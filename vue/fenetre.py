@@ -7,4 +7,9 @@ def __init__(self, titre, largeur, hauteur):
     self.fenetre = pygame.display.set_mode((largeur, hauteur))
     fond = pygame.image.load("hakase_nyan.png").convert()
     self.fenetre.blit(fond, (0, 0))
+    #TODO : ajouter un titre à la fenêtre.
+
+def __del__(self):
+    pygame.quit()
+
 
