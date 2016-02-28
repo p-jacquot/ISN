@@ -12,4 +12,5 @@ def __init__(self, titre, largeur, hauteur):
 def __del__(self):
     pygame.quit()
 
-
+def rafraichir(self):
+    self.fenetre.display.flip()
