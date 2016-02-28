@@ -2,15 +2,19 @@
 
 import pygame
 
-def __init__(self, titre, largeur, hauteur):
-    pygame.init()
-    self.fenetre = pygame.display.set_mode((largeur, hauteur))
-    fond = pygame.image.load("hakase_nyan.png").convert()
-    self.fenetre.blit(fond, (0, 0))
-    #TODO : ajouter un titre à la fenêtre.
+class Fenetre:
+    def __init__(self, titre, largeur, hauteur):
+        pygame.init()
+        self.fenetre = pygame.display.set_mode((largeur, hauteur))
+        fond = pygame.image.load("hakase_nyan.png").convert()
+        self.fenetre.blit(fond, (0, 0))
+        #TODO : ajouter un titre à la fenêtre.
 
-def __del__(self):
-    pygame.quit()
+    def __del__(self):
+        pygame.quit()
 
-def rafraichir(self):
-    self.fenetre.display.flip()
+    def rafraichir(self):
+        pygame.display.flip()
+
+    def fermer(self):
+        pygame.quit()
