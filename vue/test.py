@@ -1,5 +1,5 @@
 ﻿# Créé par Pierre, le 28/02/2016 en Python 3.2
-from Fenetre import *
+from fenetre import *
 import time
 
 f = Fenetre("test", 1000, 800)
