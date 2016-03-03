@@ -4,10 +4,9 @@ from math import *
 
 class Atome:
 
-    def __init__(self,hp,x,y) :
+    def __init__(self, hp, pos) :
         self.hp=hp
-        self.x=x
-        self.y=y
+        self.position = pos
 
     def Boom(self) :
         print("Boom la molécule explose !")
@@ -18,10 +17,10 @@ class Atome:
 
 
 class Hydrogene(Atome):
-    def __init__(self,hp,x,y):
-        self.hp=hp
-        self.x=x
-        self.y=y
+
+    def __init__(self , hp, pos):
+        Atome.__init__(hp, pos)
+        #Attention les enfants, ce constructeur ne sert à rien pour l'instant !
 
 
     def tir(self,xCible,yCible):
