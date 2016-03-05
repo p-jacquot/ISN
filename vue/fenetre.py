@@ -36,6 +36,6 @@ class Fenetre:
 if __name__ == "__main__":
     f = Fenetre("test", 1000, 800)
     f.addImgList(pygame.image.load("hakase_nyan.png").convert_alpha(), (0, 0))
-    f.rafraichir();
+    f.rafraichir()
     time.sleep(2)
     f.fermer()
