@@ -26,7 +26,7 @@ class Fenetre:
     def rafraichir(self):
         #print(self.imgList)
         for lis in self.imgList:
-            self.fenetre.blit(lis[0], lis[1])
+            self.fenetre.blit(int(lis[0]), int(lis[1]))
         pygame.display.flip()
 
     def fermer(self):
