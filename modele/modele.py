@@ -1,6 +1,7 @@
 ﻿# Créé par Pierre, le 05/03/2016 en Python 3.2
-
-from vue.fenetre import Fenetre
+import sys
+sys.path.append("../vue")
+from fenetre import Fenetre
 
 class Modele:
     """La classe qui s'occupera de gérer le jeu en lui même"""
