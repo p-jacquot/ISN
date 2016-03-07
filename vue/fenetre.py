@@ -8,8 +8,10 @@ class Fenetre:
 
     def __init__(self, titre, largeur, hauteur):
         pygame.init()
-        self.fenetre = pygame.display.set_mode((largeur, hauteur))
-        self.imgList = []
+        self.fen = pygame.display.set_mode((largeur, hauteur))
+        #self.imgList = []
+        self.molecules = []
+        #self.fond = fond
         pygame.display.set_caption(titre)
         #self.imgList.append(image.load("hakase_nyan.png").convert_alpha())
         #self.fenetre.blit(fond, (0, 0))
@@ -19,23 +21,29 @@ class Fenetre:
         pygame.quit()
 
 
-    def addImgList(self, img, pos):
-        lis = [img, pos]
-        self.imgList.append(lis)
+    """def addImgList(self, img, pos):
+        lis = [img , pos]
+        self.imgList.append(lis)"""
+
 
     def rafraichir(self):
         #print(self.imgList)
-        for lis in self.imgList:
-            self.fenetre.blit(lis[0], lis[1])
+        """for lis in self.imgList:
+            self.fen.blit(lis[0], lis[1])"""
+        self.fen.blit(self.fond, (0,0))
+        for mol in self.molecules:
+            self.fen.blit(mol.img, mol.pos)
         pygame.display.flip()
 
     def fermer(self):
         pygame.quit()
 
 
+
 if __name__ == "__main__":
-    f = Fenetre("test", 1000, 800)
-    f.addImgList(pygame.image.load("hakase_nyan.png").convert_alpha(), (0, 0))
+    f = Fenetre("test", 768, 600)
+    f.fond = pygame.image.load("hakase_nyan.png").convert_alpha()
+    #f.addImgList(pygame.image.load("hakase_nyan.png").convert_alpha(), (0, 0))
     f.rafraichir()
     time.sleep(2)
     f.fermer()
