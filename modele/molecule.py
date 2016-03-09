@@ -29,3 +29,4 @@ class Molecule:
 
     def move():
         pos += (mv_x, mv_y)
+        #TODO: ici, prendre la décision de tirer ou non.
