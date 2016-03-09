@@ -10,7 +10,7 @@ class Fenetre:
         pygame.init()
         self.fen = pygame.display.set_mode((largeur, hauteur))
         #self.imgList = []
-        self.molecules = []
+        self.entites = [] #une liste qui contient des listes comme ça : [image, tuple_de_position]
         #self.fond = fond
         pygame.display.set_caption(titre)
         #self.imgList.append(image.load("hakase_nyan.png").convert_alpha())
@@ -31,9 +31,10 @@ class Fenetre:
         """for lis in self.imgList:
             self.fen.blit(lis[0], lis[1])"""
         self.fen.blit(self.fond, (0,0))
-        for mol in self.molecules:
-            self.fen.blit(mol.img, mol.pos)
+        for ent in self.entites:
+            self.fen.blit(ent[0], ent[1])
         pygame.display.flip()
+        self.entites = []
 
     def fermer(self):
         pygame.quit()
