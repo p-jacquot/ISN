@@ -1,0 +1,7 @@
+à modifier quand vous voulez
+
+H hydrogène :
+  10 hp
+  tir : 1 boule qui vise le joueur
+  MRU
+  
