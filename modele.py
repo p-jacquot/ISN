@@ -1,6 +1,5 @@
 ﻿# Créé par Pierre, le 05/03/2016 en Python 3.2
-import sys
-sys.path.append("../vue")
+
 from fenetre import Fenetre
 from pygame.event import *
 from pygame.locals import * #Pour les events.
