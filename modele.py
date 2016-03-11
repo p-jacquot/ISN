@@ -59,6 +59,10 @@ class Modele:
                     self.moleculeJoueur.mv_x = 0
             #TODO: Gérer les collisions.
 
+
+    def actualiser():
+        self.fenetre.entites = self.ennemyList + self.ennemyProjectiles + self.projectilesJoueur + self.moleculeJoueur
+
     def stop(self):
         #si on veut faire des choses particulières une fois qu'on arrête le jeu.
         self.continuer = false
