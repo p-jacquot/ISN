@@ -44,8 +44,7 @@ def listerAtomes( nomMol,hauteur,largeur):
             for x in range(largeur):
 
                 pixel = img.getpixel((x,y))
-                if pixel == (0,0,1,255):
-                    print(pixel)
+
                 if pixel==(0,1,0,255) :
                     listeAtomes.append(('C',(x,y)))
                 elif pixel == (0,0,1,255):
@@ -56,5 +55,5 @@ def listerAtomes( nomMol,hauteur,largeur):
                     listeAtomes.append(('N',(x,y)))
         return listeAtomes
     #pour tester pour l'instant vous pouvez faire la commande CH4=Molecule('CH4.png')puis print(CH4.atomeList) dans la console
-H=Molecule('resources/photos/oxygene.png',22,22)
+H=Molecule('resources/photos/cortizone.png',500,500)
 print(H.atomeList)
