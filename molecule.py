@@ -19,7 +19,7 @@ class Molecule:
     def __init__(self,nomMol,hauteur,largeur):
         self.atomeList = listerAtomes(nomMol,hauteur,largeur) #La liste qui contient tous les atomes.
         #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
-        self.hpMax = 0 #La vie maximale de la molécule, somme de ceux des atomes.
+        self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
         self.hp = 0 #La vie de la molécule.
         self.pos = (0,0) #Tuple de position : (x,y)
         self.mv_y = 0
@@ -55,5 +55,20 @@ def listerAtomes( nomMol,hauteur,largeur):
                     listeAtomes.append(('N',(x,y)))
         return listeAtomes
     #pour tester pour l'instant vous pouvez faire la commande CH4=Molecule('CH4.png')puis print(CH4.atomeList) dans la console
-H=Molecule('resources/photos/cortizone.png',500,500)
-print(H.atomeList)
+
+
+def vieMol(atomeList):
+    vie =0
+    for a in atomeList :
+        if a[0]=='H':
+            vie+=10
+        elif a[0]=='C':
+            vie+=40
+        elif a[0]=='O':
+            vie+=20
+        elif a[0]=='N':
+            vie+=30
+    return vie
+Cortizone=Molecule('resources/photos/cortizone.png',500,500)
+print(Cortizone.atomeList)
+print(Cortizone.hpMax," est la vie max de la cortizone")
