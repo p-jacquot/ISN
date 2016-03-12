@@ -16,8 +16,8 @@ class Molecule:
         self.mv_y = 0
 
 
-    def __init__(self,nomMol):
-        self.atomeList = listerAtomes(nomMol) #La liste qui contient tous les atomes.
+    def __init__(self,nomMol,hauteur,largeur):
+        self.atomeList = listerAtomes(nomMol,hauteur,largeur) #La liste qui contient tous les atomes.
         #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
         self.hpMax = 0 #La vie maximale de la molécule, somme de ceux des atomes.
         self.hp = 0 #La vie de la molécule.
@@ -37,17 +37,24 @@ class Molecule:
         #TODO: ici, prendre la décision de tirer ou non.
 
 
-def listerAtomes( nomMol):
+def listerAtomes( nomMol,hauteur,largeur):
         img = Image.open(nomMol)
         listeAtomes=[]
-        for y in range(250):
-            for x in range(250):
+        for y in range(hauteur):
+            for x in range(largeur):
+
                 pixel = img.getpixel((x,y))
-                if pixel==(220,220,220,255) :
+                if pixel == (0,0,1,255):
+                    print(pixel)
+                if pixel==(0,1,0,255) :
                     listeAtomes.append(('C',(x,y)))
-                elif pixel == (200,178,178,255):
+                elif pixel == (0,0,1,255):
                     listeAtomes.append(('H',(x,y)))
+                elif pixel == (1,0,0,255):
+                    listeAtomes.append(('O',(x,y)))
+                elif pixel == (0,1,1,255):
+                    listeAtomes.append(('N',(x,y)))
         return listeAtomes
     #pour tester pour l'instant vous pouvez faire la commande CH4=Molecule('CH4.png')puis print(CH4.atomeList) dans la console
-CH4=Molecule('CH4.png')
-print(CH4.atomeList)
+H=Molecule('resources/photos/oxygene.png',22,22)
+print(H.atomeList)
