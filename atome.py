@@ -40,6 +40,10 @@ class Hydrogene(Atome):
         self.atomeVoisin = atome
         atome.posX = self.posX + 3 # + le rayon
         atome.posY = self.posY
+        atome.finirLiaison(self)
+
+    def finirLiaison(self, atomeLie):
+        self.atomeVoisin = atomeLie
 
     """def seLierA(self, atome):
         #Ici c'est l'hydrogène, alors il n'a qu'un seul voisin, mais les autres auront une liste de voisins.
@@ -70,6 +74,8 @@ class Carbone(Atome):
             atome.posX = self.posX
             atome.posY = self.posY + 10
 
+    def finirLiaison(self, atomeLie, position):
+        self.atomesVoisins[position] = atomeLie
 
 class Azote(Atome):
 
@@ -94,6 +100,9 @@ class Azote(Atome):
             atome.posX = self.posX -5
             atome.posY = self.posY +2
 
+    def finirLiaison(self, atomeLie, position):
+        self.atomesVoisins[position] = atomeLie
+
 class Oxygene(Atome):
 
     def __init__(self, hp, posX, posY):
@@ -111,3 +120,6 @@ class Oxygene(Atome):
         elif position == 1:
             atome.posX = self.posX -5
             atome.posY = self.posY
+
+    def finirLiaison(self, atomeLie, position):
+        self.atomesVoisins[position] = atomeLie
