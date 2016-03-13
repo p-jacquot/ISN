@@ -3,6 +3,7 @@
 from atome import *
 from modele import Modele
 import pygame
+import pygame.rect
 
 
 
@@ -88,3 +89,21 @@ class Molecule:
 Cortizone=Molecule('resources/photos/cortizone.png',500,500)
 print(Cortizone.atomeList)
 print(Cortizone.hpMax," est la vie max de la cortizone")"""
+
+if __name__ == "__main__":
+    pygame.init()
+    carb = Carbone(10, 50, 50)
+    #azo = Azote(7, 0, 0)
+    hydr = Hydrogene(2, 0, 0)
+    hydr1 = Hydrogene(2, 0, 0)
+    hydr2 = Hydrogene(2, 0, 0)
+    oxy = Oxygene(2, 0, 0)
+    carb.lierA(hydr1, 3)
+    carb.lierA(hydr2, 1)
+    carb.lierA(oxy, 0)
+    carb.lierA(hydr, 2)
+    mol = Molecule([carb, hydr1, hydr, hydr2, oxy], 0, 0)
+    scrn = pygame.display.set_mode((100, 100))
+    pygame.draw.rect(scrn, Color(100, 100, 100), (0, 0, 100, 100))
+    mol.seDessiner(scrn)
+    pygame.quit()
