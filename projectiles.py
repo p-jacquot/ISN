@@ -9,7 +9,7 @@ class Projectile:
         self.position = pos #tuple de position.
         self.mouvement = mv #tuple de mouvement.
 
-    def __init__(self, pos, posCible):
+    def __init__(self, pos, posCible,equipe):
         """Le fameux constructeur qui va permettre de viser le joueur."""
         self.position = pos
         x1, y1 = pos
