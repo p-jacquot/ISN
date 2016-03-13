@@ -20,6 +20,7 @@ class Molecule:
         self.hp = 0
         self.hpMax = 0
         self.countHP()
+        self.surface = None
 
 
     """def __init__(self, nomMol, hauteur, largeur):
@@ -70,6 +71,8 @@ class Molecule:
         pygame.draw.rect(surface, Color(100, 100, 100), (0, 0, x_max, y_max))
         for atome in self.atomeList:
             atome.seDessiner(surface)
+
+        self.surface = surface
         pygame.image.save(surface, 'test.png')
 
 
