@@ -1,5 +1,5 @@
 ﻿# Créé par Pierre, le 07/03/2016 en Python 3.2
-from PIL import Image
+#from PIL import Image
 from atome import *
 from modele import Modele
 
@@ -8,36 +8,46 @@ from modele import Modele
 class Molecule:
     """La classe Molécule, qui est un ensemble d'atomes."""
 
-    def __init__(self, atome, pos):
-        self.addAtome(atome)
-        self.pos = pos
+    def __init__(self, atomeList, posX, posY):
+        self.atomeList = atomeList
+        self.posX = posX
+        self.posY = posY
         self.isAlive = True
         self.mv_x = 0
         self.mv_y = 0
+        self.hp = 0
+        self.hpMax = 0
+        self.countHP()
 
 
-    def __init__(self,nomMol,hauteur,largeur):
+    """def __init__(self, nomMol, hauteur, largeur):
         self.atomeList = listerAtomes(nomMol,hauteur,largeur) #La liste qui contient tous les atomes.
         #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
         self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
         self.hp = 0 #La vie de la molécule.
         self.pos = (0,0) #Tuple de position : (x,y)
         self.mv_y = 0
-        self.mv_x = 0   #les variables de mouvements.
+        self.mv_x = 0   #les variables de mouvements."""
 
 
-    def addAtome(atome,pos):
+    """def addAtome(atome,pos):
         self.atomeList.append(atome)
         self.hpMax += atome.hp
         self.hp = self.hpMax
-        self.pos = pos
+        self.pos = pos"""
 
-    def move():
-        pos += (mv_x, mv_y)
+    def move(self):
+        self.posX += self.mv_x
+        self.posY += self.mv_y
         #TODO: ici, prendre la décision de tirer ou non.
 
+    def countHP(self):
+        for atome in self.atomeList:
+            self.hpMax += atome.hp
+        self.hp = self.hpMax
 
-def listerAtomes( nomMol,hauteur,largeur):
+
+"""def listerAtomes( nomMol,hauteur,largeur):
         img = Image.open(nomMol)
         listeAtomes=[]
         for y in range(hauteur):
@@ -54,10 +64,10 @@ def listerAtomes( nomMol,hauteur,largeur):
                 elif pixel == (0,1,1,255):
                     listeAtomes.append(('N',(x,y)))
         return listeAtomes
-    #pour tester pour l'instant vous pouvez faire la commande CH4=Molecule('CH4.png')puis print(CH4.atomeList) dans la console
+    #pour tester pour l'instant vous pouvez faire la commande CH4=Molecule('CH4.png')puis print(CH4.atomeList) dans la console"""
 
 
-def vieMol(atomeList):
+"""def vieMol(atomeList):
     vie =0
     for a in atomeList :
         if a[0]=='H':
@@ -71,4 +81,4 @@ def vieMol(atomeList):
     return vie
 Cortizone=Molecule('resources/photos/cortizone.png',500,500)
 print(Cortizone.atomeList)
-print(Cortizone.hpMax," est la vie max de la cortizone")
+print(Cortizone.hpMax," est la vie max de la cortizone")"""
