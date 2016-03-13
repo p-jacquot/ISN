@@ -8,10 +8,11 @@ import pygame
 
 class Atome:
 
-    def __init__(self, hp, posX, posY) :
+    def __init__(self, hp, posX, posY, rayon) :
         self.hp=hp
         self.posX = posX
         self.posY = posY
+        self.rayon = rayon
 
     def Boom(self) :
         print("Boom la molécule explose !")
@@ -24,7 +25,7 @@ class Atome:
 class Hydrogene(Atome):
 
     def __init__(self , hp, posX, posY):
-        Atome.__init__(self, hp, posX, posY)
+        Atome.__init__(self, hp, posX, posY, 10)
         self.atomeVoisin = None
         #Attention les enfants, ce constructeur ne sert à rien pour l'instant !
 
@@ -35,11 +36,11 @@ class Hydrogene(Atome):
         self.modele.add(Projectile(self.position, posCible)) # ce ne sera peut être pas tout à fait la méthode add(), du modèle,
 
     def seDessiner(self, surface):
-        pygame.draw.circle(surface, Color(255, 255, 255, 255), (self.posX, self.posY), 10)
+        pygame.draw.circle(surface, Color(255, 255, 255, 255), (self.posX, self.posY), self.rayon)
 
     def lierA(self, atome):
         self.atomeVoisin = atome
-        atome.posX = self.posX + 3 # + le rayon
+        atome.posX = self.posX + self.rayon # + le rayon
         atome.posY = self.posY
         atome.finirLiaison(self)
 
@@ -54,26 +55,26 @@ class Hydrogene(Atome):
 class Carbone(Atome):
 
     def __init__(self, hp, posX, posY):
-        Atome.__init__(self, hp, posX, posY)
+        Atome.__init__(self, hp, posX, posY, 20)
         self.atomesVoisins = [None, None, None, None] #Dans l'ordre : Droite, Haut, Gauche, Bas.
 
     def seDessiner(self, surface):
-        pygame.draw.circle(surface, Color(0, 0, 0, 255), (self.posX, self.posY), 20)
+        pygame.draw.circle(surface, Color(0, 0, 0, 255), (self.posX, self.posY), self.rayon)
 
     def lierA(self, atome, position): #Attention, la position est un nombre entre 0 et 3.
         self.atomesVoisins[position] = atome
         if position == 0:
-            atome.posX = self.posX + 20
+            atome.posX = self.posX + self.rayon
             atome.posY = self.posY
         elif position == 1:
             atome.posX = self.posX
-            atome.posY = self.posY - 20
+            atome.posY = self.posY - self.rayon
         elif position == 2:
-            atome.posX = self.posX - 20
+            atome.posX = self.posX - self.rayon
             atome.posY = self.posY
         elif position == 3:
             atome.posX = self.posX
-            atome.posY = self.posY + 20
+            atome.posY = self.posY + self.rayon
 
     def finirLiaison(self, atomeLie, position):
         self.atomesVoisins[position] = atomeLie
@@ -81,25 +82,25 @@ class Carbone(Atome):
 class Azote(Atome):
 
     def __init__(self, hp, posX, posY):
-        Atome.__init__(self, hp, posX, posY)
+        Atome.__init__(self, hp, posX, posY, 15)
         self.atomesVoisins = [None, None, None] #Dans l'ordre, Droite, haut, gauche.
 
     def seDessiner(self, surface):
-        pygame.draw.circle(surface, Color(0, 0, 255, 255), (self.posX, self.posY), 15)
+        pygame.draw.circle(surface, Color(0, 0, 255, 255), (self.posX, self.posY), self.rayon)
 
     def lierA(self, atome, position): #ici, la position est entre 0 et 2.
         """Les positions sont posées assez grossièrement là, mais étant donné qu'on connait le rayon, on pourra améliorer ça plus tard."""
         self.atomesVoisins[position] = atome
         if position == 0:
-            atome.posX = self.posX + 5
-            atome.posY = self.posY +2
+            atome.posX = self.posX + (self.rayon -3)
+            atome.posY = self.posY + (self.rayon - 10)
         elif position == 1:
             atome.posX = self.posX
-            atome.posY = self.posY - 7
+            atome.posY = self.posY - self.rayon
 
         elif position == 2:
-            atome.posX = self.posX -5
-            atome.posY = self.posY +2
+            atome.posX = self.posX - (self.rayon -3)
+            atome.posY = self.posY + (self.rayon - 10)
 
     def finirLiaison(self, atomeLie, position):
         self.atomesVoisins[position] = atomeLie
@@ -107,19 +108,19 @@ class Azote(Atome):
 class Oxygene(Atome):
 
     def __init__(self, hp, posX, posY):
-        Atome.__init__(self, hp, posX, posY)
+        Atome.__init__(self, hp, posX, posY, 12)
         self.atomesVoisins = [None, None] #Dans l'ordre : Gauche, Droite.
 
     def seDessiner(self, surface):
-        pygame.draw.circle(surface, Color(255, 0, 0, 255), (self.posX, self.posY), 12)
+        pygame.draw.circle(surface, Color(255, 0, 0, 255), (self.posX, self.posY), self.rayon)
 
     def lierA(self, atome, position): # De 0 à 1
         self.atomesVoisins[position] = atome
         if position == 0:
-            atome.posX = self.posX + 5
+            atome.posX = self.posX + self.rayon
             atome.posY = self.posY
         elif position == 1:
-            atome.posX = self.posX -5
+            atome.posX = self.posX - self.rayon
             atome.posY = self.posY
 
     def finirLiaison(self, atomeLie, position):
