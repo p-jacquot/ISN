@@ -2,6 +2,7 @@
 #from PIL import Image
 from atome import *
 from modele import Modele
+import pygame
 
 
 
@@ -45,6 +46,11 @@ class Molecule:
         for atome in self.atomeList:
             self.hpMax += atome.hp
         self.hp = self.hpMax
+
+    def seDessiner(self, surface):
+        for atome in self.atomeList:
+            atome.seDessiner(surface)
+        pygame.image.save(surface, 'test.png')
 
 
 """def listerAtomes( nomMol,hauteur,largeur):
