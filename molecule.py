@@ -48,7 +48,26 @@ class Molecule:
             self.hpMax += atome.hp
         self.hp = self.hpMax
 
-    def seDessiner(self, surface):
+    def seDessiner(self):
+        x_max = 0
+        y_max = 0
+        x_min = 1000
+        y_min = 1000
+        for atome in self.atomeList:
+            if atome.posX - atome.rayon < x_min:
+                x_min = atome.posX - atome.rayon
+            if atome.posY - atome.rayon < y_min:
+                y_min = atome.posY - atome.rayon
+        for atome in self.atomeList:
+            atome.posX -= x_min
+            atome.posY -= y_min
+        for atome in self.atomeList:
+            if atome.posX + atome.rayon > x_max:
+                x_max = atome.posX+atome.rayon
+            if atome.posY + atome.rayon> y_max:
+                y_max = atome.posY + atome.rayon
+        surface = pygame.display.set_mode((x_max, y_max))
+        pygame.draw.rect(surface, Color(100, 100, 100), (0, 0, x_max, y_max))
         for atome in self.atomeList:
             atome.seDessiner(surface)
         pygame.image.save(surface, 'test.png')
@@ -93,17 +112,13 @@ print(Cortizone.hpMax," est la vie max de la cortizone")"""
 if __name__ == "__main__":
     pygame.init()
     carb = Carbone(10, 50, 50)
-    #azo = Azote(7, 0, 0)
+    azo = Azote(7, 0, 0)
     hydr = Hydrogene(2, 0, 0)
-    hydr1 = Hydrogene(2, 0, 0)
-    hydr2 = Hydrogene(2, 0, 0)
-    oxy = Oxygene(2, 0, 0)
-    carb.lierA(hydr1, 3)
-    carb.lierA(hydr2, 1)
-    carb.lierA(oxy, 0)
+    carb.lierA(azo, 3)
+    carb.lierA(azo, 1)
+    carb.lierA(azo, 0)
     carb.lierA(hydr, 2)
-    mol = Molecule([carb, hydr1, hydr, hydr2, oxy], 0, 0)
-    scrn = pygame.display.set_mode((100, 100))
-    pygame.draw.rect(scrn, Color(100, 100, 100), (0, 0, 100, 100))
-    mol.seDessiner(scrn)
+    mol = Molecule([carb, azo, hydr], 0, 0)
+    #scrn = pygame.display.set_mode((100, 100))
+    mol.seDessiner()
     pygame.quit()
