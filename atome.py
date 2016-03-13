@@ -44,7 +44,7 @@ class Hydrogene(Atome):
 
 class Carbone(Atome):
     def __init__(self,hp,pos,modele):
-        Atome.__init(self,hp,pos,modele)
+        Atome.__init__(self,hp,pos,modele)
         self.tirNum = -1
     def tir():
         if self.tirNum==-1:
@@ -58,5 +58,14 @@ class Carbone(Atome):
             self.modele.add(Projectile(self.position, (1,1)))
             self.modele.add(Projectile(self.position, (-1,1)))
         tirNum=-tirNum
+
+class Oxygene(Atome):
+    def __init__(self,hp,pos,modele):
+        Atome.__init__(self,hp,pos,modele)
+        self.tirNum=0
+    def tir(self,angle):
+        self.angle = angle #angle entre chaques tirs
+        self.modele.add(Projectile(self.position, (cos((self.angle*self.tirNum)/180*pi),sin((self.angle*self.tirNum))/180*pi)))
+        tirNum+=1
 
 
