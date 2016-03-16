@@ -8,9 +8,10 @@ from modele import Modele
 class Molecule:
     """La classe Molécule, qui est un ensemble d'atomes."""
 
-    def __init__(self, atome, pos):
+    def __init__(self, atome, posX, posY):
         self.addAtome(atome)
-        self.pos = pos
+        self.posX = posX
+        self.posY = posY
         self.isAlive = True
         self.mv_x = 0
         self.mv_y = 0
@@ -21,19 +22,21 @@ class Molecule:
         #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
         self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
         self.hp = 0 #La vie de la molécule.
-        self.pos = (0,0) #Tuple de position : (x,y)
+        self.posX = 0
+        self.posY = 0
         self.mv_y = 0
         self.mv_x = 0   #les variables de mouvements.
 
 
-    def addAtome(atome,pos):
+    """def addAtome(atome,pos):
         self.atomeList.append(atome)
         self.hpMax += atome.hp
         self.hp = self.hpMax
-        self.pos = pos
+        self.pos = pos"""
 
-    def move():
-        pos += (mv_x, mv_y)
+    def move(self):
+        self.posX += mv_x
+        self.posY += mv_y
         #TODO: ici, prendre la décision de tirer ou non.
 
 
@@ -69,6 +72,7 @@ def vieMol(atomeList):
         elif a[0]=='N':
             vie+=30
     return vie
+
 Cortizone=Molecule('resources/photos/cortizone.png',500,500)
 print(Cortizone.atomeList)
 print(Cortizone.hpMax," est la vie max de la cortizone")
