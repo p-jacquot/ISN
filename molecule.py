@@ -39,6 +39,12 @@ class Molecule:
         self.posY += mv_y
         #TODO: ici, prendre la décision de tirer ou non.
 
+    def tirer(self):
+        projectiles = []
+        for atome in self.atomeList:
+            projectiles.extend(atome.tir())
+        return projectiles
+
 
 def listerAtomes( nomMol,hauteur,largeur):
         img = Image.open(nomMol)
@@ -73,6 +79,8 @@ def vieMol(atomeList):
             vie+=30
     return vie
 
+"""
+Marre que ce code là soit exécuté tout le temps.
 Cortizone=Molecule('resources/photos/cortizone.png',500,500)
 print(Cortizone.atomeList)
-print(Cortizone.hpMax," est la vie max de la cortizone")
+print(Cortizone.hpMax," est la vie max de la cortizone")"""
