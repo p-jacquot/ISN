@@ -6,7 +6,7 @@ from projectiles import Projectile
 class Atome:
 
     def __init__(self, hp, pos, modele) :
-        self.hp=hp
+        self.hp = hp
         self.position = pos #pos : tuple de la forme (positionX, positionY)
         self.modele = modele
 
@@ -18,23 +18,20 @@ class Atome:
         print("Pew !")
         #Redéfinissez cette fonction dans les classes filles.
     def __del__(self):
-        pass
+        pass    #ça, ça sert à rien, je pense.
 
 
 class Hydrogene(Atome):
 
     def __init__(self , hp, pos, modele):
-        Atome.__init__(self,hp,pos,modele)
+        Atome.__init__(self, hp, pos, modele)
         self.atomeVoisin = True
         #Attention les enfants, ce constructeur ne sert à rien pour l'instant !
-
-
 
     def tir(self, posCible):
         #distanceCible = int(sqrt(pow(xCible-self.x,2)+pow(yCible-self.y,2)))
         #print(distanceCible)
-
-        self.modele.add(Projectile(self.position, posCible,0)) # ce ne sera peut être pas tout à fait la méthode add(), du modèle,
+        self.modele.add(Projectile(self.position, posCible,0 )) # ce ne sera peut être pas tout à fait la méthode add(), du modèle,
         #le troisieme argument est pour différencier d'où vient le projectile (0=ennemi,1=joueur) et aussi pour différencier les deux constructeurs de l'autre coté
 
     def seLierA(self, atome):
@@ -43,29 +40,31 @@ class Hydrogene(Atome):
         atome.seLierA(self) #Pas sûr de la syntaxe ici.
 
 class Carbone(Atome):
+
     def __init__(self,hp,pos,modele):
         Atome.__init__(self,hp,pos,modele)
         self.tirNum = -1
+
     def tir():
-        if self.tirNum==-1:
-            self.modele.add(Projectile(self.position, (-1,0)))
-            self.modele.add(Projectile(self.position, (1,0)))
-            self.modele.add(Projectile(self.position, (0,1)))
-            self.modele.add(Projectile(self.position, (0,-1)))
-        elif self.tirNum==1:
-            self.modele.add(Projectile(self.position, (-1,-1)))
-            self.modele.add(Projectile(self.position, (1,-1)))
-            self.modele.add(Projectile(self.position, (1,1)))
-            self.modele.add(Projectile(self.position, (-1,1)))
-        tirNum=-tirNum
+        if self.tirNum == -1:
+            self.modele.add(Projectile(self.position, (-1, 0)))
+            self.modele.add(Projectile(self.position, (1, 0)))
+            self.modele.add(Projectile(self.position, (0, 1)))
+            self.modele.add(Projectile(self.position, (0, -1)))
+        elif self.tirNum == 1:
+            self.modele.add(Projectile(self.position, (-1, -1)))
+            self.modele.add(Projectile(self.position, (1, -1)))
+            self.modele.add(Projectile(self.position, (1, 1)))
+            self.modele.add(Projectile(self.position, (-1, 1)))
+        tirNum = -tirNum
 
 class Oxygene(Atome):
-    def __init__(self,hp,pos,modele):
-        Atome.__init__(self,hp,pos,modele)
-        self.tirNum=0
-    def tir(self,angle):
+    def __init__(self, hp, pos, modele):
+        Atome.__init__(self, hp, pos, modele)
+        self.tirNum = 0
+    def tir(self, angle):
         self.angle = angle #angle entre chaques tirs
-        self.modele.add(Projectile(self.position, (cos((self.angle*self.tirNum)/180*pi),sin((self.angle*self.tirNum))/180*pi)))
-        tirNum+=1
+        self.modele.add(Projectile(self.position, (cos((self.angle*self.tirNum)/180*pi), sin((self.angle*self.tirNum))/180*pi)))
+        tirNum += 1
 
 
