@@ -5,10 +5,9 @@ from projectiles import Projectile
 
 class Atome:
 
-    def __init__(self, hp, pos, modele) :
+    def __init__(self, hp, pos) :
         self.hp = hp
         self.position = pos #pos : tuple de la forme (positionX, positionY)
-        self.modele = modele
 
     def Boom(self) :
         print("Boom la molécule explose !")
@@ -23,8 +22,8 @@ class Atome:
 
 class Hydrogene(Atome):
 
-    def __init__(self , hp, pos, modele):
-        Atome.__init__(self, hp, pos, modele)
+    def __init__(self , hp, pos):
+        Atome.__init__(self, hp, pos)
         self.atomeVoisin = True
         #Attention les enfants, ce constructeur ne sert à rien pour l'instant !
 
@@ -47,15 +46,9 @@ class Carbone(Atome):
 
     def tir():
         if self.tirNum == -1:
-            self.modele.add(Projectile(self.position, (-1, 0)))
-            self.modele.add(Projectile(self.position, (1, 0)))
-            self.modele.add(Projectile(self.position, (0, 1)))
-            self.modele.add(Projectile(self.position, (0, -1)))
+            return [Projectile(self.position, (-1, 0)), Projectile(self.position, (1, 0)), Projectile(self.position, (0, 1)), Projectile(self.position, (0, -1))]
         elif self.tirNum == 1:
-            self.modele.add(Projectile(self.position, (-1, -1)))
-            self.modele.add(Projectile(self.position, (1, -1)))
-            self.modele.add(Projectile(self.position, (1, 1)))
-            self.modele.add(Projectile(self.position, (-1, 1)))
+            return [Projectile(self.position, (-1, -1)), Projectile(self.position, (1, -1)), Projectile(self.position, (1, 1)), Projectile(self.position, (-1, 1))]
         tirNum = -tirNum
 
 class Oxygene(Atome):
@@ -64,7 +57,7 @@ class Oxygene(Atome):
         self.tirNum = 0
     def tir(self, angle):
         self.angle = angle #angle entre chaques tirs
-        self.modele.add(Projectile(self.position, (cos((self.angle*self.tirNum)/180*pi), sin((self.angle*self.tirNum))/180*pi)))
+        return [Projectile(self.position, (cos((self.angle*self.tirNum)/180*pi), sin((self.angle*self.tirNum))/180*pi))]
         tirNum += 1
 
 
