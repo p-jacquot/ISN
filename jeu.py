@@ -4,7 +4,7 @@ from fenetre import Fenetre
 from pygame.event import *
 from pygame.locals import * #Pour les events.
 
-class Modele:
+class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
 
     def __init__(self, fenetre, niveau): #on lui donnera le niveau qu'on veut jouer (un int, et on ira chercher dans des dossiers).
