@@ -1,7 +1,7 @@
 ﻿# Créé par Pierre, le 07/03/2016 en Python 3.2
 from PIL import Image
 from atome import *
-from modele import Modele
+from jeu import Jeu
 
 
 
