@@ -6,7 +6,7 @@ class Niveau:
     """La classe qui gère les niveaux."""
 
     def __init__(self):
-        self.mobList = [[]] #Les choses sont stockées dans l'ordre suivant : molécule, proba d'apparition.
+        self.mobList = [] #Les choses sont stockées dans l'ordre suivant : molécule, proba d'apparition.
         self.maxMobOnScreen = 0 #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
 
 
