@@ -49,13 +49,13 @@ class Jeu:
                     self.moleculeJoueur.mv_x = 1
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
-                if event == K_UP:
+                if event == K_UP and self.moleculeJoueur.mv_y==-1:
                     self.moleculeJoueur.mv_y = 0
-                elif event == K_DOWN:
+                elif event == K_DOWN and self.moleculeJoueur.mv_y==1:
                     self.moleculeJoueur.mv_y = 0
-                elif event == K_LEFT:
+                elif event == K_LEFT and self.moleculeJoueur.mv_x==-1:
                     self.moleculeJoueur.mv_x = 0
-                elif event == K_RIGHT:
+                elif event == K_RIGHT and self.moleculeJoueur.mv_x==1:
                     self.moleculeJoueur.mv_x = 0
             #TODO: Gérer les collisions.
 
