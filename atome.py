@@ -51,8 +51,8 @@ class Oxygene(Atome):
         Atome.__init__(self, hp, posX, posY)
         self.tirNum = 0
 
-    def tir(self, angle):
-        self.angle = angle #angle entre chaques tirs
+    def tir(self):
+        self.angle = #angle entre chaques tirs
         return [Projectile((self.posX, self.posY), (cos((self.angle*self.tirNum)/180*pi), sin((self.angle*self.tirNum))/180*pi))]
         tirNum += 1
 
