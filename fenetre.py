@@ -32,7 +32,7 @@ class Fenetre:
             self.fen.blit(lis[0], lis[1])"""
         self.fen.blit(self.fond, (0,0))
         for ent in self.entites:
-            self.fen.blit(ent[0], ent[1])
+            self.fen.blit(ent.img, (ent.posX, ent.posY))
         pygame.display.flip()
         self.entites = []
 
