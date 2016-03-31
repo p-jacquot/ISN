@@ -39,7 +39,7 @@ class Fenetre:
         self.entites = []
 
     def dessinerCadre(self, posX, posY, hauteur, largeur):
-        pygame.draw.rect(self.fen, pygame.Color(255, 255, 255, 0))
+        pygame.draw.rect(self.fen, pygame.Color(255, 255, 255, 0), pygame.Rect(posX, posY, largeur, hauteur))
 
     def fermer(self):
         pygame.quit()
@@ -48,6 +48,7 @@ if __name__ == "__main__":
     f = Fenetre("test", 768, 600)
     f.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
     #f.addImgList(pygame.image.load("hakase_nyan.png").convert_alpha(), (0, 0))
+    f.dessinerCadre(0, 50, 100, 300)
     f.rafraichir()
     time.sleep(2)
     f.fermer()
