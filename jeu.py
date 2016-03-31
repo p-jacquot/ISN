@@ -1,5 +1,5 @@
 ﻿# Créé par Pierre, le 05/03/2016 en Python 3.2
-
+from random import *
 from fenetre import Fenetre
 import pygame
 from pygame.event import *
@@ -25,6 +25,9 @@ class Jeu:
         epr = [] #rect des projectiles ennemis
         pjr = [] #rect des projectiles du joueur.
         while self.continuer:
+            if self.niveau.maxMobsOnScreen > self.niveau.totalMobLeft :
+                if randint(0,50)==45:
+                    self.niveau.genererMob()
             #La boucle principale du jeu.
             #print("yolo ! On s'amuse bien !")
             #print(self.moleculeJoueur.rect)
