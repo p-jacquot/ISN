@@ -9,6 +9,8 @@ class Fenetre:
     def __init__(self, titre, largeur, hauteur):
         pygame.init()
         self.fen = pygame.display.set_mode((largeur, hauteur))
+        self.largeur = largeur
+        self.hauteur = hauteur
         #self.imgList = []
         self.entites = [] #une liste qui contient des listes comme ça : [image, tuple_de_position]
         #self.fond = fond
