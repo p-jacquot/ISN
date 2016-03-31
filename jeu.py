@@ -95,6 +95,19 @@ class Jeu:
         self.fenetre.entites.append(self.moleculeJoueur)
         self.fenetre.rafraichir()
 
+    def dialoguer(self, dialog):
+        while dialog.isNotFinished:
+            punchline = dialog.getPunchline()
+            posX, posY = punchline[2]
+            self.fenetre.fen.blit(punchline[1][1], (posX, posY))
+            self.fenetre.dessinerCadre(posX, posY, self.fenetre.largeur, 100)
+            self.fenetre.dessinerCadre(posX+50, posY-25, 75, 30)
+            self.fenetre.ecrireText(punchline[1][0], posX + 55, posY - 20)
+            self.fenetre.ecrireText(punchline[0], posX, posY +20)
+            event = pygame.event.wait()
+            while event.type != KEYDOWN:
+                pass
+
     def stop(self):
         #si on veut faire des choses particulières une fois qu'on arrête le jeu.
         self.continuer = false
