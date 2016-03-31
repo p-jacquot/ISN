@@ -10,6 +10,7 @@ class Dialog:
         self.rightPosition = (750, 500)
         self.punchlineList = [] # Une punchline c'est : [réplique(String), indexDuPersoDansLaListeCharacters(int), tupleDePosition(tuple)]
         self.counter = 0
+        self.notFinished = True
 
     def getPunchline(self):
         if counter < len(punchlineList):
@@ -17,6 +18,8 @@ class Dialog:
                         self.characters[self.punchlineList[self.counter]][1],
                         self.punchlineList[self.counter][2]]
             self.counter += 1
+            if self.counter == len(self.punchlineList):
+                notFinished = False
             return punchline
         else:
             return None
