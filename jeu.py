@@ -17,16 +17,18 @@ class Jeu:
         self.projectilesJoueur = [] #les projectiles de la molécule gentille.
 
         self.continuer = True
+        self.moleculeJoueur = None
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
     def play(self):
         er = [] #rect ennemies
-        epr = [] #rect des projectiles ennemis (et pas de l'éducation physique et sportive !)
+        epr = [] #rect des projectiles ennemis
         pjr = [] #rect des projectiles du joueur.
         while self.continuer:
             #La boucle principale du jeu.
             #print("yolo ! On s'amuse bien !")
-            print(self.moleculeJoueur.rect)
+            #print(self.moleculeJoueur.rect)
+            """Mouvement des différentes molecules et projectiles"""
             for ennemy in self.ennemyList:
                 ennemy.move()
                 er.append(ennemy.rect)
@@ -37,10 +39,23 @@ class Jeu:
             for proj in self.projectilesJoueur:
                 proj.move()
                 pjr.append(proj.rect)
-            if self.moleculeJoueur.rect.collidelist(er) != -1:
-                print("Boum !")
-                self.continuer = False
-                #self.fenetre.fermer()
+
+            """Calcul des collisions."""
+            indexMechant = self.moleculeJoueur.rect.collidelist(er)
+            if indexMechant != -1:
+                self.moleculeJoueur.hp -= 1
+                self.ennemyList[indexMechant].hp -= 1
+
+            indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
+            if indexMechantProjectile != -1:
+                self.moleculeJoueur.hp -= 1
+                del self.ennemyProjectiles[indexMechantProjectile] #On supprime le projectile, s'il a touché sa cible.
+
+            for proj in pjr:
+                index = proj.collidelist(er)
+                if index != -1:
+                    self.ennemyList[index].hp -= 1
+
             """Events incoming !"""
             event = pygame.event.poll()
             if event.type == KEYDOWN:
