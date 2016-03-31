@@ -1,13 +1,23 @@
 ﻿# Créé par Pierre, le 05/03/2016 en Python 3.2
 
 import random
+from dialogue import Dialog
 
 class Niveau:
     """La classe qui gère les niveaux."""
 
-    def __init__(self):
+    def __init__(self, mobOnScreen, totalMob):
         self.mobList = [] #Les choses sont stockées dans l'ordre suivant : molécule, proba d'apparition.
-        self.maxMobOnScreen = 0 #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
+        self.maxMobOnScreen = mobOnScreen #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
+        self.totalMobsLeft = totalMob
+
+    def __init__(self, mobOnScreen, totalMob, firstDialog, middleDialog, lastDialog):
+        self.mobList = [] #Les choses sont stockées dans l'ordre suivant : molécule, proba d'apparition.
+        self.maxMobOnScreen = mobOnScreen #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
+        self.totalMobsLef = totalMob
+        self.firstDialog = firstDialog  #Les différents dialogues qu'ils y aura dans le niveau.
+        self.middleDialog = middleDialog
+        self.lastDialog = lastDialog
 
 
     def genererMob(self):
