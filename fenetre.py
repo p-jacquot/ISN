@@ -36,10 +36,11 @@ class Fenetre:
         pygame.display.flip()
         self.entites = []
 
+    def dessinerCadre(self, posX, posY, hauteur, largeur):
+        pygame.draw.rect(self.fen, pygame.Color(255, 255, 255, 0))
+
     def fermer(self):
         pygame.quit()
-
-
 
 if __name__ == "__main__":
     f = Fenetre("test", 768, 600)
