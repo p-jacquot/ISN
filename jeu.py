@@ -100,6 +100,7 @@ class Jeu:
             punchline = dialog.getPunchline()
             posX, posY = punchline[3]
             #print(punchline[1][0])
+            pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
             self.fenetre.fen.blit(punchline[2], (posX, posY))
             self.fenetre.dessinerCadre(0, 500, 100, self.fenetre.largeur)
             self.fenetre.dessinerCadre(posX+50, posY-25, 30, 100)

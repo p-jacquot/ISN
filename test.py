@@ -15,8 +15,8 @@ def testplay():
     jeu.play()
 
 def testDialog():
-    ricken = pygame.image.load("Ricken.png").convert_alpha()
-    tharja = pygame.image.load("Tharja.png").convert_alpha()
+    ricken = pygame.image.load("resources/temporaire/Ricken.png").convert_alpha()
+    tharja = pygame.image.load("resources/temporaire/Tharja.png").convert_alpha()
     dialogue = Dialog(tharja, "Tharja", (10, 210), ricken, "Ricken", (500, 200))
     dialogue.punchlineList.append(["Il semblerait que mon sort n'ait pas fonctionné...", 0])
     dialogue.punchlineList.append(["Hein ? Tu as dit quelque chose ?", 1])
