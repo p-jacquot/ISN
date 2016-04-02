@@ -98,12 +98,12 @@ class Jeu:
     def dialoguer(self, dialog):
         while dialog.notFinished:
             punchline = dialog.getPunchline()
-            posX, posY = punchline[2]
+            posX, posY = punchline[3]
             #print(punchline[1][0])
-            self.fenetre.fen.blit(punchline[1][1], (posX, posY+100))
+            self.fenetre.fen.blit(punchline[2], (posX, posY))
             self.fenetre.dessinerCadre(0, 500, 100, self.fenetre.largeur)
             self.fenetre.dessinerCadre(posX+50, posY-25, 30, 100)
-            self.fenetre.ecrireTexte(punchline[1][0], posX + 55, posY - 20)
+            self.fenetre.ecrireTexte(punchline[1], posX + 55, posY - 20)
             self.fenetre.ecrireTexte(punchline[0], 25, 500)
             event = pygame.event.wait()
             while event.type != KEYDOWN:

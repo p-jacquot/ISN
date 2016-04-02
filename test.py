@@ -17,13 +17,13 @@ def testplay():
 def testDialog():
     ricken = pygame.image.load("Ricken.png").convert_alpha()
     tharja = pygame.image.load("Tharja.png").convert_alpha()
-    dialogue = Dialog(tharja, "Tharja", ricken, "Ricken")
-    dialogue.punchlineList.append(["Il semblerait que mon sort n'ait pas fonctionné...", 0, dialogue.leftPosition])
-    dialogue.punchlineList.append(["Hein ? Tu as dit quelque chose ?", 1, dialogue.rightPosition])
+    dialogue = Dialog(tharja, "Tharja", (10, 210), ricken, "Ricken", (500, 200))
+    dialogue.punchlineList.append(["Il semblerait que mon sort n'ait pas fonctionné...", 0])
+    dialogue.punchlineList.append(["Hein ? Tu as dit quelque chose ?", 1])
     jeu.dialoguer(dialogue)
 
 
-fenetre = Fenetre("test", 768, 600)
+fenetre = Fenetre("test ISN Dialogue", 768, 600)
 fenetre.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
 
 jeu = Jeu(fenetre, 1)
