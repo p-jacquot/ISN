@@ -32,7 +32,7 @@ class Jeu:
             for ennemy in self.ennemyList:
                 ennemy.move()
                 er.append(ennemy.rect)
-                print(ennemy.rect)
+                #print(ennemy.rect)
             for proj in self.ennemyProjectiles:
                 proj.move()
                 epr.append(proj.rect)
@@ -44,7 +44,7 @@ class Jeu:
             indexMechant = self.moleculeJoueur.rect.collidelist(er)
             if indexMechant != -1:
                 self.moleculeJoueur.hp -= 1
-                self.ennemyList[indexMechant].hp -= 1
+                self.ennemyList[indexMechant].hit()
 
             indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
             if indexMechantProjectile != -1:
@@ -54,7 +54,7 @@ class Jeu:
             for proj in pjr:
                 index = proj.collidelist(er)
                 if index != -1:
-                    self.ennemyList[index].hp -= 1
+                    self.ennemyList[index].hit()
 
             """Events incoming !"""
             event = pygame.event.poll()
@@ -96,15 +96,24 @@ class Jeu:
         self.fenetre.rafraichir()
 
     def dialoguer(self, dialog):
+        sombre = pygame.Surface((self.fenetre.largeur, self.fenetre.hauteur))  # the size of your rect
+        sombre.set_alpha(128)
+        sombre.fill((0, 0, 0))
+        perso = []
+        for liste in dialog.characters:
+            img = pygame.image.load(liste[1]).convert_alpha()
+            perso.append([liste[0], img, liste[2]])
+
         while dialog.notFinished:
             punchline = dialog.getPunchline()
-            posX, posY = punchline[3]
+            posX, posY = perso[punchline[1]][2]
             #print(punchline[1][0])
-            pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
-            self.fenetre.fen.blit(punchline[2], (posX, posY))
+            #pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
+            self.fenetre.fen.blit(sombre, (0,0))
+            self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
             self.fenetre.dessinerCadre(0, 500, 100, self.fenetre.largeur)
             self.fenetre.dessinerCadre(posX+50, posY-25, 30, 100)
-            self.fenetre.ecrireTexte(punchline[1], posX + 55, posY - 20)
+            self.fenetre.ecrireTexte(perso[punchline[1]][0], posX + 55, posY - 20)
             self.fenetre.ecrireTexte(punchline[0], 25, 500)
             event = pygame.event.wait()
             while event.type != KEYDOWN:
