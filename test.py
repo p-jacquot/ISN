@@ -6,6 +6,8 @@ from molecule import Molecule
 from dialogue import Dialog
 from niveau import Niveau
 
+import pickle
+
 def testplay():
     jeu.moleculeJoueur = Molecule('resources/photos/oxygene.png', 30, 30)
     jeu.moleculeJoueur.posX = 50
@@ -15,20 +17,25 @@ def testplay():
     jeu.play()
 
 def testDialog():
-    ricken = pygame.image.load("resources/temporaire/Ricken.png").convert_alpha()
-    tharja = pygame.image.load("resources/temporaire/Tharja.png").convert_alpha()
-    dialogue = Dialog(tharja, "Tharja", (10, 210), ricken, "Ricken", (500, 200))
+    #ricken = pygame.image.load("resources/temporaire/Ricken.png").convert_alpha()
+    #tharja = pygame.image.load("resources/temporaire/Tharja.png").convert_alpha()
+    dialogue = Dialog("resources/temporaire/Tharja.png", "Tharja", (10, 210), "resources/temporaire/Ricken.png", "Ricken", (500, 200))
     dialogue.punchlineList.append(["Il semblerait que mon sort n'ait pas fonctionné...", 0])
     dialogue.punchlineList.append(["Hein ? Tu as dit quelque chose ?", 1])
+    dialogue.punchlineList.append(["Non non... Rien... hé hé...", 0])
+    with open('dialogue.pickle', 'wb') as file:
+        pickle.dump(dialogue, file)
     jeu.dialoguer(dialogue)
 
+def testSerializedDialogue():
+    with open('resources/temporaire/dialogue.pickle', 'rb') as file:
+        dialogue = pickle.load(file)
+    jeu.dialoguer(dialogue)
 
 fenetre = Fenetre("test ISN Dialogue", 768, 600)
 fenetre.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
 
 jeu = Jeu(fenetre, 1)
-testDialog()
+#testDialog()
+testSerializedDialogue()
 pygame.quit()
-
-
-
