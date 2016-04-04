@@ -49,6 +49,11 @@ class Molecule:
             projectiles.extend(atome.tir())
         return projectiles
 
+    def hit(self):
+        self.hp -= 1
+        if hp <= 0:
+            print("Aaaaaaaaaah ! Je meurs !")
+
 
 def listerAtomes( nomMol,hauteur,largeur):
         img = Image.open(nomMol)
