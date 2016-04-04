@@ -5,8 +5,8 @@ from projectiles import Projectile
 
 class Atome:
 
-    def __init__(self, hp, posX, posY) :
-        self.hp = hp
+    def __init__(self,  posX, posY) :
+
         self.posX = posX
         self.posY = posY
 
@@ -23,9 +23,9 @@ class Atome:
 
 class Hydrogene(Atome):
 
-    def __init__(self , hp, posX, posY):
-        Atome.__init__(self, hp, posX, posY)
-
+    def __init__(self , posX, posY):
+        Atome.__init__(self,  posX, posY)
+        self.hp=10
     def tir(self, posCible):
         #distanceCible = int(sqrt(pow(xCible-self.x,2)+pow(yCible-self.y,2)))
         #print(distanceCible)
@@ -34,9 +34,10 @@ class Hydrogene(Atome):
 
 class Carbone(Atome):
 
-    def __init__(self,hp, posX, posY):
-        Atome.__init__(self, hp, posX, posY)
+    def __init__(self, posX, posY):
+        Atome.__init__(self,  posX, posY)
         self.tirNum = -1
+        self.hp=40
 
     def tir(self):
         if self.tirNum == -1:
@@ -47,13 +48,24 @@ class Carbone(Atome):
 
 class Oxygene(Atome):
 
-    def __init__(self, hp, posX, posY):
-        Atome.__init__(self, hp, posX, posY)
+    def __init__(self, posX, posY):
+        Atome.__init__(self, posX, posY)
         self.tirNum = 0
+        self.hp=20
 
     def tir(self):
-        self.angle = 30 #angle entre chaques tirs
+        #self.angle = #angle entre chaques tirs
         return [Projectile((self.posX, self.posY), (cos((self.angle*self.tirNum)/180*pi), sin((self.angle*self.tirNum))/180*pi))]
         tirNum += 1
+
+
+class Azote(Atome):
+
+    def __init__(self,posX,posY):
+        Atome.__init__(self,posX,posY)
+        self.hp=30
+
+    def tir(self):
+        return[Projectile((self.posX,self.posY),(0,2)),Projectile((self.posX,self.posY),(1,2)),Projectile((self.posX,self.posY),(-1,2))]
 
 
