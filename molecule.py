@@ -64,13 +64,13 @@ def listerAtomes( nomMol,hauteur,largeur):
                 pixel = img.getpixel((x,y))
 
                 if pixel==(0,1,0,255) :
-                    listeAtomes.append(('C',(x,y)))
+                    listeAtomes.append(Carbone(x,y))
                 elif pixel == (0,0,1,255):
-                    listeAtomes.append(('H',(x,y)))
+                    listeAtomes.append(Hydrogene(x,y))
                 elif pixel == (1,0,0,255):
-                    listeAtomes.append(('O',(x,y)))
+                    listeAtomes.append(Oxygene(x,y))
                 elif pixel == (0,1,1,255):
-                    listeAtomes.append(('N',(x,y)))
+                    listeAtomes.append(Azote(x,y))
         return listeAtomes
     #pour tester pour l'instant vous pouvez faire la commande CH4=Molecule('CH4.png')puis print(CH4.atomeList) dans la console
 
@@ -78,15 +78,9 @@ def listerAtomes( nomMol,hauteur,largeur):
 def vieMol(atomeList):
     vie =0
     for a in atomeList :
-        if a[0]=='H':
-            vie+=10
-        elif a[0]=='C':
-            vie+=40
-        elif a[0]=='O':
-            vie+=20
-        elif a[0]=='N':
-            vie+=30
+        vie+=a.hp
     return vie
+
 
 """
 Marre que ce code là soit exécuté tout le temps.
