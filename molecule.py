@@ -3,6 +3,7 @@ import pygame
 from PIL import Image
 from atome import *
 from jeu import Jeu
+from pattern import *
 
 
 
@@ -29,6 +30,7 @@ class Molecule:
         self.mv_x = 0   #les variables de mouvements.
         self.img = pygame.image.load(nomMol).convert_alpha()
         self.rect = self.img.get_rect()
+        self.pattern = Pattern(1, 1)
 
 
     """def addAtome(atome,pos):
@@ -38,9 +40,12 @@ class Molecule:
         self.pos = pos"""
 
     def move(self):
-        self.posX += self.mv_x
+        """self.posX += self.mv_x
         self.posY += self.mv_y
-        self.rect = self.rect.move(self.mv_x, self.mv_y)
+        self.rect = self.rect.move(self.mv_x, self.mv_y)"""
+        self.posX, self.posY = pattern.deplacer(self.posX, self.posY)
+        self.rect.x = self.posX
+        self.rect.y = self.posY
         #TODO: ici, prendre la décision de tirer ou non.
 
     def tirer(self):

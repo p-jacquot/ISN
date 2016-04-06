@@ -62,27 +62,27 @@ class Jeu:
             """Events incoming !"""
             event = pygame.event.poll()
             if event.type == KEYDOWN:
-                print("Touche appuyée.")
+                #print("Touche appuyée.")
                 """Lorsqu'on appuie sur une touche. Ces valeurs ne sont là qu'a titre d'exemple, il faudra qu'on les modifies."""
                 if event.key == K_UP:
-                    self.moleculeJoueur.mv_y = -1
+                    self.moleculeJoueur.pattern.mv_y = -1
                 elif event.key == K_DOWN:
-                    print("C'est la touche bas.")
-                    self.moleculeJoueur.mv_y = 1
+                    #print("C'est la touche bas.")
+                    self.moleculeJoueur.pattern.mv_y = 1
                 elif event.key == K_LEFT:
-                    self.moleculeJoueur.mv_x = -1
+                    self.moleculeJoueur.pattern.mv_x = -1
                 elif event.key == K_RIGHT:
-                    self.moleculeJoueur.mv_x = 1
+                    self.moleculeJoueur.pattern.mv_x = 1
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
                 if event.key == K_UP and self.moleculeJoueur.mv_y==-1:
-                    self.moleculeJoueur.mv_y = 0
+                    self.moleculeJoueur.pattern.mv_y = 0
                 elif event.key == K_DOWN and self.moleculeJoueur.mv_y==1:
-                    self.moleculeJoueur.mv_y = 0
+                    self.moleculeJoueur.pattern.mv_y = 0
                 elif event.key == K_LEFT and self.moleculeJoueur.mv_x==-1:
-                    self.moleculeJoueur.mv_x = 0
+                    self.moleculeJoueur.pattern.mv_x = 0
                 elif event.key == K_RIGHT and self.moleculeJoueur.mv_x==1:
-                    self.moleculeJoueur.mv_x = 0
+                    self.moleculeJoueur.pattern.mv_x = 0
             elif event.type == QUIT:
                 self.fenetre.fermer()
                 self.continuer = False
