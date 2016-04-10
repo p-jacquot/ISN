@@ -1,5 +1,5 @@
 ﻿# Créé par Pierre, le 06/04/2016 en Python 3.2
-
+from math import *
 class Pattern:
     """La classe pattern dont tous les pattern doivent hériter."""
     def __init__(self, mv_x, mv_y):
@@ -18,8 +18,12 @@ class PatternDroit(Pattern):
         self.a = a
         self.b = b
         self.c = c
+        if c == sqrt(pow(x,2)):
+            self.dir = 1
+        else:
+            self.dir = -1
 
     def deplacer(self, posX, posY):
-        posX += 1
+        posX += self.dir
         posY = self.a * self.a * posX + self.b * posX + self.c
         return posX, posY
