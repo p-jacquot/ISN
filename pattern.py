@@ -25,5 +25,21 @@ class PatternDroit(Pattern):
 
     def deplacer(self, posX, posY):
         posX += self.dir
-        posY = self.a * self.a * posX + self.b * posX + self.c
+        posY = self.a * posX * posX + self.b * posX + self.c
         return posX, posY
+
+class PatternCercle(Pattern):
+    """Pattern qui fait se déplacer selon un cercle au milieu de l'écran"""
+    def __init__(self,centreX,centreY,rayon,angleDepart,vitesse):
+        self.centreX=centreX
+        self.centreY=centreY
+        self.rayon=rayon
+        self.angle=angleDepart
+        self.vitesse=vitesse #en degrés par mouvement et négatif pour tourner dans l'autre sens
+
+    def deplacer(self,posX,posY):
+        self.angle+=vitesse
+        posX=centreX+rayon*(cos(angle/180*pi))
+        posY=centreY+rayon*(sin(angle/180*pi))
+        return posX,posY
+
