@@ -24,7 +24,19 @@ class Niveau:
         rand = random.randint(0, 100)
         for mob in mobList:
             if rand < mob[1]:
-                return mob[0] #On retourne la molécule.
+                ennemi= mob[0] #On retourne la molécule.
+                #code pour donner des coordonnees à l'ennemi, peut etre qu'on changera ca apres mais je pense que c'est nécessaire
+                rand=random.randint(1,3)
+                if rand== 1 :#en haut
+                    ennemi.posY= -5
+                    ennemi.posX=random.randint(-5,350)
+                else:
+                    ennemi.posY=random.randint(-5,350)#je pense pas que le jeu fasse la largeur de l'écran alors il faudra changer cette valeur quand on saura
+                    if rand==2:
+                        ennemi.posX=-5
+                    else :
+                        ennemi.posX=350#idem ici
+                return ennemi
 
     #TODO: Rajouter une fonction __repr__() pour qu'on puisse voir clairement un niveau, et l'éditer s'il le faut.
 
