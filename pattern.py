@@ -54,18 +54,22 @@ class PatternZigZag(Pattern):#je ne suis pas sûr de la syntaxe pour ce pattern
     def deplacer(self,posX,posY):
         compteur+=1
         if self.compteur>self.temps:
-            self.Pattern.__del__()
-            self.Pattern=Pattern(randint(-vitesse,vitesse),randint(-vitesse,vitesse))
+            #self.Pattern.__del__()
+            #self.Pattern=Pattern(randint(-vitesse,vitesse),randint(-vitesse,vitesse))
+            mv_x=randint(-vitesse,vitesse)
+            mv_y=randint(-vitesse,vitesse)
             self.compteur=-2
-
-        return self.Pattern.deplacer(posX,posY)
+        posX+=mv_x
+        posY+=mv_y
+        return posX,posY
+        #return self.Pattern.deplacer(posX,posY)
 
 class PatternSinusoidal(Pattern):
     def __init__(self,amplitude,direction):
         self.amplitude=amplitude
         self.direction=direction
 
-    def deplacer(posX,posY):
+    def deplacer(self,posX,posY):
         posX+=self.direction
         posY = self.amplitude *sin(posX/180*pi)
         return posX,posY
