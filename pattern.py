@@ -48,7 +48,7 @@ class PatternCercle(Pattern):
 class PatternZigZag(Pattern):#je ne suis pas sûr de la syntaxe pour ce pattern
     def __init__(self,temps,vitesseMax):
         self.tempsMax=abs(temps,vitesse)#temps entre les changements de direction(en nb defois où on appelle move)
-        self.compteur=-2
+        self.compteur=9001
         self.vitesse=abs(vitesseMax)
 
     def deplacer(self,posX,posY):
