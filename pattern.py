@@ -1,5 +1,7 @@
 ﻿# Créé par Pierre, le 06/04/2016 en Python 3.2
 from math import *
+from random import *
+
 class Pattern:
     """La classe pattern dont tous les pattern doivent hériter."""
     def __init__(self, mv_x, mv_y):
@@ -42,4 +44,19 @@ class PatternCercle(Pattern):
         posX=centreX+rayon*(cos(angle/180*pi))
         posY=centreY+rayon*(sin(angle/180*pi))
         return posX,posY
+
+class PatternZigZag(Pattern):#je ne suis pas sûr de la syntaxe pour ce pattern
+    def __init__(self,temps):
+        self.tempsMax=abs(temps,vitesse)#temps entre les changements de direction
+        self.compteur=-2
+        self.vitesse=abs(vitesse)
+
+    def deplacer(self,posX,posY):
+        compteur+=1
+        if self.compteur>self.temps:
+            self.Pattern.__del__()
+            self.Pattern=Pattern(randint(-vitesse,vitesse),randint(-vitesse,vitesse))
+            self.compteur=-2
+
+        return self.Pattern.deplacer(posX,posY)
 
