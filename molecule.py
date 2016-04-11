@@ -19,7 +19,7 @@ class Molecule:
         self.mv_y = 0
 
 
-    def __init__(self,nomMol,hauteur,largeur):
+    def __init__(self,nomMol,hauteur,largeur,pattern,dataPattern):
         self.atomeList = listerAtomes(nomMol,hauteur,largeur) #La liste qui contient tous les atomes.
         #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
         self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
@@ -30,7 +30,16 @@ class Molecule:
         self.mv_x = 0   #les variables de mouvements.
         self.img = pygame.image.load(nomMol).convert_alpha()
         self.rect = self.img.get_rect()
-        self.pattern = Pattern(1, 1)
+        if pattern==1 :
+            self.pattern=Pattern(dataPattern)
+        elif pattern==2:
+            self.pattern=PatternPolynome(dataPattern)
+        elif pattern==3:
+            self.pattern=PatternCercle(dataPattern)
+        elif pattern==4:
+            self.pattern=PatternZigZag(dataPattern)
+        elif pattern==5:
+            self.pattern=PatternSinusoidal(dataPattern)
 
 
     """def addAtome(atome,pos):
