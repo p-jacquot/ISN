@@ -52,7 +52,7 @@ class Molecule:
         """self.posX += self.mv_x
         self.posY += self.mv_y
         self.rect = self.rect.move(self.mv_x, self.mv_y)"""
-        self.posX, self.posY = pattern.deplacer(self.posX, self.posY)
+        self.posX, self.posY = self.pattern.deplacer(self.posX, self.posY)
         self.rect.x = self.posX
         self.rect.y = self.posY
         #TODO: ici, prendre la décision de tirer ou non.
