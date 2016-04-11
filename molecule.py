@@ -40,6 +40,8 @@ class Molecule:
             self.pattern=PatternZigZag(dataPattern)
         elif pattern==5:
             self.pattern=PatternSinusoidal(dataPattern)
+        self.hauteur=hauteur
+        self.largeur=largeur
 
 
     """def addAtome(atome,pos):
@@ -56,6 +58,8 @@ class Molecule:
         self.rect.x = self.posX
         self.rect.y = self.posY
         #TODO: ici, prendre la décision de tirer ou non.
+        if self.posX+largeur<-5 or self.posX>355 or self.posY+hauteur<-5 or self.posY>768+5:#changer valeur ici aussi
+            self.__del__()   #pas besoin de passer par hit, il n'y aura pas d'animation comme c'est hors de l'écran
 
     def tirer(self):
         projectiles = []
