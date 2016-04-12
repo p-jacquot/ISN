@@ -27,7 +27,7 @@ class Jeu:
         while self.continuer:
             if self.niveau.maxMobsOnScreen > self.niveau.totalMobLeft :
                 if randint(0,50)==45:
-                    self.niveau.genererMob()
+                    self.ennemyList.append(self.niveau.genererMob())
             #La boucle principale du jeu.
             #print("yolo ! On s'amuse bien !")
             #print(self.moleculeJoueur.rect)
