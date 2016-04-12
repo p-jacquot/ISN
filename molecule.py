@@ -19,7 +19,7 @@ class Molecule:
         #self.mv_y = 0
 
 
-    def __init__(self,nomMol,hauteur,largeur):
+    def __init__(self,nomMol,hauteur,largeur,pattern,dataPattern):
         self.atomeList = listerAtomes(nomMol,hauteur,largeur) #La liste qui contient tous les atomes.
         #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
         self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
@@ -30,7 +30,18 @@ class Molecule:
         #self.mv_x = 0   #les variables de mouvements.
         self.img = pygame.image.load(nomMol).convert_alpha()
         self.rect = self.img.get_rect()
-        self.pattern = Pattern(1, 1)
+        if pattern==1 :
+            self.pattern=Pattern(dataPattern)
+        elif pattern==2:
+            self.pattern=PatternPolynome(dataPattern)
+        elif pattern==3:
+            self.pattern=PatternCercle(dataPattern)
+        elif pattern==4:
+            self.pattern=PatternZigZag(dataPattern)
+        elif pattern==5:
+            self.pattern=PatternSinusoidal(dataPattern)
+        self.hauteur=hauteur
+        self.largeur=largeur
 
 
     """def addAtome(atome,pos):
@@ -43,10 +54,22 @@ class Molecule:
         """self.posX += self.mv_x
         self.posY += self.mv_y
         self.rect = self.rect.move(self.mv_x, self.mv_y)"""
-        self.posX, self.posY = pattern.deplacer(self.posX, self.posY)
+        self.posX, self.posY = self.pattern.deplacer(self.posX, self.posY)
         self.rect.x = self.posX
         self.rect.y = self.posY
         #TODO: ici, prendre la décision de tirer ou non.
+        if self.posX+self.largeur<-5 or self.posX>355 or self.posY+self.hauteur<-5 or self.posY>768+5:     #changer valeur ici aussi
+            self.__del__()   #pas besoin de passer par hit, il n'y aura pas d'animation comme c'est hors de l'écran
+
+        if self.__name__()=="moleculeJoueur":  #condition qui regarde si le joueur ne dépasse pas les limites de l'entendement
+            if self.posX<10:
+                self.posX=10
+            elif self.posX>340:  #changer encore ici
+                self.posX=340
+            if self.posY <10:
+                self.posY=10
+            elif self.posY>758:
+                self.posY=758
 
     def tirer(self):
         projectiles = []
