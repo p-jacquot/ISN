@@ -11,10 +11,18 @@ class Niveau:
         self.maxMobOnScreen = mobOnScreen #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
         self.totalMobsLeft = totalMob
 
-    def __init__(self, mobOnScreen, totalMob, firstDialog, middleDialog, lastDialog):
-        self.mobList = [] #Les choses sont stockées dans l'ordre suivant : molécule, proba d'apparition.
-        self.maxMobOnScreen = mobOnScreen #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
-        self.totalMobsLef = totalMob
+    def __init__(self, numero, firstDialog, middleDialog, lastDialog):
+        fname=str("resources/niveau/"+str(numero)+".txt")
+        with open(fname) as text:
+            content = text.readlines()
+        self.mobList=[]    #Les choses sont stockées dans l'ordre suivant : molécule, proba d'apparition.
+        for a in content[:-2]:
+            print(a)
+            print(a[-3:-1])
+            self.mobList.append([str(a[:-4]),int(a[-3:-1])])
+        print(self.mobList)
+        self.maxMobOnScreen = content[-2] #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
+        self.totalMobsLeft = content[-1]
         self.firstDialog = firstDialog  #Les différents dialogues qu'ils y aura dans le niveau.
         self.middleDialog = middleDialog
         self.lastDialog = lastDialog
