@@ -34,7 +34,13 @@ class Jeu:
             """Mouvement des différentes molecules et projectiles"""
             for ennemy in self.ennemyList:
                 ennemy.move()
-                er.append(ennemy.rect)
+                if ennemy.dead==False:
+                    er.append(ennemy.rect)
+                elif ennemy.hp<=0:
+                    pass #On met ici l'animation de mort, c'est à dire l'explosion, peut etre un score plus tard
+                else:
+                    self.ennemyList.remove(ennemy)
+                    ennemy.__del__()
                 #print(ennemy.rect)
             for proj in self.ennemyProjectiles:
                 proj.move()
