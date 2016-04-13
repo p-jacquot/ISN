@@ -44,10 +44,18 @@ class Jeu:
                 #print(ennemy.rect)
             for proj in self.ennemyProjectiles:
                 proj.move()
-                epr.append(proj.rect)
+                if proj.dead==False:
+                   epr.append(proj.rect)
+                else:
+                    self.ennemyProjectiles.remove(proj)
+                    proj.__del__()
             for proj in self.projectilesJoueur:
                 proj.move()
-                pjr.append(proj.rect)
+                if proj.dead==False:
+                   jpr.append(proj.rect)
+                else:
+                    self.projectilesJoueur.remove(proj)
+                    proj.__del__()
 
             """Calcul des collisions."""
             indexMechant = self.moleculeJoueur.rect.collidelist(er)
