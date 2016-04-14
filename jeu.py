@@ -32,30 +32,41 @@ class Jeu:
             #print("yolo ! On s'amuse bien !")
             #print(self.moleculeJoueur.rect)
             """Mouvement des différentes molecules et projectiles"""
+
+            newList=[]
             for ennemy in self.ennemyList:
-                ennemy.move()
                 if ennemy.dead==False:
+                    ennemy.move()
                     er.append(ennemy.rect)
-                elif ennemy.hp<=0:
+                    self.ennemyProjectiles+=ennemy.tirer()
+                    newList.append(ennemy)
+                elif ennemy.hp<=0:#l'ennemi n'a plus d'hp
+                    ennemy.__del__()
                     pass #On met ici l'animation de mort, c'est à dire l'explosion, peut etre un score plus tard
-                else:
-                    self.ennemyList.__delitem__(ennemy)  #il faudrait peut etre trouver une autre solution que remove
+                else:#l'ennemi sort de l'écran
                     ennemy.__del__()
                 #print(ennemy.rect)
+            self.ennemyList=newList
+
+            newList=[]
             for proj in self.ennemyProjectiles:
-                proj.move()
                 if proj.dead==False:
+                   proj.move()
                    epr.append(proj.rect)
+                   newList.append(proj)
                 else:
-                    self.ennemyProjectiles.remove(proj)
                     proj.__del__()
+            self.ennemyProjectiles=newList
+
+            newList=[]
             for proj in self.projectilesJoueur:
-                proj.move()
                 if proj.dead==False:
-                   jpr.append(proj.rect)
+                    proj.move()
+                    jpr.append(proj.rect)
+                    newList.append(proj)
                 else:
-                    self.projectilesJoueur.remove(proj)
                     proj.__del__()
+            self.projectilesJoueur=newList
 
             """Calcul des collisions."""
             indexMechant = self.moleculeJoueur.rect.collidelist(er)
