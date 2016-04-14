@@ -75,7 +75,10 @@ class Molecule:
     def tirer(self):
         projectiles = []
         for atome in self.atomeList:
-            projectiles+=(atome.tir())
+            if atome.delayTir<0:
+                projectiles+=(atome.tir())
+            else:
+                atome.delayTir-=1
         return projectiles
 
     def hit(self):
