@@ -39,7 +39,7 @@ class Jeu:
                 elif ennemy.hp<=0:
                     pass #On met ici l'animation de mort, c'est à dire l'explosion, peut etre un score plus tard
                 else:
-                    self.ennemyList.remove(ennemy)
+                    self.ennemyList.__delitem__(ennemy)  #il faudrait peut etre trouver une autre solution que remove
                     ennemy.__del__()
                 #print(ennemy.rect)
             for proj in self.ennemyProjectiles:
@@ -66,12 +66,13 @@ class Jeu:
             indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
             if indexMechantProjectile != -1:
                 self.moleculeJoueur.hp -= 1
-                del self.ennemyProjectiles[indexMechantProjectile] #On supprime le projectile, s'il a touché sa cible.
+                self.ennemyProjectiles[indexMechantProjectile].dead=True #On supprime le projectile, s'il a touché sa cible.
 
             for proj in pjr:
                 index = proj.collidelist(er)
                 if index != -1:
                     self.ennemyList[index].hit()
+                    self.projectilesJoueur[index].dead=True
 
             """Events incoming !"""
             event = pygame.event.poll()
