@@ -44,6 +44,7 @@ class Molecule:
         self.largeur=largeur
         self.dead=False
 
+
     """def addAtome(atome,pos):
         self.atomeList.append(atome)
         self.hpMax += atome.hp
@@ -74,7 +75,7 @@ class Molecule:
     def tirer(self):
         projectiles = []
         for atome in self.atomeList:
-            projectiles.extend(atome.tir())
+            projectiles+=(atome.tir())
         return projectiles
 
     def hit(self):
