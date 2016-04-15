@@ -32,16 +32,41 @@ class Jeu:
             #print("yolo ! On s'amuse bien !")
             #print(self.moleculeJoueur.rect)
             """Mouvement des différentes molecules et projectiles"""
+
+            newList=[]
             for ennemy in self.ennemyList:
-                ennemy.move()
-                er.append(ennemy.rect)
+                if ennemy.dead==False:
+                    ennemy.move()
+                    er.append(ennemy.rect)
+                    self.ennemyProjectiles+=ennemy.tirer()
+                    newList.append(ennemy)
+                elif ennemy.hp<=0:#l'ennemi n'a plus d'hp
+                    ennemy.__del__()
+                    pass #On met ici l'animation de mort, c'est à dire l'explosion, peut etre un score plus tard
+                else:#l'ennemi sort de l'écran
+                    ennemy.__del__()
                 #print(ennemy.rect)
+            self.ennemyList=newList
+
+            newList=[]
             for proj in self.ennemyProjectiles:
-                proj.move()
-                epr.append(proj.rect)
+                if proj.dead==False:
+                   proj.move()
+                   epr.append(proj.rect)
+                   newList.append(proj)
+                else:
+                    proj.__del__()
+            self.ennemyProjectiles=newList
+
+            newList=[]
             for proj in self.projectilesJoueur:
-                proj.move()
-                pjr.append(proj.rect)
+                if proj.dead==False:
+                    proj.move()
+                    jpr.append(proj.rect)
+                    newList.append(proj)
+                else:
+                    proj.__del__()
+            self.projectilesJoueur=newList
 
             """Calcul des collisions."""
             indexMechant = self.moleculeJoueur.rect.collidelist(er)
@@ -52,12 +77,13 @@ class Jeu:
             indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
             if indexMechantProjectile != -1:
                 self.moleculeJoueur.hp -= 1
-                del self.ennemyProjectiles[indexMechantProjectile] #On supprime le projectile, s'il a touché sa cible.
+                self.ennemyProjectiles[indexMechantProjectile].dead=True #On supprime le projectile, s'il a touché sa cible.
 
             for proj in pjr:
                 index = proj.collidelist(er)
                 if index != -1:
                     self.ennemyList[index].hit()
+                    self.projectilesJoueur[index].dead=True
 
             """Events incoming !"""
             event = pygame.event.poll()
