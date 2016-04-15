@@ -26,7 +26,7 @@ class Projectile:
         self.mv_x = mv_x
         self.mv_y = mv_y
         self.dead=False
-        self.img = constantes.projectilesList[indexImg].convert_alpha()
+        self.img = constantes.projectilesList[indexImg]
         self.rect = self.img.get_rect()
         self.rect.x = self.posX
         self.rect.y = self.posY
