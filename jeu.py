@@ -18,6 +18,7 @@ class Jeu:
 
         self.continuer = True
         self.moleculeJoueur = None
+        self.delayTirJoueur=0
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
     def play(self):
@@ -99,6 +100,8 @@ class Jeu:
                     self.moleculeJoueur.pattern.mv_x = -1
                 elif event.key == K_RIGHT:
                     self.moleculeJoueur.pattern.mv_x = 1
+                if event.key == K_w :
+                    self.tir =True
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
                 if event.key == K_UP and self.moleculeJoueur.mv_y==-1:
@@ -109,9 +112,18 @@ class Jeu:
                     self.moleculeJoueur.pattern.mv_x = 0
                 elif event.key == K_RIGHT and self.moleculeJoueur.mv_x==1:
                     self.moleculeJoueur.pattern.mv_x = 0
+                if event.key == K_w :
+                    self.tir = False
             elif event.type == QUIT:
                 self.fenetre.fermer()
                 self.continuer = False
+
+            if self.tir == True and self.delayTirJoueur <=0 :
+                proj = Projectile(self.moleculeJoueur.posX,self.moleculeJoueur.posY,0,-2)
+                proj.img = constantes.projectilesList[0]
+                self.projectilesJoueur.append(proj)
+                self.delayTirJoueur=20
+
             self.moleculeJoueur.move()
             self.actualiser()
             #TODO: Gérer les collisions.
