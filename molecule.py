@@ -15,8 +15,8 @@ class Molecule:
         self.posX = posX
         self.posY = posY
         self.isAlive = True
-        self.mv_x = 0
-        self.mv_y = 0
+        #self.mv_x = 0
+        #self.mv_y = 0
 
 
     def __init__(self,nomMol,hauteur,largeur,pattern):
@@ -26,8 +26,8 @@ class Molecule:
         self.hp = 0 #La vie de la molécule.
         self.posX = 0
         self.posY = 0
-        self.mv_y = 0
-        self.mv_x = 0   #les variables de mouvements.
+        #self.mv_y = 0
+        #self.mv_x = 0   #les variables de mouvements.
         self.img = pygame.image.load(nomMol).convert_alpha()
         self.rect = self.img.get_rect()
         self.pattern=pattern

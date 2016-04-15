@@ -26,7 +26,7 @@ class Niveau:
 
 
     def genererMob(self):
-        rand = random.randint(0, 100)
+        rand = random.randint(0, 99)
         for mob in mobList:
             if rand < mob[1]:
                 ennemi= mob[0] #On retourne la molécule.

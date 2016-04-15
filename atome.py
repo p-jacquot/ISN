@@ -39,7 +39,7 @@ class Hydrogene(Atome):
         distance=sqrt(pow(x2-x1,2)+pow(y2-y1,2))
         a = int((x2-x1)/distance)
         b = int((y2-y1)/distance)
-        return [Projectile((self.posX, self.posY), (a, b))]
+        return [Projectile(self.posX, self.posY, a, b)]
 
 
 class Carbone(Atome):
@@ -54,9 +54,9 @@ class Carbone(Atome):
         tirNum = -tirNum
         self.delayTir=self.delayTirMax
         if self.tirNum == -1:
-            return [Projectile((self.posX, self.posY), (-1, 0)), Projectile((self.posX, self.posY), (1, 0)), Projectile((self.posX, self.posY), (0, 1)), Projectile((self.posX, self.posY), (0, -1))]
+            return [Projectile(self.posX, self.posY, -1, 0), Projectile(self.posX, self.posY, 1, 0), Projectile(self.posX, self.posY, 0, 1), Projectile(self.posX, self.posY, 0, -1)]
         elif self.tirNum == 1:
-            return [Projectile((self.posX, self.posY), (-1, -1)), Projectile((self.posX, self.posY), (1, -1)), Projectile((self.posX, self.posY), (1, 1)), Projectile((self.posX, self.posY), (-1, 1))]
+            return [Projectile(self.posX, self.posY, -1, -1), Projectile(self.posX, self.posY, (1, -1)), Projectile(self.posX, self.posY, 1, 1), Projectile(self.posX, self.posY, -1, 1)]
 
 class Oxygene(Atome):
 
@@ -70,7 +70,7 @@ class Oxygene(Atome):
         #self.angle = #angle entre chaques tirs
         tirNum += 1
         self.delayTir=self.delayTirMax
-        return [Projectile((self.posX, self.posY), (cos((self.angle*self.tirNum)/180*pi), sin((self.angle*self.tirNum))/180*pi))]
+        return [Projectile(self.posX, self.posY, cos((self.angle*self.tirNum))/180*pi, sin((self.angle*self.tirNum))/180*pi)]
 
 
 class Azote(Atome):
@@ -82,6 +82,6 @@ class Azote(Atome):
         self.delayTir=self.delayTirMax
     def tir(self):
         self.delayTir=self.delayTirMax
-        return[Projectile((self.posX,self.posY),(0,2)),Projectile((self.posX,self.posY),(1,2)),Projectile((self.posX,self.posY),(-1,2))]
+        return[Projectile(self.posX,self.posY, 0,2),Projectile(self.posX,self.posY,1,2),Projectile(self.posX,self.posY,-1,2)]
 
 
