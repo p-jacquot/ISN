@@ -4,7 +4,6 @@ import constantes
 from random import *
 
 
-
 class Projectile:
     """Classe des projectiles tirés par les atomes."""
 
@@ -20,6 +19,17 @@ class Projectile:
         self.rect.x = self.posX
         self.rect.y = self.posY
 
+    def __init__(self, posX, posY, mv_x, mv_y, indexImg):
+        """Constructeur quasi identique, mais on peut choisir l'image du projectile. (pour ceux du joueur, ce sera tous les mêmes)"""
+        self.posX = posX
+        self.posY = posY
+        self.mv_x = mv_x
+        self.mv_y = mv_y
+        self.dead=False
+        self.img = constantes.projectilesList[indexImg].convert_alpha()
+        self.rect = self.img.get_rect()
+        self.rect.x = self.posX
+        self.rect.y = self.posY
 
     """ def __init__(self, pos, posCible,equipe):
         #Le fameux constructeur qui va permettre de viser le joueur.
@@ -40,4 +50,3 @@ class Projectile:
         self.rect.move_ip(mv_x, mv_y) #On fait bouger le rectangle !
         if self.posY<-20 or self.posY>610 or self.posX[0]<-20 or self.posX>380:
             self.dead=True
-
