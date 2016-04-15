@@ -7,7 +7,6 @@ class Fenetre:
     """Classe Fenêtre, s'occupant de l'affichage."""
 
     def __init__(self, titre, largeur, hauteur):
-        pygame.init()
         self.fen = pygame.display.set_mode((largeur, hauteur))
         self.largeur = largeur
         self.hauteur = hauteur
@@ -51,7 +50,7 @@ class Fenetre:
     def fermer(self):
         pygame.quit()
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     f = Fenetre("test", 768, 600)
     f.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
     #f.addImgList(pygame.image.load("hakase_nyan.png").convert_alpha(), (0, 0))
@@ -59,4 +58,4 @@ if __name__ == "__main__":
     f.rafraichir()
     #f.ecrireTexte("lel", 500, 200)
     time.sleep(2)
-    f.fermer()
+    f.fermer()"""
