@@ -1,5 +1,8 @@
 ﻿# Créé par Pierre, le 03/03/2016 en Python 3.2
 from math import *
+import constantes
+from random import *
+
 
 class Projectile:
     """Classe des projectiles tirés par les atomes."""
@@ -9,7 +12,8 @@ class Projectile:
         self.position = [pos[0],pos[1]] #tuple de position.
         self.mouvement = [mv[0],mv[1]] #liste de mouvement.
         self.dead=False
-
+        self.img = projectilesList[randint(1,6)].convert_alpha()
+        self.rect = self.img.get_rect()
     """ def __init__(self, pos, posCible,equipe):
         #Le fameux constructeur qui va permettre de viser le joueur.
         self.position = pos
