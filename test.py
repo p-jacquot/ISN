@@ -5,6 +5,7 @@ from fenetre import Fenetre
 from molecule import Molecule
 from dialogue import Dialog
 from niveau import Niveau
+import constantes
 
 import pickle
 
@@ -32,10 +33,12 @@ def testSerializedDialogue():
         dialogue = pickle.load(file)
     jeu.dialoguer(dialogue)
 
+pygame.init()
 fenetre = Fenetre("test ISN Dialogue", 768, 600)
 fenetre.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
 
 jeu = Jeu(fenetre, 1)
 #testDialog()
-testSerializedDialogue()
+#testSerializedDialogue()
+testplay()
 pygame.quit()
