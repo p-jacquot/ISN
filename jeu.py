@@ -42,7 +42,7 @@ class Jeu:
                     newList.append(ennemy)
                 elif ennemy.hp<=0:#l'ennemi n'a plus d'hp
                     ennemy.__del__()
-                    pass #On met ici l'animation de mort, c'est à dire l'explosion, peut etre un score plus tard
+                    #On met ici l'animation de mort, c'est à dire l'explosion, peut etre un score plus tard
                 else:#l'ennemi sort de l'écran
                     ennemy.__del__()
                 #print(ennemy.rect)
