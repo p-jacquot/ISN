@@ -4,10 +4,12 @@ from math import *
 class Projectile:
     """Classe des projectiles tirés par les atomes."""
 
-    def __init__(self, pos, mv):
+    def __init__(self, posX, posY, mv_x, mv_y):
         """Constructeur 'tout simple'..."""
-        self.position = [pos[0],pos[1]] #tuple de position.
-        self.mouvement = [mv[0],mv[1]] #liste de mouvement.
+        self.posX = posX
+        self.posY = posY
+        self.mv_x = mv_x
+        self.mv_y = mv_y
         self.dead=False
 
     """ def __init__(self, pos, posCible,equipe):
@@ -24,8 +26,8 @@ class Projectile:
         self.mouvement = (a,b)"""
 
     def move(self):
-        self.position[0]+=self.mouvement[0]
-        self.position[1]+=self.mouvement[1]
-        if self.position[1]<-20 or self.position[1]>610 or self.position[0]<-20 or self.position[0]>380:
+        self.posX += mv_x
+        self.posY += mv_y
+        if self.posY<-20 or self.posY>610 or self.posX[0]<-20 or self.posX>380:
             self.dead=True
 
