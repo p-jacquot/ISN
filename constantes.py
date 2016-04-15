@@ -2,8 +2,8 @@
 import pygame
 
 """Constantes projectiles"""
-projectilesList = [pygame.image.load("/resources/photos/photon_bleu.png"),
-                    pygame.image.load("/resources/photos/photon_bleu_clair_pour_le_joueur2.png"),
+projectilesList = [ pygame.image.load("/resources/photos/photon_bleu_clair_pour_le_joueur2.png"),
+                    pygame.image.load("/resources/photos/photon_bleu.png"),
                     pygame.image.load("/resources/photos/photon_jaune.png"),
                     pygame.image.load("/resources/photos/photon_rose2.png"),
                     pygame.image.load("/resources/photos/photon_sombre.png"),
