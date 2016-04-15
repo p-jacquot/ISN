@@ -21,10 +21,10 @@ class Jeu:
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
     def play(self):
-        er = [] #rect ennemies
-        epr = [] #rect des projectiles ennemis
-        pjr = [] #rect des projectiles du joueur.
         while self.continuer:
+            er = [] #rect ennemies
+            epr = [] #rect des projectiles ennemis
+            pjr = [] #rect des projectiles du joueur.
             if self.niveau.maxMobsOnScreen > self.niveau.totalMobLeft :
                 if randint(0,50)==45:
                     self.ennemyList.append(self.niveau.genererMob())
