@@ -118,6 +118,7 @@ class Jeu:
                 self.fenetre.fermer()
                 self.continuer = False
 
+            self.delayTirJoueur-=1
             if self.tir == True and self.delayTirJoueur <=0 :
                 proj = Projectile(self.moleculeJoueur.posX,self.moleculeJoueur.posY,0,-2)
                 proj.img = constantes.projectilesList[0]
