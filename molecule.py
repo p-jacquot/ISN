@@ -1,10 +1,11 @@
 ﻿# Créé par Pierre, le 07/03/2016 en Python 3.2
 import pygame
+pygame.init()
 from PIL import Image
 from atome import *
 from jeu import Jeu
 from pattern import *
-pygame.init()
+
 
 
 class Molecule:
