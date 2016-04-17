@@ -6,14 +6,14 @@ from molecule import Molecule
 from dialogue import Dialog
 from niveau import Niveau
 import constantes
-
+from pattern import *
 import pickle
-
+pygame.init()
 def testplay():
-    jeu.moleculeJoueur = Molecule('resources/photos/oxygene.png', 30, 30)
+    jeu.moleculeJoueur = Molecule('resources/photos/oxygene.png', 30, 30,Pattern(0,0))
     jeu.moleculeJoueur.posX = 50
     jeu.moleculeJoueur.rect = jeu.moleculeJoueur.rect.move(50, 0)
-    jeu.ennemyList.append(Molecule('resources/photos/azote.png', 35, 35))
+    jeu.ennemyList.append(Molecule('resources/photos/azote.png', 35, 35,PatternCercle(50,60,10,4,3)))
 
     jeu.play()
 
