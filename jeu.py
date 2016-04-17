@@ -4,7 +4,7 @@ from fenetre import Fenetre
 import pygame
 from pygame.event import *
 from pygame.locals import * #Pour les events.
-
+pygame.init()
 class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
 
@@ -121,7 +121,7 @@ class Jeu:
             self.delayTirJoueur-=1
             if self.tir == True and self.delayTirJoueur <=0 :
                 proj = Projectile(self.moleculeJoueur.posX,self.moleculeJoueur.posY,0,-2)
-                proj.img = constantes.projectilesList[0]
+                proj.img = constantes.projectilesList[0].convert_alpha()
                 self.projectilesJoueur.append(proj)
                 self.delayTirJoueur=20
 
