@@ -4,7 +4,7 @@ from PIL import Image
 from atome import *
 from jeu import Jeu
 from pattern import *
-
+pygame.init()
 
 
 class Molecule:
@@ -28,7 +28,7 @@ class Molecule:
         self.posY = 0
         #self.mv_y = 0
         #self.mv_x = 0   #les variables de mouvements.
-        self.img = pygame.image.load(nomMol).convert_alpha()
+        self.img = pygame.image.load('resources/photos/'+str(nomMol)).convert_alpha()
         self.rect = self.img.get_rect()
         self.pattern=pattern
         self.hauteur=hauteur
