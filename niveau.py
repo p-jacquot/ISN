@@ -1,4 +1,5 @@
 ﻿# Créé par Pierre, le 05/03/2016 en Python 3.2
+from PIL import Image
 
 import random
 from dialogue import Dialog
@@ -29,7 +30,14 @@ class Niveau:
         rand = random.randint(0, 99)
         for mob in mobList:
             if rand < mob[1]:
-                ennemi= mob[0] #On retourne la molécule.
+                #code en attendant de sérialiser les molécules
+                name = "resources/photos/"+str(mob[0])
+                img=Image.open(name)
+                taille=img.size
+                pattern=Pattern(0,0)
+
+
+                ennemi= Molecule(mob[0],taille[1],taille[0],pattern) #On retourne la molécule.
                 #code pour donner des coordonnees à l'ennemi, peut etre qu'on changera ca apres mais je pense que c'est nécessaire
                 rand=random.randint(1,3)
                 if rand== 1 :#en haut
