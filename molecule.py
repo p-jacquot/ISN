@@ -8,6 +8,7 @@ from pattern import *
 
 
 
+
 class Molecule:
     """La classe Molécule, qui est un ensemble d'atomes."""
 
@@ -81,7 +82,10 @@ class Molecule:
 
 
 def listerAtomes( nomMol,hauteur,largeur):
-        img = Image.open(nomMol)
+        print(nomMol)
+        chemin='resources/photos/'+str(nomMol)
+        img = Image.open(chemin)
+
         listeAtomes=[]
         for y in range(hauteur):
             for x in range(largeur):
@@ -108,7 +112,7 @@ def vieMol(atomeList):
 
 
 """
-Marre que ce code là soit exécuté tout le temps.
-Cortizone=Molecule('resources/photos/cortizone.png',500,500)
+#Marre que ce code là soit exécuté tout le temps.
+Cortizone=Molecule('cortizone.png',500,500,Pattern(0,0))
 print(Cortizone.atomeList)
 print(Cortizone.hpMax," est la vie max de la cortizone")"""
