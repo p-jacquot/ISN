@@ -15,9 +15,13 @@ def testplay():
     jeu.moleculeJoueur.posX = 250
     jeu.moleculeJoueur.posY = 250
     jeu.moleculeJoueur.rect = jeu.moleculeJoueur.rect.move(50, 0)
-    jeu.ennemyList.append(Molecule('azote.png', 35, 35,PatternCercle(50,60,10,4,1)))
-    jeu.ennemyList.append(Molecule('oxygene.png', 30, 30,PatternZigZag(5,5)))
+    jeu.moleculeJoueur.hp =9001
+    jeu.ennemyList.append(Molecule('azote.png', 35, 35,PatternCercle(150,60,25,4,2)))
+    jeu.ennemyList.append(Molecule('oxygene.png', 22, 22,PatternZigZag(20,1)))
     jeu.ennemyList.append(Molecule('carbone.png', 42, 42,PatternPolynome(1,1,1)))
+    for a in jeu.ennemyList:
+        a.posX =randint(15,200)
+        a.posY = randint(15,200)
     #jeu.ennemyList.append(Molecule('hydrogene.png', 22, 22,PatternSinusoidal(5,1)))
     jeu.play()
 
@@ -39,7 +43,7 @@ def testSerializedDialogue():
 
 pygame.init()
 fenetre = Fenetre("test ISN Dialogue", 768, 600)
-fenetre.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
+fenetre.fond = pygame.image.load("resources/galaxie.jpg").convert_alpha()
 
 jeu = Jeu(fenetre, Niveau(1,"kek","des","barres"))
 #testDialog()
