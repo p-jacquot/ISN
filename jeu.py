@@ -5,6 +5,7 @@ import pygame
 from pygame.event import *
 from pygame.locals import * #Pour les events.
 pygame.init()
+from projectiles import *
 class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
 
@@ -64,7 +65,7 @@ class Jeu:
             for proj in self.projectilesJoueur:
                 if proj.dead==False:
                     proj.move()
-                    jpr.append(proj.rect)
+                    pjr.append(proj.rect)
                     newList.append(proj)
                 else:
                     proj.__del__()
@@ -101,7 +102,7 @@ class Jeu:
                     self.moleculeJoueur.pattern.mv_x = -1
                 elif event.key == K_RIGHT:
                     self.moleculeJoueur.pattern.mv_x = 1
-                if event.key == K_w :
+                if event.key == K_SPACE :
                     self.tir =True
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
@@ -113,7 +114,7 @@ class Jeu:
                     self.moleculeJoueur.pattern.mv_x = 0
                 elif event.key == K_RIGHT and self.moleculeJoueur.pattern.mv_x==1:
                     self.moleculeJoueur.pattern.mv_x = 0
-                if event.key == K_w :
+                if event.key == K_SPACE :
                     self.tir = False
             elif event.type == QUIT:
                 self.fenetre.fermer()
@@ -121,7 +122,7 @@ class Jeu:
 
             self.delayTirJoueur-=1
             if self.tir == True and self.delayTirJoueur <=0 :
-                proj = Projectile(self.moleculeJoueur.posX,self.moleculeJoueur.posY,0,-2)
+                proj = Projectile(self.moleculeJoueur.posX,self.moleculeJoueur.posY,0,-3)
                 proj.img = constantes.projectilesList[0].convert_alpha()
                 self.projectilesJoueur.append(proj)
                 self.delayTirJoueur=20
@@ -133,12 +134,12 @@ class Jeu:
                 self.moleculeJoueur.posX=340
             if self.moleculeJoueur.posY <10:
                 self.moleculeJoueur.posY=10
-            elif self.moleculeJoueur.posY>758:
-                self.moleculeJoueur.posY=758
+            elif self.moleculeJoueur.posY>590:
+                self.moleculeJoueur.posY=590
             self.actualiser()
             #TODO: Gérer les collisions.
 
-            print(len(self.ennemyProjectiles))
+
         self.fenetre.fermer()
 
     def actualiser(self):
