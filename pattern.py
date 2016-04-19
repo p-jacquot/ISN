@@ -1,4 +1,5 @@
 ﻿# Créé par Pierre, le 06/04/2016 en Python 3.2
+#kek
 from math import *
 from random import *
 """utiliser un tuple pour donner les arguments dans le constructeur est bcp plus simple pour créer le pattern"""
