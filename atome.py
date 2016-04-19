@@ -40,7 +40,8 @@ class Hydrogene(Atome):
         distance=sqrt(pow(x2-x1,2)+pow(y2-y1,2))
         a = int((x2-x1)/distance)
         b = int((y2-y1)/distance)
-        return [Projectile(self.posX, self.posY, a, b)]
+        #return [Projectile(self.posX, self.posY, a, b)]
+        return []
 
 
 class Carbone(Atome):
@@ -49,7 +50,7 @@ class Carbone(Atome):
         Atome.__init__(self,  posX, posY)
         self.tirNum = -1
         self.hp=150
-        self.delayTirMax=70
+        self.delayTirMax=150
         self.delayTir=self.delayTirMax
     def tir(self):
         self.tirNum = -self.tirNum
