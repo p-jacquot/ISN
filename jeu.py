@@ -138,7 +138,7 @@ class Jeu:
             self.actualiser()
             #TODO: Gérer les collisions.
 
-            print(len(self.ennemyList))
+            print(len(self.ennemyProjectiles))
         self.fenetre.fermer()
 
     def actualiser(self):
