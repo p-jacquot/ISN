@@ -37,6 +37,9 @@ class Molecule:
         self.largeur=largeur
         self.dead=False
 
+    def __del__(self):
+        del self
+
 
     """def addAtome(atome,pos):
         self.atomeList.append(atome)
@@ -55,15 +58,7 @@ class Molecule:
         if self.posX+self.largeur<-5 or self.posX>355 or self.posY+self.hauteur<-5 or self.posY>768+5:     #changer valeur ici aussi
             self.dead=True   #pas besoin de passer par hit, il n'y aura pas d'animation comme c'est hors de l'écran
 
-        if self.__name__()=="moleculeJoueur":  #condition qui regarde si le joueur ne dépasse pas les limites de l'entendement
-            if self.posX<10:
-                self.posX=10
-            elif self.posX>340:  #changer encore ici
-                self.posX=340
-            if self.posY <10:
-                self.posY=10
-            elif self.posY>758:
-                self.posY=758
+
 
     def tirer(self):
         projectiles = []
@@ -76,7 +71,7 @@ class Molecule:
 
     def hit(self):
         self.hp -= 1
-        if hp <= 0:
+        if self.hp <= 0:
             print("Aaaaaaaaaah ! Je meurs !")
             self.dead=True
 
