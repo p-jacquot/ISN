@@ -35,7 +35,7 @@ class Hydrogene(Atome):
         self.delayTir=self.delayTirMax
 
         x1, y1 = self.posX,self.posY
-        x2, y2 = moleculeJoueur.position
+        x2, y2 = jeu.moleculeJoueur.posX,jeu.moleculeJoueur.posY
         distance=sqrt(pow(x2-x1,2)+pow(y2-y1,2))
         a = int((x2-x1)/distance)
         b = int((y2-y1)/distance)
@@ -66,9 +66,10 @@ class Oxygene(Atome):
         self.hp=20
         self.delayTirMax=30
         self.delayTir=self.delayTirMax
+        self.angle=0
     def tir(self):
         #self.angle = #angle entre chaques tirs
-        tirNum += 1
+        self.tirNum += 1
         self.delayTir=self.delayTirMax
         return [Projectile(self.posX, self.posY, cos((self.angle*self.tirNum))/180*pi, sin((self.angle*self.tirNum))/180*pi)]
 
