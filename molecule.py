@@ -25,7 +25,7 @@ class Molecule:
         self.atomeList = listerAtomes(nomMol,hauteur,largeur) #La liste qui contient tous les atomes.
         #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
         self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
-        self.hp = 0 #La vie de la molécule.
+        self.hp = self.hpMax #La vie de la molécule.
         self.posX = 0
         self.posY = 0
         #self.mv_y = 0
@@ -65,8 +65,12 @@ class Molecule:
         for atome in self.atomeList:
             if atome.delayTir<0:
                 projectiles+=(atome.tir())
+                for a in projectiles:
+                    a.posX+=self.posX
+                    a.posY+=self.posY
             else:
                 atome.delayTir-=1
+
         return projectiles
 
     def hit(self):
