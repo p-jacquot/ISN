@@ -8,13 +8,17 @@ from niveau import Niveau
 import constantes
 from pattern import *
 import pickle
+import niveau
 pygame.init()
 def testplay():
     jeu.moleculeJoueur = Molecule('oxygene.png', 30, 30,Pattern(0,0))
-    jeu.moleculeJoueur.posX = 50
+    jeu.moleculeJoueur.posX = 250
+    jeu.moleculeJoueur.posY = 250
     jeu.moleculeJoueur.rect = jeu.moleculeJoueur.rect.move(50, 0)
-    jeu.ennemyList.append(Molecule('azote.png', 35, 35,PatternCercle(50,60,10,4,3)))
-
+    jeu.ennemyList.append(Molecule('azote.png', 35, 35,PatternCercle(50,60,10,4,1)))
+    jeu.ennemyList.append(Molecule('oxygene.png', 30, 30,PatternZigZag(5,5)))
+    jeu.ennemyList.append(Molecule('carbone.png', 42, 42,PatternPolynome(1,1,1)))
+    #jeu.ennemyList.append(Molecule('hydrogene.png', 22, 22,PatternSinusoidal(5,1)))
     jeu.play()
 
 def testDialog():
@@ -37,7 +41,7 @@ pygame.init()
 fenetre = Fenetre("test ISN Dialogue", 768, 600)
 fenetre.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
 
-jeu = Jeu(fenetre, 1)
+jeu = Jeu(fenetre, Niveau(1,"kek","des","barres"))
 #testDialog()
 #testSerializedDialogue()
 testplay()
