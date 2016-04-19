@@ -34,7 +34,6 @@ class Fenetre:
         """for lis in self.imgList:
             self.fen.blit(lis[0], lis[1])"""
         self.fen.blit(self.fond, (0,0))
-        self.entites=Jeu.ennemyList+Jeu.ennemyProjectiles+Jeu.projectilesJoueur+Jeu.moleculeJoueur
         for ent in self.entites:
             self.fen.blit(ent.img, (ent.posX, ent.posY))
         pygame.display.flip()
