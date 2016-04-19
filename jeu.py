@@ -19,6 +19,7 @@ class Jeu:
         self.continuer = True
         self.moleculeJoueur = None
         self.delayTirJoueur=0
+        self.tir = False
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
     def play(self):
@@ -26,7 +27,7 @@ class Jeu:
             er = [] #rect ennemies
             epr = [] #rect des projectiles ennemis
             pjr = [] #rect des projectiles du joueur.
-            if self.niveau.maxMobsOnScreen > self.niveau.totalMobLeft :
+            if len(self.ennemyList) > self.niveau.maxMobOnScreen :
                 if randint(0,50)==45:
                     self.ennemyList.append(self.niveau.genererMob())
             #La boucle principale du jeu.
@@ -104,13 +105,13 @@ class Jeu:
                     self.tir =True
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
-                if event.key == K_UP and self.moleculeJoueur.mv_y==-1:
+                if event.key == K_UP and self.moleculeJoueur.pattern.mv_y==-1:
                     self.moleculeJoueur.pattern.mv_y = 0
-                elif event.key == K_DOWN and self.moleculeJoueur.mv_y==1:
+                elif event.key == K_DOWN and self.moleculeJoueur.pattern.mv_y==1:
                     self.moleculeJoueur.pattern.mv_y = 0
-                elif event.key == K_LEFT and self.moleculeJoueur.mv_x==-1:
+                elif event.key == K_LEFT and self.moleculeJoueur.pattern.mv_x==-1:
                     self.moleculeJoueur.pattern.mv_x = 0
-                elif event.key == K_RIGHT and self.moleculeJoueur.mv_x==1:
+                elif event.key == K_RIGHT and self.moleculeJoueur.pattern.mv_x==1:
                     self.moleculeJoueur.pattern.mv_x = 0
                 if event.key == K_w :
                     self.tir = False
@@ -126,6 +127,14 @@ class Jeu:
                 self.delayTirJoueur=20
 
             self.moleculeJoueur.move()
+            if self.moleculeJoueur.posX<10:
+                self.moleculeJoueur.posX=10
+            elif self.moleculeJoueur.posX>340:  #changer encore ici
+                self.moleculeJoueur.posX=340
+            if self.moleculeJoueur.posY <10:
+                self.moleculeJoueur.posY=10
+            elif self.moleculeJoueur.posY>758:
+                self.moleculeJoueur.posY=758
             self.actualiser()
             #TODO: Gérer les collisions.
         self.fenetre.fermer()
