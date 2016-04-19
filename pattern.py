@@ -40,9 +40,9 @@ class PatternCercle(Pattern):
         self.vitesse=vitesse #en degrés par mouvement et négatif pour tourner dans l'autre sens
 
     def deplacer(self,posX,posY):
-        self.angle+=vitesse
-        posX=centreX+rayon*(cos(angle/180*pi))
-        posY=centreY+rayon*(sin(angle/180*pi))
+        self.angle+=self.vitesse
+        posX=self.centreX+self.rayon*(cos(self.angle/180*pi))
+        posY=self.centreY+self.rayon*(sin(self.angle/180*pi))
         return posX,posY
 
 class PatternZigZag(Pattern):#je ne suis pas sûr de la syntaxe pour ce pattern
@@ -50,17 +50,18 @@ class PatternZigZag(Pattern):#je ne suis pas sûr de la syntaxe pour ce pattern
         self.tempsMax=abs(tempsMax)#temps entre les changements de direction(en nb defois où on appelle move)
         self.compteur=9001
         self.vitesse=abs(vitesse)
+        self.temps=tempsMax
 
     def deplacer(self,posX,posY):
-        compteur+=1
+        self.compteur+=1
         if self.compteur>self.temps:
             #self.Pattern.__del__()
             #self.Pattern=Pattern(randint(-vitesse,vitesse),randint(-vitesse,vitesse))
-            mv_x=randint(-vitesse,vitesse)
-            mv_y=randint(-vitesse,vitesse)
+            self.mv_x=randint(-self.vitesse,self.vitesse)
+            self.mv_y=randint(-self.vitesse,self.vitesse)
             self.compteur=-2
-        posX+=mv_x
-        posY+=mv_y
+        posX+=self.mv_x
+        posY+=self.mv_y
         return posX,posY
         #return self.Pattern.deplacer(posX,posY)
 
