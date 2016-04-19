@@ -137,6 +137,8 @@ class Jeu:
                 self.moleculeJoueur.posY=758
             self.actualiser()
             #TODO: Gérer les collisions.
+
+            print(len(self.ennemyList))
         self.fenetre.fermer()
 
     def actualiser(self):
