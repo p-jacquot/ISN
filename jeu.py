@@ -174,6 +174,10 @@ class Jeu:
                 event = pygame.event.wait()
                 pass
 
+    def progressInLevel(self):
+        pygame.mixer.music.load(self.niveau.pathMusicBoss)
+        pygame.mixer.music.play()
+
     def stop(self):
         #si on veut faire des choses particulières une fois qu'on arrête le jeu.
         self.continuer = false
