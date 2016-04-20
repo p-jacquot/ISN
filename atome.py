@@ -1,5 +1,6 @@
 ﻿# Créé par Baptiste Noblet, le 02/03/2016 en Python 3.2
-
+import pygame
+pygame.init()
 from math import *
 from projectiles import Projectile
 
@@ -9,6 +10,7 @@ class Atome:
 
         self.posX = posX
         self.posY = posY
+
 
     def Boom(self) :
         print("Boom la molécule explose !")
@@ -28,6 +30,8 @@ class Hydrogene(Atome):
         self.hp=10
         self.delayTirMax=50
         self.delayTir=self.delayTirMax
+        img = pygame.image.load('resources/photos/hydrogene.png').convert_alpha()
+        self.rect = img.get_rect()
 
     def tir(self):
         #distanceCible = int(sqrt(pow(xCible-self.x,2)+pow(yCible-self.y,2)))
@@ -52,6 +56,10 @@ class Carbone(Atome):
         self.hp=150
         self.delayTirMax=150
         self.delayTir=self.delayTirMax
+        img = pygame.image.load('resources/photos/carbone.png').convert_alpha()
+        self.rect = img.get_rect()
+
+
     def tir(self):
         self.tirNum = -self.tirNum
         self.delayTir=self.delayTirMax
@@ -69,6 +77,10 @@ class Oxygene(Atome):
         self.delayTirMax=30
         self.delayTir=self.delayTirMax
         self.angle=0
+        img = pygame.image.load('resources/photos/oxygene.png').convert_alpha()
+        self.rect = img.get_rect()
+
+
     def tir(self):
         #self.angle = #angle entre chaques tirs
         self.tirNum += 1
@@ -83,6 +95,9 @@ class Azote(Atome):
         self.hp=30
         self.delayTirMax=100
         self.delayTir=self.delayTirMax
+        img = pygame.image.load('resources/photos/azote.png').convert_alpha()
+        self.rect = img.get_rect()
+
     def tir(self):
         self.delayTir=self.delayTirMax
         return[Projectile(self.posX,self.posY, 0,2),Projectile(self.posX,self.posY,1,2),Projectile(self.posX,self.posY,-1,2)]
