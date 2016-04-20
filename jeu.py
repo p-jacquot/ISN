@@ -29,8 +29,8 @@ class Jeu:
             epr = [] #rect des projectiles ennemis
             pjr = [] #rect des projectiles du joueur.
             if len(self.ennemyList) > self.niveau.maxMobOnScreen :
-                if randint(0,50)==45:
-                    self.ennemyList.append(self.niveau.genererMob())
+                #if randint(0,50)==45:
+                self.ennemyList.append(self.niveau.genererMob())
             #La boucle principale du jeu.
             #print("yolo ! On s'amuse bien !")
             #print(self.moleculeJoueur.rect)
@@ -175,20 +175,20 @@ class Jeu:
                 pass
 
     def progressInLevel(self):
-        dialoguer(self.niveau.firstDialog)
+        self.dialoguer(self.niveau.firstDialog)
 
         pygame.mixer.music.load(self.niveau.pathMusicLevel)
         pygame.mixer.music.play(5)
-        play()
+        self.play()
 
-        dialoguer(self.niveau.middleDialog)
+        self.dialoguer(self.niveau.middleDialog)
 
         pygame.mixer.music.load(self.niveau.pathMusicBoss)
         pygame.mixer.music.play(5)
         """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
-        play()
+        self.play()
 
-        dialoguer(self.niveau.lastDialog)
+        self.dialoguer(self.niveau.lastDialog)
 
     def stop(self):
         #si on veut faire des choses particulières une fois qu'on arrête le jeu.

@@ -20,13 +20,12 @@ def testplay():
     """jeu.ennemyList.append(Molecule('azote.png', 35, 35,PatternCercle(150,60,25,4,2)))
     jeu.ennemyList.append(Molecule('oxygene.png', 22, 22,PatternZigZag(20,1)))
     jeu.ennemyList.append(Molecule('carbone.png', 42, 42,PatternPolynome(1,1,1)))"""
-    jeu.ennemyList.append(Molecule('cortizone.png',500,500,Pattern(0,0)))
+    #jeu.ennemyList.append(Molecule('cortizone.png',500,500,Pattern(0,0)))
     """for a in jeu.ennemyList:
         a.posX =randint(15,200)
         a.posY = randint(15,200)"""
     #jeu.ennemyList.append(Molecule('hydrogene.png', 22, 22,PatternSinusoidal(5,1)))
     jeu.progressInLevel()
-    jeu.play()
 
 def testDialog():
     #ricken = pygame.image.load("resources/temporaire/Ricken.png").convert_alpha()
@@ -49,7 +48,16 @@ pygame.mixer.init()
 fenetre = Fenetre("test ISN Dialogue", 768, 600)
 fenetre.fond = pygame.image.load("resources/galaxie.jpg").convert_alpha()
 
-jeu = Jeu(fenetre, Niveau(1,"kek","des","barres"))
+with open('resources/niveau/1/firstDialog.pickle', 'rb') as file:
+    firstDialog = pickle.load(file)
+
+with open('resources/niveau/1/middleDialog.pickle', 'rb') as file:
+    middleDialog = pickle.load(file)
+
+with open('resources/niveau/1/lastDialog.pickle', 'rb') as file:
+    lastDialog = pickle.load(file)
+
+jeu = Jeu(fenetre, Niveau(1,firstDialog, middleDialog, lastDialog))
 #testDialog()
 #testSerializedDialogue()
 testplay()
