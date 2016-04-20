@@ -13,8 +13,10 @@ class Niveau:
         self.totalMobsLeft = totalMob
 
     def __init__(self, numero, firstDialog, middleDialog, lastDialog):
-        fname=str("resources/niveau/"+str(numero)+".txt")
-        with open(fname) as text:
+        self.fname=str("resources/niveau/"+str(numero)+"/mobs.txt")
+        self.pathMusicLevel = str("resources/niveau/" + str(numero) + "/music.wav")
+        self.pathMusicBoss = str("resources/niveau/" + str(numero) + "/musicBoss.wav")
+        with open(self.fname) as text:
             content = text.readlines()
         self.mobList=[]    #Les choses sont stockées dans l'ordre suivant : molécule, proba d'apparition.
         for a in content[:-2]:
