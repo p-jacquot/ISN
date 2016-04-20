@@ -175,8 +175,20 @@ class Jeu:
                 pass
 
     def progressInLevel(self):
+        dialoguer(self.niveau.firstDialog)
+
+        pygame.mixer.music.load(self.niveau.pathMusicLevel)
+        pygame.mixer.music.play(5)
+        play()
+
+        dialoguer(self.niveau.middleDialog)
+
         pygame.mixer.music.load(self.niveau.pathMusicBoss)
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(5)
+        """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
+        play()
+
+        dialoguer(self.niveau.lastDialog)
 
     def stop(self):
         #si on veut faire des choses particulières une fois qu'on arrête le jeu.
