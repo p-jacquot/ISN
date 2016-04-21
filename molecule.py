@@ -21,21 +21,20 @@ class Molecule:
         #self.mv_y = 0
 
 
-    def __init__(self,nomMol,hauteur,largeur,pattern):
-        self.atomeList = listerAtomes(nomMol,hauteur,largeur) #La liste qui contient tous les atomes.
-        #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
+    def __init__(self, nomMol, pattern):
+        self.img = pygame.image.load('resources/photos/'+str(nomMol)).convert_alpha()
+        self.rect = self.img.get_rect()
+        self.hauteur = self.rect.height
+        self.largeur = self.rect.width
+        self.atomeList = listerAtomes(nomMol, self.hauteur, self.largeur) #La liste qui contient tous les atomes.
         self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
         self.hp = self.hpMax #La vie de la molécule.
         self.posX = 0
         self.posY = 0
         #self.mv_y = 0
         #self.mv_x = 0   #les variables de mouvements.
-        self.img = pygame.image.load('resources/photos/'+str(nomMol)).convert_alpha()
-        self.rect = self.img.get_rect()
-        self.pattern=pattern
-        self.hauteur=hauteur
-        self.largeur=largeur
-        self.dead=False
+        self.pattern = pattern
+        self.dead = False
 
     def __del__(self):
         del self
