@@ -40,17 +40,20 @@ class Niveau:
             if rand <= mob[1]:
                 self.totalMobsLeft -= 1
                 ennemi = mob[0]
-
+                print(mob[0])
                 rand=random.randint(1,3)
                 if rand== 1 :#en haut
                     ennemi.posY= -5
                     ennemi.posX=random.randint(-5,350)
+                    print("En haut !")
                 else:
                     ennemi.posY=random.randint(-5,350)#je pense pas que le jeu fasse la largeur de l'écran alors il faudra changer cette valeur quand on saura
                     if rand==2:
+                        print("Heu... Sur la gauche ?")
                         ennemi.posX=-5
                     else :
                         ennemi.posX=350#idem ici
+                        print("Sur la droite, je pense.")
                 break
         return ennemi
 

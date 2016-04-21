@@ -6,6 +6,7 @@ from pygame.event import *
 from pygame.locals import * #Pour les events.
 pygame.init()
 from projectiles import *
+from pattern import *
 
 class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
@@ -85,11 +86,11 @@ class Jeu:
                 self.moleculeJoueur.hp -= 1
                 self.ennemyProjectiles[indexMechantProjectile].dead=True #On supprime le projectile, s'il a touché sa cible.
 
-            for proj in pjr:
-                index = proj.collidelist(er)
+            for proj in self.projectilesJoueur:
+                index = proj.rect.collidelist(er)
                 if index != -1:
                     self.ennemyList[index].hit()
-                    self.projectilesJoueur[index].dead=True
+                    proj.dead=True
 
             """Events incoming !"""
             event = pygame.event.poll()
@@ -192,7 +193,9 @@ class Jeu:
         pygame.mixer.music.play(5)
         """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
         self.continuer = True
-        self.ennemyList.append(self.niveau.mobList[0][0])
+        boss = self.niveau.mobList[0][0]
+        boss.pattern = Pattern(0,0)
+        self.ennemyList.append(boss)
         self.play()
 
         self.dialoguer(self.niveau.lastDialog)
