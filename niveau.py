@@ -28,7 +28,7 @@ class Niveau:
 
     def genererMob(self):
         rand = random.randint(0, 99)
-        for mob in mobList:
+        for mob in self.mobList:
             if rand < mob[1]:
                 #code en attendant de sérialiser les molécules
                 name = "resources/photos/"+str(mob[0])
