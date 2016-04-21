@@ -133,6 +133,7 @@ class Jeu:
 
             if self.moleculeJoueur.dead or self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
                 self.continuer = False
+                print("lel on quitte !")
             self.moleculeJoueur.move()
             if self.moleculeJoueur.posX<10:
                 self.moleculeJoueur.posX=10
@@ -195,6 +196,10 @@ class Jeu:
         self.continuer = True
         boss = self.niveau.mobList[0][0]
         boss.pattern = Pattern(0,0)
+        boss.posX = 20
+        boss.posY = 20
+        boss.rect.x = 20
+        boss.rect.y = 20
         self.ennemyList.append(boss)
         self.play()
 
