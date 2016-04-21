@@ -5,6 +5,7 @@ from PIL import Image
 from atome import *
 from jeu import Jeu
 from pattern import *
+from random import *
 
 
 
@@ -26,16 +27,30 @@ class Molecule:
         #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
         self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
         self.hp = self.hpMax #La vie de la molécule.
-        self.posX = 0
-        self.posY = 0
+        self.posX = 100
+        self.posY = 100
+        print(self.posX,self.posY,"position origine mol")
         #self.mv_y = 0
         #self.mv_x = 0   #les variables de mouvements.
         self.img = pygame.image.load('resources/photos/'+str(nomMol)).convert_alpha()
-        self.rect = self.img.get_rect()
+        #self.rect = self.img.get_rect()
+        self.rectAtome=[]
+        for a in self.atomeList:
+            a.rect.x=a.posX
+            a.rect.y=a.posY
+            self.rectAtome.append(a.rect)
+        self.rect = self.rectAtome[0].unionall(self.rectAtome[1:])
+
+        self.rectX = self.rect.x  #position du rect dans l'image, il n'est pas en haut à gauche
+        self.rectY = self.rect.y
+
+        print(self.rect)
         self.pattern=pattern
         self.hauteur=hauteur
         self.largeur=largeur
         self.dead=False
+
+
 
     def __del__(self):
         del self
@@ -54,8 +69,9 @@ class Molecule:
         self.posX, self.posY = self.pattern.deplacer(self.posX, self.posY)
         self.rect.x = self.posX
         self.rect.y = self.posY
+
         #TODO: ici, prendre la décision de tirer ou non.
-        if self.posX+self.largeur<-5 or self.posX>355 or self.posY+self.hauteur<-5 or self.posY>768+5:     #changer valeur ici aussi
+        if self.posX+self.largeur<-5 or self.posX>655 or self.posY+self.hauteur<-5 or self.posY>768+5:     #changer valeur ici aussi
             self.dead=True   #pas besoin de passer par hit, il n'y aura pas d'animation comme c'est hors de l'écran
 
 
@@ -68,9 +84,10 @@ class Molecule:
                 for a in projectiles:
                     a.posX+=self.posX
                     a.posY+=self.posY
+                    a.rect.x=a.posX
+                    a.rect.y=a.posY
             else:
                 atome.delayTir-=1
-
         return projectiles
 
     def hit(self):
