@@ -22,9 +22,12 @@ class Molecule:
         #self.mv_y = 0
 
 
-    def __init__(self,nomMol,hauteur,largeur,pattern):
-        self.atomeList = listerAtomes(nomMol,hauteur,largeur) #La liste qui contient tous les atomes.
-        #self.isAlive = true #Booléen qui rend compte de l'état de la molécule.  #Pour l'instant je l'ai viré parce qu'il faisait une erreur
+    def __init__(self, nomMol, pattern):
+        self.img = pygame.image.load('resources/photos/'+str(nomMol)).convert_alpha()
+        self.rect = self.img.get_rect()
+        self.hauteur = self.rect.height
+        self.largeur = self.rect.width
+        self.atomeList = listerAtomes(nomMol, self.hauteur, self.largeur) #La liste qui contient tous les atomes.
         self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
         self.hp = self.hpMax #La vie de la molécule.
         self.posX = 100
@@ -32,6 +35,7 @@ class Molecule:
         print(self.posX,self.posY,"position origine mol")
         #self.mv_y = 0
         #self.mv_x = 0   #les variables de mouvements.
+
         self.img = pygame.image.load('resources/photos/'+str(nomMol)).convert_alpha()
         #self.rect = self.img.get_rect()
         self.rectAtome=[]
@@ -46,9 +50,8 @@ class Molecule:
 
         print(self.rect)
         self.pattern=pattern
-        self.hauteur=hauteur
-        self.largeur=largeur
         self.dead=False
+
 
 
 

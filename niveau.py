@@ -3,30 +3,30 @@ from PIL import Image
 
 import random
 from dialogue import Dialog
+from molecule import Molecule
+from pattern import Pattern
 
 class Niveau:
     """La classe qui gère les niveaux."""
 
-    def __init__(self, mobOnScreen, totalMob):
+    """def __init__(self, mobOnScreen, totalMob):
         self.mobList = [] #Les choses sont stockées dans l'ordre suivant : molécule, proba d'apparition.
         self.maxMobOnScreen = mobOnScreen #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
-        self.totalMobsLeft = totalMob
+        self.totalMobsLeft = totalMob"""
 
     def __init__(self, numero, firstDialog, middleDialog, lastDialog):
 
         self.fname=str("resources/niveau/"+str(numero)+"/mobs.txt")
         self.pathMusicLevel = str("resources/niveau/" + str(numero) + "/music.wav")
         self.pathMusicBoss = str("resources/niveau/" + str(numero) + "/musicBoss.wav")
-
+        self.mobList = [] #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
         with open(self.fname) as text:
             content = text.readlines()
-        self.mobList=[]    #Les choses sont stockées dans l'ordre suivant : molécule, proba d'apparition.
         for a in content[:-2]:
-            self.mobList.append([str(a[:-4]), int(a[-3:-1])])
+            self.mobList.append([Molecule(str(a[:-4]), Pattern(0, 1)), int(a[-3:-1])])
 
         self.maxMobOnScreen = int(content[-2]) #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
         self.totalMobsLeft = int(content[-1])
-
         self.firstDialog = firstDialog  #Les différents dialogues qu'ils y aura dans le niveau.
         self.middleDialog = middleDialog
         self.lastDialog = lastDialog
@@ -34,17 +34,17 @@ class Niveau:
 
     def genererMob(self):
         rand = random.randint(0, 99)
+        print(rand)
+        ennemi = None
         for mob in self.mobList:
             if rand < mob[1]:
                 #code en attendant de sérialiser les molécules
-                name = "resources/photos/"+str(mob[0])
+                """name = "resources/photos/"+str(mob[0])
                 img=Image.open(name)
                 taille=img.size
-                pattern=Pattern(0,0)
-
-
-                ennemi= Molecule(mob[0],taille[1],taille[0],pattern) #On retourne la molécule.
-                #code pour donner des coordonnees à l'ennemi, peut etre qu'on changera ca apres mais je pense que c'est nécessaire
+                pattern=Pattern(0,0)"""
+                self.totalMobsLeft -= 1
+                ennemi = mob[0]
                 rand=random.randint(1,3)
                 if rand== 1 :#en haut
                     ennemi.posY= -5
@@ -55,7 +55,8 @@ class Niveau:
                         ennemi.posX=-5
                     else :
                         ennemi.posX=350#idem ici
-                return ennemi
+                break
+        return ennemi
 
     #TODO: Rajouter une fonction __repr__() pour qu'on puisse voir clairement un niveau, et l'éditer s'il le faut.
 

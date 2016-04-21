@@ -9,25 +9,27 @@ import constantes
 from pattern import *
 import pickle
 import niveau
+
 pygame.init()
 
 def testplay():
-    jeu.moleculeJoueur = Molecule('hydrogene.png', 22, 22,Pattern(0,0))
+
+    jeu.moleculeJoueur = Molecule('oxygene.png', Pattern(0,0))
+
     jeu.moleculeJoueur.posX = 250
     jeu.moleculeJoueur.posY = 500
     jeu.moleculeJoueur.rect = jeu.moleculeJoueur.rect.move(250, 500)
     jeu.moleculeJoueur.hp =9001
-    """jeu.ennemyList.append(Molecule('azote.png', 35, 35,PatternCercle(150,60,25,4,2)))
-    jeu.ennemyList.append(Molecule('oxygene.png', 22, 22,PatternZigZag(20,1)))
-    jeu.ennemyList.append(Molecule('carbone.png', 42, 42,PatternPolynome(1,1,1)))"""
 
-    jeu.ennemyList.append(Molecule('test.png',500,500,Pattern(0,0)))
-    #jeu.ennemyList.append(Molecule('cortizone.png',500,500,Pattern(0,0)))
+    """jeu.ennemyList.append(Molecule('azote.png', PatternCercle(150,60,25,4,2)))
+    jeu.ennemyList.append(Molecule('oxygene.png', PatternZigZag(20,1)))
+    jeu.ennemyList.append(Molecule('carbone.png', PatternPolynome(1,1,1)))"""
+    #jeu.ennemyList.append(Molecule('cortizone.png', Pattern(0,0)))
 
     """for a in jeu.ennemyList:
         a.posX =randint(15,200)
         a.posY = randint(15,200)"""
-    #jeu.ennemyList.append(Molecule('hydrogene.png', 22, 22,PatternSinusoidal(5,1)))
+    #jeu.ennemyList.append(Molecule('hydrogene.png', PatternSinusoidal(5,1)))
     jeu.progressInLevel()
 
 def testDialog():

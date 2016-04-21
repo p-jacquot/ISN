@@ -6,6 +6,7 @@ from pygame.event import *
 from pygame.locals import * #Pour les events.
 pygame.init()
 from projectiles import *
+
 class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
 
@@ -19,18 +20,20 @@ class Jeu:
 
         self.continuer = True
         self.moleculeJoueur = None
-        self.delayTirJoueur=0
+        self.delayTirJoueur = 0
         self.tir = False
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
     def play(self):
+        pygame.time.Clock().tick(15)
         while self.continuer:
             er = [] #rect ennemies
             epr = [] #rect des projectiles ennemis
             pjr = [] #rect des projectiles du joueur.
-            if len(self.ennemyList) > self.niveau.maxMobOnScreen :
-                #if randint(0,50)==45:
-                self.ennemyList.append(self.niveau.genererMob())
+            if len(self.ennemyList) < self.niveau.maxMobOnScreen and self.niveau.totalMobsLeft > 0:
+                if randint(0,50)==45:
+                    print("On génère une nouvelle molécule !")
+                    self.ennemyList.append(self.niveau.genererMob())
             #La boucle principale du jeu.
             #print("yolo ! On s'amuse bien !")
             #print(self.moleculeJoueur.rect)
@@ -131,6 +134,8 @@ class Jeu:
                 self.projectilesJoueur.append(proj)
                 self.delayTirJoueur=20
 
+            if self.moleculeJoueur.dead or self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
+                self.continuer = False
             self.moleculeJoueur.move()
             if self.moleculeJoueur.posX<10:
                 self.moleculeJoueur.posX=10
@@ -144,7 +149,7 @@ class Jeu:
             #TODO: Gérer les collisions.
 
 
-        self.fenetre.fermer()
+        #self.fenetre.fermer()
 
     def actualiser(self):
         self.fenetre.entites.extend(self.ennemyList)
@@ -190,6 +195,8 @@ class Jeu:
         pygame.mixer.music.load(self.niveau.pathMusicBoss)
         pygame.mixer.music.play(5)
         """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
+        self.continuer = True
+        self.ennemyList.append(self.niveau.mobList[0][0])
         self.play()
 
         self.dialoguer(self.niveau.lastDialog)
