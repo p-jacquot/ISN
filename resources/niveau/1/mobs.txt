@@ -1,6 +1,6 @@
-Cortizone.png 05
-Carbone.png 15
-Azote.png 17
-Hydrogene.png 25
+Cortizone.png 00
+Carbone.png 33
+Azote.png 66
+Hydrogene.png 99
 30
 110
