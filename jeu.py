@@ -44,7 +44,11 @@ class Jeu:
             for ennemy in self.ennemyList:
                 if ennemy.dead==False:
                     ennemy.move()
-                    er.append(ennemy.rect)
+                    rectangle=ennemy.rect
+                    rectangle.x+=ennemy.rectX
+                    rectangle.y+=ennemy.rectY
+                    er.append(rectangle)
+                    #er.append(ennemy.rect)
                     self.ennemyProjectiles+=ennemy.tirer()
                     newList.append(ennemy)
                 elif ennemy.hp<=0:#l'ennemi n'a plus d'hp
@@ -137,8 +141,8 @@ class Jeu:
             self.moleculeJoueur.move()
             if self.moleculeJoueur.posX<10:
                 self.moleculeJoueur.posX=10
-            elif self.moleculeJoueur.posX>340:  #changer encore ici
-                self.moleculeJoueur.posX=340
+            elif self.moleculeJoueur.posX>640:  #changer encore ici
+                self.moleculeJoueur.posX=640
             if self.moleculeJoueur.posY <10:
                 self.moleculeJoueur.posY=10
             elif self.moleculeJoueur.posY>590:

@@ -50,7 +50,7 @@ class Projectile:
         self.posX += self.mv_x
         self.posY += self.mv_y
         self.rect.move_ip(self.mv_x, self.mv_y) #On fait bouger le rectangle !
-        if self.posY<-20 or self.posY>610 or self.posX<-20 or self.posX>380:
+        if self.posY<-20 or self.posY>610 or self.posX<-20 or self.posX>680:
             self.dead=True
 
 

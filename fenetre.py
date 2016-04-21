@@ -36,6 +36,8 @@ class Fenetre:
         self.fen.blit(self.fond, (0,0))
         for ent in self.entites:
             self.fen.blit(ent.img, (ent.posX, ent.posY))
+            #self.fen.fill((255,0,0),ent.rect)    #montre les hitboxs
+
         pygame.display.flip()
         self.entites = []
 
