@@ -1,6 +1,0 @@
-Cortizone.png 05
-Carbone.png 15
-Azote.png 17
-Hydrogene.png 25
-30
-110
