@@ -37,7 +37,7 @@ class Niveau:
         print(rand)
         ennemi = None
         for mob in self.mobList:
-            if rand < mob[1]:
+            if rand <= mob[1]:
                 #code en attendant de sérialiser les molécules
                 """name = "resources/photos/"+str(mob[0])
                 img=Image.open(name)
