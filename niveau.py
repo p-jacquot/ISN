@@ -45,10 +45,6 @@ class Niveau:
                 pattern=Pattern(0,0)"""
                 self.totalMobsLeft -= 1
                 ennemi = mob[0]
-<<<<<<< HEAD
-                print(mob[0])
-=======
->>>>>>> a66e61f83cb8db9a995c57b30cfa605571b9574b
                 rand=random.randint(1,3)
                 if rand== 1 :#en haut
                     ennemi.posY= -5
