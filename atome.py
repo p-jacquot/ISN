@@ -29,23 +29,31 @@ class Hydrogene(Atome):
     def __init__(self , posX, posY):
         Atome.__init__(self,  posX, posY)
         self.hp=10
-        self.delayTirMax=50
+        self.delayTirMax=300
         self.delayTir=randint(0,self.delayTirMax)
         img = pygame.image.load('resources/photos/hydrogene.png').convert_alpha()
         self.rect = img.get_rect()
+        self.compteur = 0
+        self.cible = randint ( -3,3)
 
     def tir(self):
         #distanceCible = int(sqrt(pow(xCible-self.x,2)+pow(yCible-self.y,2)))
         #print(distanceCible)
-        self.delayTir=self.delayTirMax
-
-        x1, y1 = self.posX,self.posY
+        if self.compteur == 5 :
+            self.delayTir=self.delayTirMax
+            self.compteur = 0
+            self.cible = randint ( -3,3)
+        else :
+            self.compteur += 1
+            self.delayTir = 30
+            return [Projectile(self.posX,self.posY ,self.cible/5, 0.5 )]
+        """x1, y1 = 0, 0
         #x2, y2 = jeu.moleculeJoueur.posX,jeu.moleculeJoueur.posY
-        x2,y2=100,100
+        x2,y2=200,300
         distance=sqrt(pow(x2-x1,2)+pow(y2-y1,2))
-        a = int((x2-x1)/distance)
-        b = int((y2-y1)/distance)
-        #return [Projectile(self.posX, self.posY, a, b)]
+        a = float((x2-x1)/distance)
+        b = float((y2-y1)/distance)
+        return [Projectile(self.posX, self.posY, int(a*2), int(b*2))]"""
         return []
 
 
@@ -55,7 +63,7 @@ class Carbone(Atome):
         Atome.__init__(self,  posX, posY)
         self.tirNum = -1
         self.hp=150
-        self.delayTirMax=5000
+        self.delayTirMax=250
         self.delayTir=randint(0,self.delayTirMax)
         img = pygame.image.load('resources/photos/carbone.png').convert_alpha()
         self.rect = img.get_rect()
@@ -75,26 +83,25 @@ class Oxygene(Atome):
         Atome.__init__(self, posX, posY)
         self.tirNum = 0
         self.hp=20
-        self.delayTirMax=30
+        self.delayTirMax=50
         self.delayTir=randint(0,self.delayTirMax)
-        self.angle=0
+        self.angle=10
         img = pygame.image.load('resources/photos/oxygene.png').convert_alpha()
         self.rect = img.get_rect()
 
 
     def tir(self):
         #self.angle = #angle entre chaques tirs
-        self.tirNum += 1
+        self.tirNum += 0.02
         self.delayTir=self.delayTirMax
-        #return [Projectile(self.posX, self.posY, cos((self.angle*self.tirNum))/60*pi, sin((self.angle*self.tirNum))/60*pi)]
-        return []
+        return [Projectile(self.posX, self.posY, cos((self.angle*self.tirNum))*pi/5, sin((self.angle*self.tirNum))*pi/5)]
 
 class Azote(Atome):
 
     def __init__(self,posX,posY):
         Atome.__init__(self,posX,posY)
         self.hp=30
-        self.delayTirMax=5000
+        self.delayTirMax=150
         self.delayTir=randint(0,self.delayTirMax)
         img = pygame.image.load('resources/photos/azote.png').convert_alpha()
         self.rect = img.get_rect()
