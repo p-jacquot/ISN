@@ -26,7 +26,6 @@ class Niveau:
         self.boss = Molecule(str(content[0][:-1]), Pattern(0,0))
         for a in content[1:-2]:
             self.mobList.append([Molecule(str(a[:-4]), Pattern(0, 1)), int(a[-3:-1])])
-
         self.maxMobOnScreen = int(content[-2]) #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
         self.totalMobsLeft = int(content[-1])
         self.firstDialog = firstDialog  #Les différents dialogues qu'ils y aura dans le niveau.
@@ -46,7 +45,8 @@ class Niveau:
                 taille=img.size
                 pattern=Pattern(0,0)"""
                 self.totalMobsLeft -= 1
-                ennemi = copy.copy(mob[0])
+                ennemi = copy.deepcopy(mob[0])
+                ennemi.img =mob[0].img
                 ennemi.posY = 5
                 ennemi.posX = random.randint(0, 350)
                 ennemi.rect.x = ennemi.posX
