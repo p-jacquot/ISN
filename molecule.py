@@ -30,8 +30,8 @@ class Molecule:
         self.atomeList = listerAtomes(nomMol, self.hauteur, self.largeur) #La liste qui contient tous les atomes.
         self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
         self.hp = self.hpMax #La vie de la molécule.
-        self.posX = 100
-        self.posY = 100
+        self.posX = 0
+        self.posY = 0
         print(self.posX,self.posY,"position origine mol")
         #self.mv_y = 0
         #self.mv_x = 0   #les variables de mouvements.
@@ -74,7 +74,7 @@ class Molecule:
         self.rect.y = self.posY
 
         #TODO: ici, prendre la décision de tirer ou non.
-        if self.posX+self.largeur<-5 or self.posX>655 or self.posY+self.hauteur<-5 or self.posY>768+5:     #changer valeur ici aussi
+        if self.posX+self.largeur<-50 or self.posX>955 or self.posY+self.hauteur<-50 or self.posY>900:     #changer valeur ici aussi
             self.dead=True   #pas besoin de passer par hit, il n'y aura pas d'animation comme c'est hors de l'écran
 
 
