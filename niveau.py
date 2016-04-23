@@ -23,7 +23,8 @@ class Niveau:
         self.mobList = [] #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
         with open(self.fname) as text:
             content = text.readlines()
-        for a in content[:-2]:
+        self.boss = Molecule(str(content[0][:-1]), Pattern(0,0))
+        for a in content[1:-2]:
             self.mobList.append([Molecule(str(a[:-4]), Pattern(0, 1)), int(a[-3:-1])])
 
         self.maxMobOnScreen = int(content[-2]) #le nombre maximal de méchant qu'il pourrait y avoir en même temps.

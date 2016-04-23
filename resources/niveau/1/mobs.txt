@@ -1,4 +1,4 @@
-Cortizone.png 00
+cortizone.png
 Carbone.png 33
 Azote.png 66
 Hydrogene.png 99

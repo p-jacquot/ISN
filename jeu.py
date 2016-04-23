@@ -198,8 +198,7 @@ class Jeu:
         pygame.mixer.music.play(5)
         """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
         self.continuer = True
-        boss = self.niveau.mobList[0][0]
-        boss.pattern = Pattern(0,0)
+        boss = self.niveau.boss
         boss.posX = 20
         boss.posY = 20
         boss.rect.x = 20
