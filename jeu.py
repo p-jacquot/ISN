@@ -7,7 +7,9 @@ from pygame.locals import * #Pour les events.
 pygame.init()
 from projectiles import *
 from pattern import *
-
+pygame.mixer.init(frequency=22050, size=-16, channels=25, buffer=4096)
+explosion1 = pygame.mixer.Sound("resources/explosion1.wav")
+explosion2 = pygame.mixer.Sound("resources/explosion2.wav")
 class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
 
@@ -41,6 +43,7 @@ class Jeu:
             """Mouvement des différentes molecules et projectiles"""
 
             newList=[]
+            #print(len(self.ennemyList))
             for ennemy in self.ennemyList:
                 if ennemy.dead==False:
                     ennemy.move()
@@ -53,6 +56,7 @@ class Jeu:
                     newList.append(ennemy)
                 elif ennemy.hp<=0:#l'ennemi n'a plus d'hp
                     ennemy.__del__()
+                    explosion2.play()
                     #On met ici l'animation de mort, c'est à dire l'explosion, peut etre un score plus tard
                 else:#l'ennemi sort de l'écran
                     ennemy.__del__()
@@ -83,11 +87,13 @@ class Jeu:
             indexMechant = self.moleculeJoueur.rect.collidelist(er)
             if indexMechant != -1:
                 self.moleculeJoueur.hp -= 1
+                explosion1.play()
                 self.ennemyList[indexMechant].hit()
 
             indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
             if indexMechantProjectile != -1:
                 self.moleculeJoueur.hp -= 1
+                explosion1.play()
                 self.ennemyProjectiles[indexMechantProjectile].dead=True #On supprime le projectile, s'il a touché sa cible.
 
             for proj in self.projectilesJoueur:
