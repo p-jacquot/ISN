@@ -52,6 +52,8 @@ class Niveau:
                 ennemi.rect.x = ennemi.posX
                 ennemi.rect.y = ennemi.posY
                 #print("Apparition aux coordonnées :", ennemi.posX, ",", ennemi.posY)
+                #print("Son rect est :", ennemi.rect)
+                #print("--------------------------------------")
                 """rand=random.randint(1,3)
                 if rand== 1 :#en haut
                     ennemi.posY= -5
