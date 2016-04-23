@@ -91,10 +91,11 @@ class Molecule:
                     a.rect.y=a.posY
             else:
                 atome.delayTir-=1
+
         return projectiles
 
     def hit(self):
-        self.hp -= 1
+        self.hp -= 3
         if self.hp <= 0:
             print("Aaaaaaaaaah ! Je meurs !")
             self.dead=True
