@@ -44,10 +44,8 @@ class Molecule:
             a.rect.y=a.posY
             self.rectAtome.append(a.rect)
         self.rect = self.rectAtome[0].unionall(self.rectAtome[1:])
-
-        self.rectX = self.rect.x  #position du rect dans l'image, il n'est pas en haut à gauche
-        self.rectY = self.rect.y
-
+        self.rect.x+=self.posX
+        self.rect.y+=self.posY
         print(self.rect)
         self.pattern=pattern
         self.dead=False
