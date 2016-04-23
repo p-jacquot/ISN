@@ -83,7 +83,7 @@ class Oxygene(Atome):
         Atome.__init__(self, posX, posY)
         self.tirNum = 0
         self.hp=20
-        self.delayTirMax=50
+        self.delayTirMax=75
         self.delayTir=randint(0,self.delayTirMax)
         self.angle=10
         img = pygame.image.load('resources/photos/oxygene.png').convert_alpha()
@@ -108,6 +108,6 @@ class Azote(Atome):
 
     def tir(self):
         self.delayTir=self.delayTirMax
-        return[Projectile(self.posX,self.posY, 0,2),Projectile(self.posX,self.posY,1,2),Projectile(self.posX,self.posY,-1,2)]
+        return[Projectile(self.posX,self.posY, 0,2),Projectile(self.posX,self.posY,0.75,1.5),Projectile(self.posX,self.posY,-0.75,1.5)]
 
 
