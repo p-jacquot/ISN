@@ -10,8 +10,9 @@ from pattern import *
 pygame.mixer.init(frequency=22050, size=-16, channels=25, buffer=4096)
 explosion1 = pygame.mixer.Sound("resources/explosion1.wav")
 explosion2 = pygame.mixer.Sound("resources/explosion2.wav")
-explosion1.set_volume(.7)
-explosion2.set_volume(.7)
+explosion1.set_volume(.5)
+explosion2.set_volume(.5)
+
 class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
 
@@ -28,6 +29,8 @@ class Jeu:
         self.delayTirJoueur = 0
         self.tir = False
         self.delayMouvement = 5
+
+
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
     def play(self):
@@ -92,12 +95,14 @@ class Jeu:
                 self.moleculeJoueur.hp -= 1
                 explosion1.play()
                 self.ennemyList[indexMechant].hit()
+                self.clearProj()
 
             indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
             if indexMechantProjectile != -1:
                 self.moleculeJoueur.hp -= 1
                 explosion1.play()
                 self.ennemyProjectiles[indexMechantProjectile].dead=True #On supprime le projectile, s'il a touché sa cible.
+                self.clearProj()
 
             for proj in self.projectilesJoueur:
                 index = proj.rect.collidelist(er)
@@ -111,28 +116,32 @@ class Jeu:
                 #print("Touche appuyée.")
                 """Lorsqu'on appuie sur une touche. Ces valeurs ne sont là qu'a titre d'exemple, il faudra qu'on les modifies."""
                 if event.key == K_UP:
-                    self.moleculeJoueur.pattern.mv_y = -1
+                    self.moleculeJoueur.pattern.mv_y = -1 * self.vitesse
                 elif event.key == K_DOWN:
                     #print("C'est la touche bas.")
-                    self.moleculeJoueur.pattern.mv_y = 1
+                    self.moleculeJoueur.pattern.mv_y = 1 * self.vitesse
                 elif event.key == K_LEFT:
-                    self.moleculeJoueur.pattern.mv_x = -1
+                    self.moleculeJoueur.pattern.mv_x = -1 * self.vitesse
                 elif event.key == K_RIGHT:
-                    self.moleculeJoueur.pattern.mv_x = 1
-                if event.key == K_SPACE :
+                    self.moleculeJoueur.pattern.mv_x = 1 * self.vitesse
+                if event.key == K_z :
                     self.tir =True
+                if event.key == K_LSHIFT :
+                    self.vitesse = 0.2
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
-                if event.key == K_UP and self.moleculeJoueur.pattern.mv_y==-1:
+                if event.key == K_UP and self.moleculeJoueur.pattern.mv_y<0:
                     self.moleculeJoueur.pattern.mv_y = 0
-                elif event.key == K_DOWN and self.moleculeJoueur.pattern.mv_y==1:
+                elif event.key == K_DOWN and self.moleculeJoueur.pattern.mv_y>0:
                     self.moleculeJoueur.pattern.mv_y = 0
-                elif event.key == K_LEFT and self.moleculeJoueur.pattern.mv_x==-1:
+                elif event.key == K_LEFT and self.moleculeJoueur.pattern.mv_x<0:
                     self.moleculeJoueur.pattern.mv_x = 0
-                elif event.key == K_RIGHT and self.moleculeJoueur.pattern.mv_x==1:
+                elif event.key == K_RIGHT and self.moleculeJoueur.pattern.mv_x>0:
                     self.moleculeJoueur.pattern.mv_x = 0
-                if event.key == K_SPACE :
+                if event.key == K_z :
                     self.tir = False
+                if event.key == K_LSHIFT :
+                    self.vitesse = 0.4
             elif event.type == QUIT:
                 self.fenetre.fermer()
                 self.continuer = False
@@ -225,6 +234,12 @@ class Jeu:
         """Cette fonction s'occupera de charger tout ce dont on a besoin d'un niveau :
             mobs, probas..."""
         self.niveau = niveau
+
+    def clearProj(self):
+        """for a in self.ennemyProjectiles :
+            a.dead = True"""
+        """for a in self.ennemyList :
+            a.dead = True"""
 
 
 
