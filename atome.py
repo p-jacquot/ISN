@@ -3,6 +3,7 @@ import pygame
 pygame.init()
 from math import *
 from projectiles import Projectile
+from random import *
 
 class Atome:
 
@@ -29,7 +30,7 @@ class Hydrogene(Atome):
         Atome.__init__(self,  posX, posY)
         self.hp=10
         self.delayTirMax=50
-        self.delayTir=self.delayTirMax
+        self.delayTir=randint(0,self.delayTirMax)
         img = pygame.image.load('resources/photos/hydrogene.png').convert_alpha()
         self.rect = img.get_rect()
 
@@ -54,8 +55,8 @@ class Carbone(Atome):
         Atome.__init__(self,  posX, posY)
         self.tirNum = -1
         self.hp=150
-        self.delayTirMax=150
-        self.delayTir=self.delayTirMax
+        self.delayTirMax=5000
+        self.delayTir=randint(0,self.delayTirMax)
         img = pygame.image.load('resources/photos/carbone.png').convert_alpha()
         self.rect = img.get_rect()
 
@@ -75,7 +76,7 @@ class Oxygene(Atome):
         self.tirNum = 0
         self.hp=20
         self.delayTirMax=30
-        self.delayTir=self.delayTirMax
+        self.delayTir=randint(0,self.delayTirMax)
         self.angle=0
         img = pygame.image.load('resources/photos/oxygene.png').convert_alpha()
         self.rect = img.get_rect()
@@ -93,8 +94,8 @@ class Azote(Atome):
     def __init__(self,posX,posY):
         Atome.__init__(self,posX,posY)
         self.hp=30
-        self.delayTirMax=100
-        self.delayTir=self.delayTirMax
+        self.delayTirMax=5000
+        self.delayTir=randint(0,self.delayTirMax)
         img = pygame.image.load('resources/photos/azote.png').convert_alpha()
         self.rect = img.get_rect()
 
