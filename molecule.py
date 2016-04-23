@@ -6,7 +6,7 @@ from atome import *
 from jeu import Jeu
 from pattern import *
 from random import *
-
+import constantes
 
 
 
@@ -72,7 +72,7 @@ class Molecule:
         self.rect.y = self.posY
 
         #TODO: ici, prendre la décision de tirer ou non.
-        if self.posX+self.largeur<-50 or self.posX>955 or self.posY+self.hauteur<-50 or self.posY>900:     #changer valeur ici aussi
+        if self.posX+self.largeur<-50 or self.posX>constantes.largeur+50 or self.posY+self.hauteur<-50 or self.posY>constantes.hauteur+50:     #changer valeur ici aussi
             self.dead=True   #pas besoin de passer par hit, il n'y aura pas d'animation comme c'est hors de l'écran
 
 

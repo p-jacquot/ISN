@@ -11,3 +11,9 @@ projectilesList = [ pygame.image.load("resources/photos/photon_bleu_clair_pour_l
                     pygame.image.load("resources/photos/photon_violet.png")]
 
 #Quand vous voulez récupérer l'image d'un photon : projectilesList[index]
+
+#lycee
+largeur,hauteur=768, 600
+
+#pas lycee
+#largeur,hauteur=1280,720

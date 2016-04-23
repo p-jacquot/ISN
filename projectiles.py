@@ -52,7 +52,7 @@ class Projectile:
         self.rect.x = self.posX
         self.rect.y = self.posY
         #self.rect.move_ip(self.mv_x, self.mv_y) #On fait bouger le rectangle !
-        if self.posY<-20 or self.posY>610 or self.posX<-20 or self.posX>680:
+        if self.posY<-20 or self.posY>constantes.hauteur+20 or self.posX<-20 or self.posX>constantes.largeur+20:
             self.dead=True
 
 

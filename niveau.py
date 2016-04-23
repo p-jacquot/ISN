@@ -6,6 +6,7 @@ from dialogue import Dialog
 from molecule import Molecule
 from pattern import Pattern
 import copy
+import constantes
 
 class Niveau:
     """La classe qui gère les niveaux."""
@@ -48,7 +49,7 @@ class Niveau:
                 ennemi = copy.deepcopy(mob[0])
                 ennemi.img =mob[0].img
                 ennemi.posY = 5
-                ennemi.posX = random.randint(0, 350)
+                ennemi.posX = random.randint(0, constantes.largeur-ennemi.rect.width)
                 ennemi.rect.x = ennemi.posX
                 ennemi.rect.y = ennemi.posY
                 #print("Apparition aux coordonnées :", ennemi.posX, ",", ennemi.posY)
