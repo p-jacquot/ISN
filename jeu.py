@@ -10,6 +10,8 @@ from pattern import *
 pygame.mixer.init(frequency=22050, size=-16, channels=25, buffer=4096)
 explosion1 = pygame.mixer.Sound("resources/explosion1.wav")
 explosion2 = pygame.mixer.Sound("resources/explosion2.wav")
+explosion1.set_volume(.7)
+explosion2.set_volume(.7)
 class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
 
@@ -25,6 +27,7 @@ class Jeu:
         self.moleculeJoueur = None
         self.delayTirJoueur = 0
         self.tir = False
+        self.delayMouvement = 5
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
     def play(self):
@@ -41,15 +44,18 @@ class Jeu:
             #print("yolo ! On s'amuse bien !")
             #print(self.moleculeJoueur.rect)
             """Mouvement des différentes molecules et projectiles"""
-
+            if self.delayMouvement < 0 :
+                self.delayMouvement = 10
+            self.delayMouvement -= 1
             newList=[]
             #print(len(self.ennemyList))
             for ennemy in self.ennemyList:
                 if ennemy.dead==False:
-                    ennemy.move()
+                    if self.delayMouvement == 0 :
+                        ennemy.move()
                     rectangle=ennemy.rect
-                    rectangle.x+=ennemy.rectX
-                    rectangle.y+=ennemy.rectY
+                    rectangle.x=ennemy.rectX+ennemy.posX
+                    rectangle.y=ennemy.rectY+ennemy.posY
                     er.append(rectangle)
                     #er.append(ennemy.rect)
                     self.ennemyProjectiles+=ennemy.tirer()
