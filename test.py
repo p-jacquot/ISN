@@ -14,7 +14,7 @@ pygame.init()
 
 def testplay():
 
-    jeu.moleculeJoueur = Molecule('oxygene.png', Pattern(0,0))
+    jeu.moleculeJoueur = Molecule('hydrogene.png', Pattern(0,0))
 
     jeu.moleculeJoueur.posX = 250
     jeu.moleculeJoueur.posY = 500
@@ -24,7 +24,7 @@ def testplay():
     """jeu.ennemyList.append(Molecule('azote.png', PatternCercle(150,60,25,4,2)))
     jeu.ennemyList.append(Molecule('oxygene.png', PatternZigZag(20,1)))
     jeu.ennemyList.append(Molecule('carbone.png', PatternPolynome(1,1,1)))"""
-    #jeu.ennemyList.append(Molecule('cortizone.png', Pattern(0,0)))
+    jeu.ennemyList.append(Molecule('cortizone.png', Pattern(0,0)))
 
     """for a in jeu.ennemyList:
         a.posX =randint(15,200)
