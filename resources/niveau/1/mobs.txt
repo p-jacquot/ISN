@@ -1,6 +1,7 @@
-cortizone.png
-Carbone.png 33
-Azote.png 66
+methamphetamine.png
+Oxygene.png 25
+Carbone.png 50
+Azote.png 75
 Hydrogene.png 99
-1
-110
+5
+15
