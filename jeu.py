@@ -199,10 +199,10 @@ class Jeu:
         """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
         self.continuer = True
         boss = self.niveau.boss
-        boss.posX = 20
-        boss.posY = 20
-        boss.rect.x = 20
-        boss.rect.y = 20
+        boss.posX = 10
+        boss.posY = 10
+        boss.rect.x = 10
+        boss.rect.y = 10
         self.ennemyList.append(boss)
         self.play()
 
