@@ -5,6 +5,7 @@ import random
 from dialogue import Dialog
 from molecule import Molecule
 from pattern import Pattern
+import copy
 
 class Niveau:
     """La classe qui gère les niveaux."""
@@ -22,7 +23,8 @@ class Niveau:
         self.mobList = [] #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
         with open(self.fname) as text:
             content = text.readlines()
-        for a in content[:-2]:
+        self.boss = Molecule(str(content[0][:-1]), Pattern(0,0))
+        for a in content[1:-2]:
             self.mobList.append([Molecule(str(a[:-4]), Pattern(0, 1)), int(a[-3:-1])])
 
         self.maxMobOnScreen = int(content[-2]) #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
@@ -34,7 +36,7 @@ class Niveau:
 
     def genererMob(self):
         rand = random.randint(0, 99)
-        print(rand)
+        #print(rand)
         ennemi = None
         for mob in self.mobList:
             if rand <= mob[1]:
@@ -44,8 +46,15 @@ class Niveau:
                 taille=img.size
                 pattern=Pattern(0,0)"""
                 self.totalMobsLeft -= 1
-                ennemi = mob[0]
-                rand=random.randint(1,3)
+                ennemi = copy.copy(mob[0])
+                ennemi.posY = 5
+                ennemi.posX = random.randint(0, 350)
+                ennemi.rect.x = ennemi.posX
+                ennemi.rect.y = ennemi.posY
+                #print("Apparition aux coordonnées :", ennemi.posX, ",", ennemi.posY)
+                #print("Son rect est :", ennemi.rect)
+                #print("--------------------------------------")
+                """rand=random.randint(1,3)
                 if rand== 1 :#en haut
                     ennemi.posY= -5
                     ennemi.posX=random.randint(-5,350)
@@ -57,7 +66,7 @@ class Niveau:
                         ennemi.posX=-5
                     else :
                         ennemi.posX=350#idem ici
-                        print("Sur la droite, je pense.")
+                        print("Sur la droite, je pense.")"""
                 break
         return ennemi
 

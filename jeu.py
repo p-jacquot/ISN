@@ -35,7 +35,7 @@ class Jeu:
             pjr = [] #rect des projectiles du joueur.
             if len(self.ennemyList) < self.niveau.maxMobOnScreen and self.niveau.totalMobsLeft > 0:
                 if randint(0,50)==45:
-                    print("On génère une nouvelle molécule !")
+                    #print("On génère une nouvelle molécule !")
                     self.ennemyList.append(self.niveau.genererMob())
             #La boucle principale du jeu.
             #print("yolo ! On s'amuse bien !")
@@ -204,12 +204,11 @@ class Jeu:
         pygame.mixer.music.play(5)
         """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
         self.continuer = True
-        boss = self.niveau.mobList[0][0]
-        boss.pattern = Pattern(0,0)
-        boss.posX = 20
-        boss.posY = 20
-        boss.rect.x = 20
-        boss.rect.y = 20
+        boss = self.niveau.boss
+        boss.posX = 10
+        boss.posY = 10
+        boss.rect.x = 10
+        boss.rect.y = 10
         self.ennemyList.append(boss)
         self.play()
 
