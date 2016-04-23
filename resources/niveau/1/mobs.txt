@@ -2,5 +2,5 @@ cortizone.png
 Carbone.png 33
 Azote.png 66
 Hydrogene.png 99
-30
+1
 110
