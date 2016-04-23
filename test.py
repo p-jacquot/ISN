@@ -20,7 +20,7 @@ def testplay():
     jeu.moleculeJoueur.posY = 500
     jeu.moleculeJoueur.rect = jeu.moleculeJoueur.rect.move(250, 500)
     jeu.moleculeJoueur.hp =9001
-
+    jeu.vitesse = 0.4
     """jeu.ennemyList.append(Molecule('azote.png', PatternCercle(150,60,25,4,2)))
     jeu.ennemyList.append(Molecule('oxygene.png', PatternZigZag(20,1)))
     jeu.ennemyList.append(Molecule('carbone.png', PatternPolynome(1,1,1)))"""
