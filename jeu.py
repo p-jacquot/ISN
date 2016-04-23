@@ -53,10 +53,7 @@ class Jeu:
                 if ennemy.dead==False:
                     if self.delayMouvement == 0 :
                         ennemy.move()
-                    rectangle=ennemy.rect
-                    rectangle.x=ennemy.rectX+ennemy.posX
-                    rectangle.y=ennemy.rectY+ennemy.posY
-                    er.append(rectangle)
+                    er.append(ennemy.rect)
                     #er.append(ennemy.rect)
                     self.ennemyProjectiles+=ennemy.tirer()
                     newList.append(ennemy)
