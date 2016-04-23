@@ -33,7 +33,7 @@ class Jeu:
             pjr = [] #rect des projectiles du joueur.
             if len(self.ennemyList) < self.niveau.maxMobOnScreen and self.niveau.totalMobsLeft > 0:
                 if randint(0,50)==45:
-                    print("On génère une nouvelle molécule !")
+                    #print("On génère une nouvelle molécule !")
                     self.ennemyList.append(self.niveau.genererMob())
             #La boucle principale du jeu.
             #print("yolo ! On s'amuse bien !")
