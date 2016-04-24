@@ -10,10 +10,14 @@ projectilesList = [ pygame.image.load("resources/photos/photon_bleu_clair_pour_l
                     pygame.image.load("resources/photos/photon_vert.png"),
                     pygame.image.load("resources/photos/photon_violet.png")]
 
+"""Les sprites des explosions"""
+explodeList = [pygame.image.load("resources/photos/explosion_v1.1.bmp"),
+               pygame.image.load("resources/photos/explosion_v2.2.bmp"),
+               pygame.image.load("resources/photos/explosion_v3.bmp")]
 #Quand vous voulez récupérer l'image d'un photon : projectilesList[index]
 
 #lycee
-largeur,hauteur=768, 600
+largeur,hauteur= 768, 600
 
 #pas lycee
 #largeur,hauteur=1280,720
