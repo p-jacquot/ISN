@@ -179,14 +179,19 @@ class Jeu:
         self.fenetre.rafraichir()
 
     def dialoguer(self, dialog):
-        sombre = pygame.Surface((self.fenetre.largeur, self.fenetre.hauteur))  # the size of your rect
+        sombre = pygame.Surface((self.fenetre.largeur, self.fenetre.hauteur))
         sombre.set_alpha(128)
         sombre.fill((0, 0, 0))
         perso = []
         for liste in dialog.characters:
             img = pygame.image.load(liste[1]).convert_alpha()
             perso.append([liste[0], img, liste[2]])
-
+        for p in perso:
+            #print(p)
+            #print(p[1].get_rect())
+            rect = p[1].get_rect()
+            rect.x, rect.y = p[2]
+            p[2] = (rect.x, self.fenetre.hauteur - 100 - rect.height)
         while dialog.notFinished:
             punchline = dialog.getPunchline()
             posX, posY = perso[punchline[1]][2]
@@ -194,10 +199,10 @@ class Jeu:
             #pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
             self.fenetre.fen.blit(sombre, (0,0))
             self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
-            self.fenetre.dessinerCadre(0, 500, 100, self.fenetre.largeur)
+            self.fenetre.dessinerCadre(0, self.fenetre.hauteur-100, 100, self.fenetre.largeur)
             self.fenetre.dessinerCadre(posX+50, posY-25, 30, 100)
             self.fenetre.ecrireTexte(perso[punchline[1]][0], posX + 55, posY - 20)
-            self.fenetre.ecrireTexte(punchline[0], 25, 500)
+            self.fenetre.ecrireTexte(punchline[0], 25, self.fenetre.hauteur-80)
             event = pygame.event.wait()
             while event.type != KEYDOWN:
                 event = pygame.event.wait()
