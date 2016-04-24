@@ -63,6 +63,8 @@ with open('resources/niveau/1/lastDialog.pickle', 'rb') as file:
     lastDialog = pickle.load(file)
 
 jeu = Jeu(fenetre, Niveau(1,firstDialog, middleDialog, lastDialog))
+for explode in constantes.explodeList:
+    explode = explode.convert_alpha()
 #testDialog()
 #testSerializedDialogue()
 testplay()
