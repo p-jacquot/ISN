@@ -16,6 +16,7 @@ class Fenetre:
         self.entites = [] #une liste qui contient des listes comme ça : [image, tuple_de_position]
         #self.fond = fond
         pygame.display.set_caption(titre)
+        self.explosions = [] #La liste des explosions: [ [ImageExplosion, ListeDeTuplesDePositions] ]
         #self.imgList.append(image.load("hakase_nyan.png").convert_alpha())
         #self.fenetre.blit(fond, (0, 0))
 
@@ -36,10 +37,16 @@ class Fenetre:
         self.fen.blit(self.fond, (0,0))
         for ent in self.entites:
             self.fen.blit(ent.img, (ent.posX, ent.posY))
+        for exp in self.explosions:
+            #print("On affiche des explosions !")
+            for pos in exp[1]:
+                self.fen.blit(exp[0], pos)
+                #print("Il y a une explosion à :", pos)
             #self.fen.fill((255,0,0),ent.rect)    #montre les hitboxs
 
         pygame.display.flip()
         self.entites = []
+        self.explosions = []
 
     def dessinerCadre(self, posX, posY, hauteur, largeur):
         pygame.draw.rect(self.fen, pygame.Color(255, 255, 255, 0), pygame.Rect(posX, posY, largeur, hauteur))
