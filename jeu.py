@@ -12,6 +12,7 @@ explosion1 = pygame.mixer.Sound("resources/explosion1.wav")
 explosion2 = pygame.mixer.Sound("resources/explosion2.wav")
 explosion1.set_volume(.5)
 explosion2.set_volume(.5)
+audioDialogue=pygame.mixer.Channel(0)
 
 class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
@@ -159,12 +160,12 @@ class Jeu:
             self.moleculeJoueur.move()
             if self.moleculeJoueur.posX<10:
                 self.moleculeJoueur.posX=10
-            elif self.moleculeJoueur.posX>640:  #changer encore ici
-                self.moleculeJoueur.posX=640
+            elif self.moleculeJoueur.posX>constantes.largeur-40:  #changer encore ici
+                self.moleculeJoueur.posX=constantes.largeur-40
             if self.moleculeJoueur.posY <10:
                 self.moleculeJoueur.posY=10
-            elif self.moleculeJoueur.posY>590:
-                self.moleculeJoueur.posY=590
+            elif self.moleculeJoueur.posY>constantes.hauteur-40:
+                self.moleculeJoueur.posY=constantes.hauteur-40
             self.actualiser()
             #TODO: Gérer les collisions.
 
@@ -199,6 +200,8 @@ class Jeu:
             self.fenetre.ecrireTexte(perso[punchline[1]][0], posX + 55, posY - 20)
             self.fenetre.ecrireTexte(punchline[0], 25, 500)
             event = pygame.event.wait()
+            #audio = pygame.mixer.Sound("resources/temporaire/"+str(dialog.counter)+".wav")
+            #audioDialogue(audio)
             while event.type != KEYDOWN:
                 event = pygame.event.wait()
                 pass
@@ -217,10 +220,10 @@ class Jeu:
         """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
         self.continuer = True
         boss = self.niveau.boss
-        boss.posX = 10
+        boss.posX = (constantes.largeur-boss.rect.width)/2
         boss.posY = 10
-        boss.rect.x = 10
-        boss.rect.y = 10
+        boss.rect.x = boss.posY
+        boss.rect.y = boss.posX
         self.ennemyList.append(boss)
         self.play()
 

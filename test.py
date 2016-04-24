@@ -16,9 +16,9 @@ def testplay():
 
     jeu.moleculeJoueur = Molecule('hydrogene.png', Pattern(0,0))
 
-    jeu.moleculeJoueur.posX = 250
-    jeu.moleculeJoueur.posY = 500
-    jeu.moleculeJoueur.rect = jeu.moleculeJoueur.rect.move(250, 500)
+    jeu.moleculeJoueur.posX = constantes.largeur/2
+    jeu.moleculeJoueur.posY = constantes.hauteur-35
+    jeu.moleculeJoueur.rect = jeu.moleculeJoueur.rect.move(jeu.moleculeJoueur.posX, jeu.moleculeJoueur.posY)
     jeu.moleculeJoueur.hp =9001
     jeu.vitesse = 0.4
     """jeu.ennemyList.append(Molecule('azote.png', PatternCercle(150,60,25,4,2)))
@@ -50,7 +50,7 @@ def testSerializedDialogue():
 
 pygame.init()
 pygame.mixer.init()
-fenetre = Fenetre("test ISN Dialogue", 768, 600)
+fenetre = Fenetre("test ISN Dialogue", constantes.largeur, constantes.hauteur)
 fenetre.fond = pygame.image.load("resources/galaxie.jpg").convert_alpha()
 
 with open('resources/niveau/1/firstDialog.pickle', 'rb') as file:
