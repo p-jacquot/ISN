@@ -13,13 +13,13 @@ import constantes
 class Molecule:
     """La classe Molécule, qui est un ensemble d'atomes."""
 
-    def __init__(self, atome, posX, posY):
+    """def __init__(self, atome, posX, posY):
         self.addAtome(atome)
         self.posX = posX
         self.posY = posY
         self.isAlive = True
         #self.mv_x = 0
-        #self.mv_y = 0
+        #self.mv_y = 0"""
 
 
     def __init__(self, nomMol, pattern):
@@ -49,7 +49,9 @@ class Molecule:
         print(self.rect)
         self.pattern=pattern
         self.dead=False
-
+        self.dying = False
+        self.explode = 0
+        self.explodeCoords = [None, []] #[image_Explosion, Liste_Tuples_de_positions]
 
 
 
@@ -70,6 +72,8 @@ class Molecule:
         self.posX, self.posY = self.pattern.deplacer(self.posX, self.posY)
         self.rect.x = self.posX
         self.rect.y = self.posY
+        if self.dying and self.explode <= 15:
+            self.blowUp()
 
         #TODO: ici, prendre la décision de tirer ou non.
         if self.posX+self.largeur<-50 or self.posX>constantes.largeur+50 or self.posY+self.hauteur<-50 or self.posY>constantes.hauteur+50:     #changer valeur ici aussi
@@ -95,8 +99,23 @@ class Molecule:
     def hit(self):
         self.hp -= 3
         if self.hp <= 0:
-            print("Aaaaaaaaaah ! Je meurs !")
+            #print("Boooom !")
+            self.dying = True
+
+    def blowUp(self):
+        print("Ca a explosé une fois !")
+        if self.explode >= 15:
             self.dead=True
+        else:
+            self.explodeCoords[0] = constantes.explodeList[int(self.explode/5)]
+            tupleList = []
+            for a in self.atomeList:
+                x,y = a.posX, a.posY
+                x += self.posX
+                y += self.posY
+                tupleList.append((x,y))
+            self.explodeCoords[1] = tupleList
+            self.explode += 1
 
 
 def listerAtomes( nomMol,hauteur,largeur):
