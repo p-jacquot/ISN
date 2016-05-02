@@ -60,6 +60,20 @@ class Fenetre:
     def fermer(self):
         pygame.quit()
 
+    def afficherPause(self):
+        sombre = pygame.Surface((self.largeur, self.hauteur))
+        sombre.set_alpha(128)
+        sombre.fill((0, 0, 0))
+        font = pygame.font.Font(None, 40)
+        font2 = pygame.font.Font(None, 20)
+        font2.set_italic(True)
+        surface = font.render("Pause", 0, pygame.Color(255, 255, 255, 0))
+        surface2 = font2.render("Appuyez sur ECHAP pour continuer.", 0, pygame.Color(255, 255, 255, 0))
+        self.fen.blit(sombre, (0,0))
+        self.fen.blit(surface, ((self.largeur/2)-60, (self.hauteur/2)-40))
+        self.fen.blit(surface2, (0, 20))
+        pygame.display.flip()
+
 """if __name__ == "__main__":
     f = Fenetre("test", 768, 600)
     f.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
