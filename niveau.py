@@ -48,12 +48,18 @@ class Niveau:
                 self.totalMobsLeft -= 1
                 ennemi = copy.deepcopy(mob[0])
                 ennemi.img =mob[0].img
+
+
+
                 randomPattern= randint(0,4)
-                randomPattern=1
+                #randomPattern=2
+
                 if randomPattern == 0 : #pattern normal
                     ennemi.pattern = Pattern(randint(-1,1),1)
                     ennemi.posY = 5
                     ennemi.posX =  randint(0, constantes.largeur-ennemi.rect.width)
+
+
                 elif randomPattern == 1 : #pattern polynome
                     ennemi.pattern = PatternPolynome(randint(-2,2)/1000,randint(-5,5)/1000,(randint(0,2)-1)*randint(100,300))
                     if ennemi.pattern.dir == -1 :
@@ -61,8 +67,39 @@ class Niveau:
                     elif ennemi.pattern.dir == 1 :
                         ennemi.posX=0
                     #ennemi.pattern=PatternPolynome(-1/1000,1/200,150)
-                """ennemi.posY = 5
-                ennemi.posX =  randint(0, constantes.largeur-ennemi.rect.width)"""
+
+
+                elif randomPattern == 2 : #pattern cercle
+                    ennemi.pattern = PatternCercle(randint(-200,constantes.largeur+200),randint(-100,constantes.hauteur-200),1,1,1)
+                    ennemi.pattern = PatternCercle(randint(0,constantes.largeur),randint(0,constantes.hauteur-200),1,1,1)
+                    rand= randint(1,3)
+                    if rand== 1 :
+                        ennemi.posY= -5-ennemi.rect.height
+                        ennemi.posX= randint(-5,constantes.largeur)
+                    else:
+                        ennemi.posY= randint(-5,constantes.hauteur-100)
+                        if rand==2:
+                            ennemi.posX=-5-ennemi.rect.width
+                        else :
+                            ennemi.posX=constantes.largeur+5
+                    ennemi.pattern.rayon=sqrt(pow(ennemi.posX-ennemi.pattern.centreX,2)+pow(ennemi.posY-ennemi.pattern.centreY,2))
+                    print(ennemi.posX,ennemi.posY,ennemi.pattern.centreX,ennemi.pattern.centreY,ennemi.pattern.rayon)
+                    ennemi.pattern.vitesse=randint(3,10)/ennemi.pattern.rayon/6*pi
+                    if ennemi.posX<ennemi.pattern.centreX and ennemi.posY>ennemi.pattern.centreY or ennemi.posX>ennemi.pattern.centreX and ennemi.posY<ennemi.pattern.centreY :   #je suis pas sûr pour cette condition encore mais elle semble bonne
+                        ennemi.pattern.vitesse=-ennemi.pattern.vitesse  #en gros on inverse le sens dans les 2 cas où c'est nécessaire
+                    ennemi.pattern.angle=abs(acos((ennemi.posX-ennemi.pattern.centreX)/ennemi.pattern.rayon))
+                    if ennemi.posY-ennemi.pattern.centreY<0:
+                        ennemi.pattern.angle=-ennemi.pattern.angle
+                    #ennemi.pattern.angle=ennemi.pattern.angle*180/pi #conversion en degrés
+                    print(ennemi.pattern.deplacer(5,5))
+                    print(ennemi.pattern.centreX,ennemi.pattern.centreY,ennemi.pattern.angle,ennemi.pattern.vitesse,ennemi.pattern.rayon)
+                    print("-------")
+
+
+
+
+                #ennemi.posY = 5
+                #ennemi.posX =  randint(0, constantes.largeur-ennemi.rect.width)
                 ennemi.rect.x = ennemi.posX
                 ennemi.rect.y = ennemi.posY
                 #print("Apparition aux coordonnées :", ennemi.posX, ",", ennemi.posY)

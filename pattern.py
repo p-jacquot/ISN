@@ -30,7 +30,6 @@ class PatternPolynome(Pattern):
     def deplacer(self, posX, posY):
         posX += self.dir-constantes.largeur/2
         posY = self.a * posX * posX + self.b * posX + self.c
-        print(posX,posY)
         return posX+constantes.largeur/2, posY
 
 class PatternCercle(Pattern):
@@ -40,12 +39,12 @@ class PatternCercle(Pattern):
         self.centreY=centreY
         self.rayon=rayon
         self.angle=angle
-        self.vitesse=vitesse #en degrés par mouvement et négatif pour tourner dans l'autre sens
+        self.vitesse=vitesse/180*pi #en degrés par mouvement et négatif pour tourner dans l'autre sens
 
     def deplacer(self,posX,posY):
+        posX=self.centreX+self.rayon*(cos(self.angle))
+        posY=self.centreY+self.rayon*(sin(self.angle))
         self.angle+=self.vitesse
-        posX=self.centreX+self.rayon*(cos(self.angle/180*pi))
-        posY=self.centreY+self.rayon*(sin(self.angle/180*pi))
         return posX,posY
 
 class PatternZigZag(Pattern):#je ne suis pas sûr de la syntaxe pour ce pattern
