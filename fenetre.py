@@ -37,12 +37,13 @@ class Fenetre:
         self.fen.blit(self.fond, (0,0))
         for ent in self.entites:
             self.fen.blit(ent.img, (ent.posX, ent.posY))
+            self.fen.fill((255,0,0),ent.rect)    #montre les hitboxs
         for exp in self.explosions:
             #print("On affiche des explosions !")
             for pos in exp[1]:
                 self.fen.blit(exp[0], pos)
                 #print("Il y a une explosion à :", pos)
-            #self.fen.fill((255,0,0),ent.rect)    #montre les hitboxs
+
 
         pygame.display.flip()
         self.entites = []
