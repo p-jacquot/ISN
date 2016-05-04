@@ -1,12 +1,12 @@
 ﻿# Créé par Pierre, le 05/03/2016 en Python 3.2
 from PIL import Image
 
-import random
+from random import *
 from dialogue import Dialog
 from molecule import Molecule
-from pattern import Pattern
 import copy
 import constantes
+from pattern import *
 
 class Niveau:
     """La classe qui gère les niveaux."""
@@ -35,7 +35,7 @@ class Niveau:
 
 
     def genererMob(self):
-        rand = random.randint(0, 99)
+        rand =  randint(0, 99)
         #print(rand)
         ennemi = None
         for mob in self.mobList:
@@ -48,20 +48,26 @@ class Niveau:
                 self.totalMobsLeft -= 1
                 ennemi = copy.deepcopy(mob[0])
                 ennemi.img =mob[0].img
+                randomPattern= randint(0,4)
+                randomPattern=1
+                if randomPattern == 0 : #pattern normal
+                    ennemi.pattern = Pattern(randint(-1,1),1)
+                elif randomPattern == 1 : #pattern polynome
+                    ennemi.pattern = PatternPolynome(randint(-5,5),randint(-5,5),randint(10,150))
                 ennemi.posY = 5
-                ennemi.posX = random.randint(0, constantes.largeur-ennemi.rect.width)
+                ennemi.posX =  randint(0, constantes.largeur-ennemi.rect.width)
                 ennemi.rect.x = ennemi.posX
                 ennemi.rect.y = ennemi.posY
                 #print("Apparition aux coordonnées :", ennemi.posX, ",", ennemi.posY)
                 #print("Son rect est :", ennemi.rect)
                 #print("--------------------------------------")
-                """rand=random.randint(1,3)
+                """rand= randint(1,3)
                 if rand== 1 :#en haut
                     ennemi.posY= -5
-                    ennemi.posX=random.randint(-5,350)
+                    ennemi.posX= randint(-5,350)
                     print("En haut !")
                 else:
-                    ennemi.posY=random.randint(-5,350)#je pense pas que le jeu fasse la largeur de l'écran alors il faudra changer cette valeur quand on saura
+                    ennemi.posY= randint(-5,350)#je pense pas que le jeu fasse la largeur de l'écran alors il faudra changer cette valeur quand on saura
                     if rand==2:
                         print("Heu... Sur la gauche ?")
                         ennemi.posX=-5
