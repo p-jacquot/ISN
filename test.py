@@ -19,7 +19,7 @@ def testplay():
     jeu.moleculeJoueur.posX = constantes.largeur/2
     jeu.moleculeJoueur.posY = constantes.hauteur-35
     jeu.moleculeJoueur.rect = jeu.moleculeJoueur.rect.move(jeu.moleculeJoueur.posX, jeu.moleculeJoueur.posY)
-    jeu.moleculeJoueur.hp =9001
+    jeu.moleculeJoueur.hp = 10
     jeu.vitesse = 0.4
     """jeu.ennemyList.append(Molecule('azote.png', PatternCercle(150,60,25,4,2)))
     jeu.ennemyList.append(Molecule('oxygene.png', PatternZigZag(20,1)))

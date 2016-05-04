@@ -115,7 +115,10 @@ class Jeu:
 
             """Events incoming !"""
             event = pygame.event.poll()
-            if event.type == KEYDOWN:
+            if event.type == NOEVENT:
+                #print('Pas d\'event !')
+                pass
+            elif event.type == KEYDOWN:
                 #print("Touche appuyée.")
                 """Lorsqu'on appuie sur une touche. Ces valeurs ne sont là qu'a titre d'exemple, il faudra qu'on les modifies."""
                 if event.key == K_UP:
@@ -133,6 +136,7 @@ class Jeu:
                     self.vitesse = 0.2
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
+                #print("Touche relachée !")
                 if event.key == K_UP and self.moleculeJoueur.pattern.mv_y<0:
                     self.moleculeJoueur.pattern.mv_y = 0
                 elif event.key == K_DOWN and self.moleculeJoueur.pattern.mv_y>0:
@@ -141,10 +145,12 @@ class Jeu:
                     self.moleculeJoueur.pattern.mv_x = 0
                 elif event.key == K_RIGHT and self.moleculeJoueur.pattern.mv_x>0:
                     self.moleculeJoueur.pattern.mv_x = 0
-                if event.key == K_z :
+                if event.key == K_z:
                     self.tir = False
                 if event.key == K_LSHIFT :
                     self.vitesse = 0.4
+                if event.key == K_ESCAPE:
+                    self.pause()
             elif event.type == QUIT:
                 self.fenetre.fermer()
                 self.continuer = False
@@ -244,6 +250,14 @@ class Jeu:
         """Cette fonction s'occupera de charger tout ce dont on a besoin d'un niveau :
             mobs, probas..."""
         self.niveau = niveau
+
+    def pause(self):
+        pause = True
+        while pause:
+            self.fenetre.afficherPause()
+            event = pygame.event.wait()
+            if event.type == KEYUP and event.key == K_ESCAPE:
+                pause = False
 
     def clearProj(self):
         """for a in self.ennemyProjectiles :
