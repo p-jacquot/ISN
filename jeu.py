@@ -235,8 +235,8 @@ class Jeu:
         boss = self.niveau.boss
         boss.posX = (constantes.largeur-boss.rect.width)/2
         boss.posY = 10
-        boss.rect.x = boss.posY
-        boss.rect.y = boss.posX
+        boss.rect.x = boss.posX
+        boss.rect.y = boss.posY
         self.ennemyList.append(boss)
         self.play()
 
