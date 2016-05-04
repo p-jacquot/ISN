@@ -2,6 +2,7 @@
 #kek
 from math import *
 from random import *
+import constantes
 """utiliser un tuple pour donner les arguments dans le constructeur est bcp plus simple pour créer le pattern"""
 class Pattern:
     """La classe pattern dont tous les pattern doivent hériter."""
@@ -27,9 +28,10 @@ class PatternPolynome(Pattern):
             self.dir = -1
 
     def deplacer(self, posX, posY):
-        posX += self.dir
-        posY = self.a * posX * posX + self.b * posX - self.c
-        return posX, posY
+        posX += self.dir-constantes.largeur/2
+        posY = self.a * posX * posX + self.b * posX + self.c
+        print(posX,posY)
+        return posX+constantes.largeur/2, posY
 
 class PatternCercle(Pattern):
     """Pattern qui fait se déplacer selon un cercle au milieu de l'écran"""

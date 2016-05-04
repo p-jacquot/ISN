@@ -52,10 +52,17 @@ class Niveau:
                 randomPattern=1
                 if randomPattern == 0 : #pattern normal
                     ennemi.pattern = Pattern(randint(-1,1),1)
+                    ennemi.posY = 5
+                    ennemi.posX =  randint(0, constantes.largeur-ennemi.rect.width)
                 elif randomPattern == 1 : #pattern polynome
-                    ennemi.pattern = PatternPolynome(randint(-5,5),randint(-5,5),randint(10,150))
-                ennemi.posY = 5
-                ennemi.posX =  randint(0, constantes.largeur-ennemi.rect.width)
+                    ennemi.pattern = PatternPolynome(randint(-2,2)/1000,randint(-5,5)/1000,(randint(0,2)-1)*randint(100,300))
+                    if ennemi.pattern.dir == -1 :
+                        ennemi.posX=constantes.largeur
+                    elif ennemi.pattern.dir == 1 :
+                        ennemi.posX=0
+                    #ennemi.pattern=PatternPolynome(-1/1000,1/200,150)
+                """ennemi.posY = 5
+                ennemi.posX =  randint(0, constantes.largeur-ennemi.rect.width)"""
                 ennemi.rect.x = ennemi.posX
                 ennemi.rect.y = ennemi.posY
                 #print("Apparition aux coordonnées :", ennemi.posX, ",", ennemi.posY)
