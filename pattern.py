@@ -67,12 +67,13 @@ class PatternZigZag(Pattern):#je ne suis pas sûr de la syntaxe pour ce pattern
         #return self.Pattern.deplacer(posX,posY)
 
 class PatternSinusoidal(Pattern):
-    def __init__(self,amplitude,direction):
+    def __init__(self,amplitude,direction,posY):
+        self.Y=posY
         self.amplitude=amplitude
         self.direction=direction
 
     def deplacer(self,posX,posY):
         posX+=self.direction
-        posY = self.amplitude *sin(posX/180*pi)
+        posY = self.amplitude *sin(posX/180*pi) + self.Y
         return posX,posY
 
