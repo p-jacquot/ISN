@@ -52,7 +52,6 @@ class Niveau:
 
 
                 randomPattern= randint(0,4)
-                randomPattern=3
 
                 if randomPattern == 0 : #pattern normal
                     ennemi.pattern = Pattern(randint(-1,1),1)
@@ -114,6 +113,11 @@ class Niveau:
                             ennemi.posX=constantes.largeur+5
                             ennemi.pattern.mv_x = -1
                     ennemi.pattern.compteur = -150
+
+                elif randomPattern == 4 :
+                    ennemi.pattern = PatternSinusoidal(randint(10,50)*3,(randint(0,1)-0.5)*2,randint(10,constantes.hauteur-50)-150)
+                    if ennemi.pattern.direction == -1 :
+                        ennemi.posX=constantes.largeur+5
 
 
 
