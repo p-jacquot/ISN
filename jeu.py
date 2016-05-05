@@ -253,8 +253,9 @@ class Jeu:
 
     def pause(self):
         pause = True
+        self.fenetre.afficherPause()
         while pause:
-            self.fenetre.afficherPause()
+
             event = pygame.event.wait()
             if event.type == KEYUP and event.key == K_ESCAPE:
                 pause = False
