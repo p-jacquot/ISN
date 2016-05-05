@@ -52,7 +52,7 @@ class Niveau:
 
 
                 randomPattern= randint(0,4)
-                #randomPattern=2
+                randomPattern=3
 
                 if randomPattern == 0 : #pattern normal
                     ennemi.pattern = Pattern(randint(-1,1),1)
@@ -91,9 +91,29 @@ class Niveau:
                     if ennemi.posY-ennemi.pattern.centreY<0:
                         ennemi.pattern.angle=-ennemi.pattern.angle
                     #ennemi.pattern.angle=ennemi.pattern.angle*180/pi #conversion en degrés
-                    print(ennemi.pattern.deplacer(5,5))
-                    print(ennemi.pattern.centreX,ennemi.pattern.centreY,ennemi.pattern.angle,ennemi.pattern.vitesse,ennemi.pattern.rayon)
-                    print("-------")
+                    #print(ennemi.pattern.deplacer(5,5))
+                    #print(ennemi.pattern.centreX,ennemi.pattern.centreY,ennemi.pattern.angle,ennemi.pattern.vitesse,ennemi.pattern.rayon)
+                    #print("-------")
+
+
+                elif randomPattern == 3 : #zigzag
+                    ennemi.pattern= PatternZigZag(randint(10,30),randint(1,5))
+                    rand= randint(1,3)
+                    if rand== 1 :
+                        ennemi.posY= -5-ennemi.rect.height
+                        ennemi.posX= randint(-5,constantes.largeur)
+                        ennemi.pattern.mv_x = 0
+                        ennemi.pattern.mv_y = 1
+                    else:
+                        ennemi.posY= randint(-5,constantes.hauteur-100)
+                        ennemi.pattern.mv_y = 0
+                        if rand==2:
+                            ennemi.posX=-5-ennemi.rect.width
+                            ennemi.pattern.mv_x = 1
+                        else :
+                            ennemi.posX=constantes.largeur+5
+                            ennemi.pattern.mv_x = -1
+                    ennemi.pattern.compteur = -150
 
 
 
