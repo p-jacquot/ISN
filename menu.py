@@ -17,7 +17,7 @@ class Menu:
     font = pygame.font.Font
     dest_surface = pygame.Surface
     nombre_d_options = 0
-    image_fond = pygame.image.load("resources/fond_transparent.png")
+    image_fond = pygame.image.load("resources/hakase_nyan.png")
     couleur_texte =  (255, 255, 100)
     couleur_selection = (200,0,100)
     position = 0
