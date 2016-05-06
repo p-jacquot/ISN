@@ -17,7 +17,7 @@ class Niveau:
         self.totalMobsLeft = totalMob"""
 
     def __init__(self, numero, firstDialog, middleDialog, lastDialog):
-
+        self.numero=numero
         self.fname=str("resources/niveau/"+str(numero)+"/mobs.txt")
         self.pathMusicLevel = str("resources/niveau/" + str(numero) + "/music.wav")
         self.pathMusicBoss = str("resources/niveau/" + str(numero) + "/musicBoss.wav")
