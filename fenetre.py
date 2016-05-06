@@ -3,6 +3,7 @@
 import pygame
 import time
 import jeu as Jeu
+from replay import ReplayLoaded
 
 class Fenetre:
     """Classe Fenêtre, s'occupant de l'affichage."""
@@ -74,6 +75,14 @@ class Fenetre:
         self.fen.blit(surface, ((self.largeur/2)-60, (self.hauteur/2)-40))
         self.fen.blit(surface2, (0, 20))
         pygame.display.flip()
+
+    def playReplay(self,nom):
+        replay = ReplayLoaded(nom)
+        for a in replay.listeFrames:
+            image = pygame.image.frombuffer(a,replay.taille,"RGB")
+            self.fen.blit(image, (0,0))
+            pygame.display.flip()
+            time.sleep(0.01)
 
 """if __name__ == "__main__":
     f = Fenetre("test", 768, 600)
