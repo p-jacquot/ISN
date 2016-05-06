@@ -19,9 +19,8 @@ explodeList = [pygame.image.load("resources/photos/explosion_v1.1.bmp"),
 
 #lycee
 largeur,hauteur= 768, 600
-
 #pas lycee
 #largeur,hauteur=1280,720
 
-recordOn=True
+recordOn=False
 
