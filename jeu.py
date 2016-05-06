@@ -151,15 +151,19 @@ class Jeu:
                     self.vitesse = 0.4
                 if event.key == K_ESCAPE:
                     self.pause()
+                if event.key == K_r:
+                    self.saveReplay()
             elif event.type == QUIT:
                 self.fenetre.fermer()
                 self.continuer = False
 
             self.delayTirJoueur-=1
             if self.tir == True and self.delayTirJoueur <=0 :
-                proj = Projectile(self.moleculeJoueur.posX,self.moleculeJoueur.posY,0,-3)
-                proj.img = constantes.projectilesList[0].convert_alpha()
-                self.projectilesJoueur.append(proj)
+                for a in range(self.niveau.numero) :
+                    posX=self.moleculeJoueur.posX+(a-(self.niveau.numero-1)/2)
+                    proj = Projectile(posX,self.moleculeJoueur.posY-5,0,-3)
+                    proj.img = constantes.projectilesList[0].convert_alpha()
+                    self.projectilesJoueur.append(proj)
                 self.delayTirJoueur=20
 
             if self.moleculeJoueur.dead or self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
