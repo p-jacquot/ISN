@@ -8,6 +8,7 @@ pygame.init()
 from projectiles import *
 from pattern import *
 from constantes import *
+from replay import *
 pygame.mixer.init(frequency=22050, size=-16, channels=25, buffer=4096)
 explosion1 = pygame.mixer.Sound("resources/explosion1.wav")
 explosion2 = pygame.mixer.Sound("resources/explosion2.wav")
@@ -36,7 +37,7 @@ class Jeu:
                                 #[(-12,5,-0.5,-2.5),(0,0,0,-3),(12,5,0.5,-2.5)],
                                 [(-15,5,-0.5,-2.5),(-8,0,0,-3),(8,0,0,-3),(15,5,0.5,-2.5)]]
 
-
+        self.listeFrame=[]
 
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
@@ -158,7 +159,10 @@ class Jeu:
                 if event.key == K_ESCAPE:
                     self.pause()
                 if event.key == K_r:
-                    self.saveReplay()
+                    replay = Replay((constantes.largeur,constantes.hauteur),self.listeFrame)
+                    nom = replay.nom
+                    replay.saveReplay()
+                    self.fenetre.playReplay(nom)
             elif event.type == QUIT:
                 self.fenetre.fermer()
                 self.continuer = False
@@ -167,9 +171,9 @@ class Jeu:
             if self.tir == True and self.delayTirJoueur <=0 :
                 projAAjouter = self.typeProjJoueur[self.niveau.numero-1]
                 for a in projAAjouter :
-
-                    self.projectilesJoueur.append(Projectile(a[0]+self.moleculeJoueur.posX,a[1]+self.moleculeJoueur.posY,a[2],a[3]))
-
+                    proj = Projectile(a[0]+self.moleculeJoueur.posX,a[1]+self.moleculeJoueur.posY,a[2],a[3])
+                    proj.img = constantes.projectilesList[0].convert_alpha()
+                    self.projectilesJoueur.append(proj)
                 self.delayTirJoueur=20
 
             if self.moleculeJoueur.dead or self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
@@ -185,6 +189,12 @@ class Jeu:
             elif self.moleculeJoueur.posY>constantes.hauteur-40:
                 self.moleculeJoueur.posY=constantes.hauteur-40
             self.actualiser()
+
+            if constantes.recordOn :
+                self.listeFrame.append(pygame.image.tostring(self.fenetre.fen,"RGB"))
+                if len(self.listeFrame)>500 :
+                    self.listeFrame = self.listeFrame[-500:]
+
             #TODO: Gérer les collisions.
 
 
