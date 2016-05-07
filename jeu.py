@@ -1,6 +1,6 @@
 ﻿# Créé par Pierre, le 05/03/2016 en Python 3.2
 from random import *
-from fenetre import Fenetre
+from fenetre import *
 import pygame
 from pygame.event import *
 from pygame.locals import * #Pour les events.
@@ -19,7 +19,7 @@ audioDialogue=pygame.mixer.Channel(0)
 class Jeu:
     """La classe qui s'occupera de gérer le jeu en lui même"""
 
-    def __init__(self, fenetre, niveau): #on lui donnera le niveau qu'on veut jouer (un int, et on ira chercher dans des dossiers).
+    def __init__(self, fenetre, niveau, moleculeJoueur, vitesse): #on lui donnera le niveau qu'on veut jouer (un int, et on ira chercher dans des dossiers).
         self.fenetre = fenetre
         self.changeNiveau(niveau)
 
@@ -28,7 +28,7 @@ class Jeu:
         self.projectilesJoueur = [] #les projectiles de la molécule gentille.
 
         self.continuer = True
-        self.moleculeJoueur = None
+        self.moleculeJoueur = moleculeJoueur
         self.delayTirJoueur = 0
         self.tir = False
         self.delayMouvement = 0
@@ -38,6 +38,7 @@ class Jeu:
                                 [(-15,5,-0.5,-2.5),(-8,0,0,-3),(8,0,0,-3),(15,5,0.5,-2.5)]]
 
         self.listeFrame=[]
+        self.vitesse = vitesse
 
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
