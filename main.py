@@ -32,14 +32,16 @@ while 1:
                     fenetre.fond = pygame.image.load("resources/galaxie.jpg").convert_alpha()
                     jeu = Jeu(fenetre, Niveau(1), Molecule('hydrogene.png', Pattern(0,0)), 4.5)
                     jeu.progressInLevel()
+                    menu.draw()
+                    pygame.display.update()
                 if menu.get_position() == 4:
                     pygame.display.quit()
                     sys.exit()
             if event.key == K_ESCAPE:
-                pygame.display.quit()
+                pygame.quit()
                 sys.exit()
             pygame.display.update()
         elif event.type == QUIT:
-            pygame.display.quit()
+            pygame.quit()
             sys.exit()
     pygame.time.wait(8)
