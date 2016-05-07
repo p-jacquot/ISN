@@ -10,8 +10,6 @@ from pattern import *
 import pickle
 import niveau
 
-pygame.init()
-
 def testplay():
 
     jeu.moleculeJoueur = Molecule('hydrogene.png', Pattern(0,0))
