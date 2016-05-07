@@ -175,8 +175,6 @@ class Jeu:
             elif self.moleculeJoueur.posY>constantes.hauteur-40:
                 self.moleculeJoueur.posY=constantes.hauteur-40
             self.actualiser()
-            #TODO: Gérer les collisions.
-
 
         #self.fenetre.fermer()
 
