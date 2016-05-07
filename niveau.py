@@ -7,6 +7,7 @@ from molecule import Molecule
 import copy
 import constantes
 from pattern import *
+import pickle
 
 class Niveau:
     """La classe qui gère les niveaux."""
@@ -16,7 +17,7 @@ class Niveau:
         self.maxMobOnScreen = mobOnScreen #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
         self.totalMobsLeft = totalMob"""
 
-    def __init__(self, numero, firstDialog, middleDialog, lastDialog):
+    def __init__(self, numero):
         self.numero=numero
         self.fname=str("resources/niveau/"+str(numero)+"/mobs.txt")
         self.pathMusicLevel = str("resources/niveau/" + str(numero) + "/music.wav")
@@ -29,6 +30,14 @@ class Niveau:
             self.mobList.append([Molecule(str(a[:-4]), Pattern(0, 1)), int(a[-3:-1])])
         self.maxMobOnScreen = int(content[-2]) #le nombre maximal de méchant qu'il pourrait y avoir en même temps.
         self.totalMobsLeft = int(content[-1])
+
+        with open("resources/niveau/"+str(numero)+"/firstDialog.pickle", 'rb') as file:
+            firstDialog = pickle.load(file)
+        with open("resources/niveau/"+str(numero)+"/middleDialog.pickle", 'rb') as file:
+            middleDialog = pickle.load(file)
+        with open(str("resources/niveau/"+str(numero)+"/lastDialog.pickle"), 'rb') as file:
+            lastDialog = pickle.load(file)
+
         self.firstDialog = firstDialog  #Les différents dialogues qu'ils y aura dans le niveau.
         self.middleDialog = middleDialog
         self.lastDialog = lastDialog
