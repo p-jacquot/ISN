@@ -72,9 +72,11 @@ class Fenetre:
         font2.set_italic(True)
         surface = font.render("Pause", 0, pygame.Color(255, 255, 255, 0))
         surface2 = font2.render("Appuyez sur ECHAP pour continuer.", 0, pygame.Color(255, 255, 255, 0))
+        surface3 = font2.render("Appuyez sur R pour enregistrer les 15 dernières secondes", 0, pygame.Color(255, 255, 255, 0))
         self.fen.blit(sombre, (0,0))
         self.fen.blit(surface, ((self.largeur/2)-60, (self.hauteur/2)-40))
         self.fen.blit(surface2, (0, 20))
+        self.fen.blit(surface3, (0, 50))
         pygame.display.flip()
 
     def playReplay(self,nom):

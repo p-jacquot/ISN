@@ -158,11 +158,11 @@ class Jeu:
                     self.vitesse = 4.5
                 if event.key == K_ESCAPE:
                     self.pause()
-                if event.key == K_r:
+                """if event.key == K_r:
                     replay = Replay((constantes.largeur,constantes.hauteur),self.listeFrame)
                     nom = replay.nom
                     replay.saveReplay()
-                    self.fenetre.playReplay(nom)
+                    self.fenetre.playReplay(nom)"""
             elif event.type == QUIT:
                 self.fenetre.fermer()
                 self.continuer = False
@@ -174,7 +174,7 @@ class Jeu:
                     proj = Projectile(a[0]+self.moleculeJoueur.posX,a[1]+self.moleculeJoueur.posY,a[2],a[3])
                     proj.img = constantes.projectilesList[0].convert_alpha()
                     self.projectilesJoueur.append(proj)
-                self.delayTirJoueur=20
+                self.delayTirJoueur=2
 
             if self.moleculeJoueur.dead or self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
                 self.continuer = False
@@ -279,6 +279,10 @@ class Jeu:
             event = pygame.event.wait()
             if event.type == KEYUP and event.key == K_ESCAPE:
                 pause = False
+            if event.key == K_r and event.type == KEYUP:
+                replay = Replay((constantes.largeur,constantes.hauteur),self.listeFrame)
+                nom = replay.nom
+                replay.saveReplay()
 
     def clearProj(self):
         """for a in self.ennemyProjectiles :
