@@ -20,6 +20,7 @@ class Fenetre:
         self.explosions = [] #La liste des explosions: [ [ImageExplosion, ListeDeTuplesDePositions] ]
         #self.imgList.append(image.load("hakase_nyan.png").convert_alpha())
         #self.fenetre.blit(fond, (0, 0))
+        self.clock = pygame.time.Clock()
 
     def __del__(self):
         """Possible qu'on n'ait pas à se servir de cette fonction, mais je l'ai créée quand même au cas où."""
@@ -44,8 +45,8 @@ class Fenetre:
             for pos in exp[1]:
                 self.fen.blit(exp[0], pos)
                 #print("Il y a une explosion à :", pos)
-
-
+        self.clock.tick(60)
+        self.fen.blit(self.font.render(str(self.clock.get_fps()), 1, (180, 180, 255)), (0, 0))
         pygame.display.flip()
         self.entites = []
         self.explosions = []
@@ -82,7 +83,7 @@ class Fenetre:
             image = pygame.image.frombuffer(a,replay.taille,"RGB")
             self.fen.blit(image, (0,0))
             pygame.display.flip()
-            time.sleep(0.01)
+            time.sleep(1/60)
 
 """if __name__ == "__main__":
     f = Fenetre("test", 768, 600)

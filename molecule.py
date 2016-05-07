@@ -92,7 +92,7 @@ class Molecule:
                     a.rect.x=a.posX
                     a.rect.y=a.posY
             else:
-                atome.delayTir-=1
+                atome.delayTir-=10
 
         return projectiles
 

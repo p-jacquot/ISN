@@ -31,7 +31,7 @@ class Jeu:
         self.moleculeJoueur = None
         self.delayTirJoueur = 0
         self.tir = False
-        self.delayMouvement = 5
+        self.delayMouvement = 0
         self.typeProjJoueur =[  [(0,0,0,-3)],
                                 [(-12,0,0,-3),(12,0,0,-3)],
                                 [(-12,5,-0.5,-2.5),(0,0,0,-3),(12,5,0.5,-2.5)],
@@ -48,16 +48,16 @@ class Jeu:
             epr = [] #rect des projectiles ennemis
             pjr = [] #rect des projectiles du joueur.
             if len(self.ennemyList) < self.niveau.maxMobOnScreen and self.niveau.totalMobsLeft > 0:
-                if randint(0,1000)==45:
+                if randint(0,100)==45:
                     #print("On génère une nouvelle molécule !")
                     self.ennemyList.append(self.niveau.genererMob())
             #La boucle principale du jeu.
             #print("yolo ! On s'amuse bien !")
             #print(self.moleculeJoueur.rect)
             """Mouvement des différentes molecules et projectiles"""
-            if self.delayMouvement < 0 :
+            """if self.delayMouvement < 0 :
                 self.delayMouvement = 10
-            self.delayMouvement -= 1
+            self.delayMouvement -= 1"""
             newList=[]
             #print(len(self.ennemyList))
             for ennemy in self.ennemyList:
@@ -140,7 +140,7 @@ class Jeu:
                 if event.key == K_z :
                     self.tir =True
                 if event.key == K_LSHIFT :
-                    self.vitesse = 0.2
+                    self.vitesse = 2
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
                 #print("Touche relachée !")
@@ -155,7 +155,7 @@ class Jeu:
                 if event.key == K_z:
                     self.tir = False
                 if event.key == K_LSHIFT :
-                    self.vitesse = 0.4
+                    self.vitesse = 4.5
                 if event.key == K_ESCAPE:
                     self.pause()
                 if event.key == K_r:

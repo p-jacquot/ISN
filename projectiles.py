@@ -11,8 +11,8 @@ class Projectile:
         """Constructeur 'tout simple'..."""
         self.posX = posX
         self.posY = posY
-        self.mv_x = mv_x
-        self.mv_y = mv_y
+        self.mv_x = mv_x*8
+        self.mv_y = mv_y*8
         self.dead=False
         self.img = constantes.projectilesList[randint(1,6)].convert_alpha()
         self.rect = self.img.get_rect()
