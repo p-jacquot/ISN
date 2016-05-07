@@ -79,6 +79,20 @@ class Fenetre:
         self.fen.blit(surface3, (0, 50))
         pygame.display.flip()
 
+    def selectNextLevel(self):
+        sombre = pygame.Surface((self.largeur, self.hauteur))
+        sombre.set_alpha(128)
+        sombre.fill((0, 0, 0))
+        font = pygame.font.Font(None, 40)
+        font2 = pygame.font.Font(None, 20)
+        bravo = font.render("Bravo !", 0, pygame.Color(255, 255, 255, 0))
+        choix = font2.render("Appuyez sur ECHAP pour revenir au menu, ENTREE pour continuer.", 0, pygame.Color(255, 255, 255, 0))
+        self.fen.blit(sombre, (0,0))
+        self.fen.blit(bravo, ((self.largeur/2)-40, (self.hauteur/2)-50))
+        self.fen.blit(choix, ((self.largeur/2) - 200, (self.hauteur/2) + 50))
+        pygame.display.flip()
+
+
     def playReplay(self,nom):
         replay = ReplayLoaded(nom)
         for a in replay.listeFrames:
