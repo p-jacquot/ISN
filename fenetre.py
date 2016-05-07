@@ -3,6 +3,7 @@
 import pygame
 import time
 import jeu as Jeu
+from replay import ReplayLoaded
 
 class Fenetre:
     """Classe Fenêtre, s'occupant de l'affichage."""
@@ -19,6 +20,7 @@ class Fenetre:
         self.explosions = [] #La liste des explosions: [ [ImageExplosion, ListeDeTuplesDePositions] ]
         #self.imgList.append(image.load("hakase_nyan.png").convert_alpha())
         #self.fenetre.blit(fond, (0, 0))
+        self.clock = pygame.time.Clock()
 
     def __del__(self):
         """Possible qu'on n'ait pas à se servir de cette fonction, mais je l'ai créée quand même au cas où."""
@@ -43,8 +45,8 @@ class Fenetre:
             for pos in exp[1]:
                 self.fen.blit(exp[0], pos)
                 #print("Il y a une explosion à :", pos)
-
-
+        self.clock.tick(60)
+        self.fen.blit(self.font.render(str(self.clock.get_fps()), 1, (180, 180, 255)), (0, 0))
         pygame.display.flip()
         self.entites = []
         self.explosions = []
@@ -70,10 +72,20 @@ class Fenetre:
         font2.set_italic(True)
         surface = font.render("Pause", 0, pygame.Color(255, 255, 255, 0))
         surface2 = font2.render("Appuyez sur ECHAP pour continuer.", 0, pygame.Color(255, 255, 255, 0))
+        surface3 = font2.render("Appuyez sur R pour enregistrer les 15 dernières secondes", 0, pygame.Color(255, 255, 255, 0))
         self.fen.blit(sombre, (0,0))
         self.fen.blit(surface, ((self.largeur/2)-60, (self.hauteur/2)-40))
         self.fen.blit(surface2, (0, 20))
+        self.fen.blit(surface3, (0, 50))
         pygame.display.flip()
+
+    def playReplay(self,nom):
+        replay = ReplayLoaded(nom)
+        for a in replay.listeFrames:
+            image = pygame.image.frombuffer(a,replay.taille,"RGB")
+            self.fen.blit(image, (0,0))
+            pygame.display.flip()
+            time.sleep(1/60)
 
 """if __name__ == "__main__":
     f = Fenetre("test", 768, 600)

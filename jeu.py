@@ -7,6 +7,8 @@ from pygame.locals import * #Pour les events.
 pygame.init()
 from projectiles import *
 from pattern import *
+from constantes import *
+from replay import *
 pygame.mixer.init(frequency=22050, size=-16, channels=25, buffer=4096)
 explosion1 = pygame.mixer.Sound("resources/explosion1.wav")
 explosion2 = pygame.mixer.Sound("resources/explosion2.wav")
@@ -29,8 +31,13 @@ class Jeu:
         self.moleculeJoueur = None
         self.delayTirJoueur = 0
         self.tir = False
-        self.delayMouvement = 5
+        self.delayMouvement = 0
+        self.typeProjJoueur =[  [(0,0,0,-3)],
+                                [(-12,0,0,-3),(12,0,0,-3)],
+                                [(-12,5,-0.5,-2.5),(0,0,0,-3),(12,5,0.5,-2.5)],
+                                [(-15,5,-0.5,-2.5),(-8,0,0,-3),(8,0,0,-3),(15,5,0.5,-2.5)]]
 
+        self.listeFrame=[]
 
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
@@ -41,16 +48,16 @@ class Jeu:
             epr = [] #rect des projectiles ennemis
             pjr = [] #rect des projectiles du joueur.
             if len(self.ennemyList) < self.niveau.maxMobOnScreen and self.niveau.totalMobsLeft > 0:
-                if randint(0,1000)==45:
+                if randint(0,100)==45:
                     #print("On génère une nouvelle molécule !")
                     self.ennemyList.append(self.niveau.genererMob())
             #La boucle principale du jeu.
             #print("yolo ! On s'amuse bien !")
             #print(self.moleculeJoueur.rect)
             """Mouvement des différentes molecules et projectiles"""
-            if self.delayMouvement < 0 :
+            """if self.delayMouvement < 0 :
                 self.delayMouvement = 10
-            self.delayMouvement -= 1
+            self.delayMouvement -= 1"""
             newList=[]
             #print(len(self.ennemyList))
             for ennemy in self.ennemyList:
@@ -133,7 +140,7 @@ class Jeu:
                 if event.key == K_z :
                     self.tir =True
                 if event.key == K_LSHIFT :
-                    self.vitesse = 0.2
+                    self.vitesse = 2
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
                 #print("Touche relachée !")
@@ -148,19 +155,26 @@ class Jeu:
                 if event.key == K_z:
                     self.tir = False
                 if event.key == K_LSHIFT :
-                    self.vitesse = 0.4
+                    self.vitesse = 4.5
                 if event.key == K_ESCAPE:
                     self.pause()
+                """if event.key == K_r:
+                    replay = Replay((constantes.largeur,constantes.hauteur),self.listeFrame)
+                    nom = replay.nom
+                    replay.saveReplay()
+                    self.fenetre.playReplay(nom)"""
             elif event.type == QUIT:
                 self.fenetre.fermer()
                 self.continuer = False
 
             self.delayTirJoueur-=1
             if self.tir == True and self.delayTirJoueur <=0 :
-                proj = Projectile(self.moleculeJoueur.posX,self.moleculeJoueur.posY,0,-3)
-                proj.img = constantes.projectilesList[0].convert_alpha()
-                self.projectilesJoueur.append(proj)
-                self.delayTirJoueur=20
+                projAAjouter = self.typeProjJoueur[self.niveau.numero-1]
+                for a in projAAjouter :
+                    proj = Projectile(a[0]+self.moleculeJoueur.posX,a[1]+self.moleculeJoueur.posY,a[2],a[3])
+                    proj.img = constantes.projectilesList[0].convert_alpha()
+                    self.projectilesJoueur.append(proj)
+                self.delayTirJoueur=2
 
             if self.moleculeJoueur.dead or self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
                 self.continuer = False
@@ -175,8 +189,11 @@ class Jeu:
             elif self.moleculeJoueur.posY>constantes.hauteur-40:
                 self.moleculeJoueur.posY=constantes.hauteur-40
             self.actualiser()
+            if constantes.recordOn :
+                self.listeFrame.append(pygame.image.tostring(self.fenetre.fen,"RGB"))
+                if len(self.listeFrame)>500 :
+                    self.listeFrame = self.listeFrame[-500:]
 
-        #self.fenetre.fermer()
 
     def actualiser(self):
         self.fenetre.entites.extend(self.ennemyList)
@@ -257,6 +274,10 @@ class Jeu:
             event = pygame.event.wait()
             if event.type == KEYUP and event.key == K_ESCAPE:
                 pause = False
+            if event.key == K_r and event.type == KEYUP:
+                replay = Replay((constantes.largeur,constantes.hauteur),self.listeFrame)
+                nom = replay.nom
+                replay.saveReplay()
 
     def clearProj(self):
         """for a in self.ennemyProjectiles :
