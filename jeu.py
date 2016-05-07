@@ -21,7 +21,7 @@ class Jeu:
 
     def __init__(self, fenetre, niveau, moleculeJoueur, vitesse): #on lui donnera le niveau qu'on veut jouer (un int, et on ira chercher dans des dossiers).
         self.fenetre = fenetre
-        self.changeNiveau(niveau)
+        self.niveau = niveau
 
         self.ennemyList = [] #les molécules méchantes
         self.ennemyProjectiles = [] #les projectiles des molécules méchantes
@@ -231,47 +231,58 @@ class Jeu:
             event = pygame.event.wait()
             #audio = pygame.mixer.Sound("resources/temporaire/"+str(dialog.counter)+".wav")
             #audioDialogue(audio)
-            while event.type != KEYDOWN:
+            while event.type != KEYUP:
                 event = pygame.event.wait()
                 pass
 
     def progressInLevel(self):
-        self.dialoguer(self.niveau.firstDialog)
+        play = True
+        while play:
+            self.dialoguer(self.niveau.firstDialog)
 
-        pygame.mixer.music.load(self.niveau.pathMusicLevel)
-        pygame.mixer.music.play(5)
-        self.play()
+            pygame.mixer.music.load(self.niveau.pathMusicLevel)
+            pygame.mixer.music.play(5)
+            self.play()
 
-        self.dialoguer(self.niveau.middleDialog)
+            self.dialoguer(self.niveau.middleDialog)
 
-        pygame.mixer.music.load(self.niveau.pathMusicBoss)
-        pygame.mixer.music.play(5)
-        """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
-        self.continuer = True
-        boss = self.niveau.boss
-        boss.posX = (constantes.largeur-boss.rect.width)/2
-        boss.posY = 10
-        boss.rect.x = boss.posX
-        boss.rect.y = boss.posY
-        self.ennemyList.append(boss)
-        self.play()
+            pygame.mixer.music.load(self.niveau.pathMusicBoss)
+            pygame.mixer.music.play(5)
+            """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
+            self.continuer = True
+            boss = self.niveau.boss
+            boss.posX = (constantes.largeur-boss.rect.width)/2
+            boss.posY = 10
+            boss.rect.x = boss.posX
+            boss.rect.y = boss.posY
+            self.ennemyList.append(boss)
+            self.play()
+            pygame.mixer.music.pause()
+            self.dialoguer(self.niveau.lastDialog)
 
-        self.dialoguer(self.niveau.lastDialog)
+            self.fenetre.selectNextLevel()
+            event = pygame.event.wait()
+            while event.type != KEYUP and event.key != K_RETURN or event.key != K_ESCAPE:
+                event = pygame.event.wait()
+            if event.key == K_RETURN:
+                self.changeNiveau()
+            else:
+                play = False
+
 
     def stop(self):
         #si on veut faire des choses particulières une fois qu'on arrête le jeu.
         self.continuer = false
 
-    def changeNiveau(self, niveau):
+    def changeNiveau(self):
         """Cette fonction s'occupera de charger tout ce dont on a besoin d'un niveau :
             mobs, probas..."""
-        self.niveau = niveau
+        self.niveau = Niveau(self.niveau.numero+1)
 
     def pause(self):
         pause = True
         self.fenetre.afficherPause()
         while pause:
-
             event = pygame.event.wait()
             if event.type == KEYUP and event.key == K_ESCAPE:
                 pause = False
@@ -280,10 +291,11 @@ class Jeu:
                 nom = replay.nom
                 replay.saveReplay()
 
+
     def clearProj(self):
         """for a in self.ennemyProjectiles :
-            a.dead = True"""
-        """for a in self.ennemyList :
+            a.dead = True
+        for a in self.ennemyList :
             a.dead = True"""
 
 
