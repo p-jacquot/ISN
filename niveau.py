@@ -91,7 +91,7 @@ class Niveau:
                         else :
                             ennemi.posX=constantes.largeur+5
                     ennemi.pattern.rayon=sqrt(pow(ennemi.posX-ennemi.pattern.centreX,2)+pow(ennemi.posY-ennemi.pattern.centreY,2))
-                    print(ennemi.posX,ennemi.posY,ennemi.pattern.centreX,ennemi.pattern.centreY,ennemi.pattern.rayon)
+                    #print(ennemi.posX,ennemi.posY,ennemi.pattern.centreX,ennemi.pattern.centreY,ennemi.pattern.rayon)
                     ennemi.pattern.vitesse=randint(3,10)/ennemi.pattern.rayon/6*pi
                     if ennemi.posX<ennemi.pattern.centreX and ennemi.posY>ennemi.pattern.centreY or ennemi.posX>ennemi.pattern.centreX and ennemi.posY<ennemi.pattern.centreY :   #je suis pas sûr pour cette condition encore mais elle semble bonne
                         ennemi.pattern.vitesse=-ennemi.pattern.vitesse  #en gros on inverse le sens dans les 2 cas où c'est nécessaire

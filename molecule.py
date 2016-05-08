@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 from PIL import Image
 from atome import *
-from jeu import Jeu
+#from jeu import Jeu
 from pattern import *
 from random import *
 import constantes
@@ -103,7 +103,7 @@ class Molecule:
             self.dying = True
 
     def blowUp(self):
-        print("Ca a explosé une fois !")
+        #print("Ca a explosé une fois !")
         if self.explode >= 15:
             self.dead=True
         else:
