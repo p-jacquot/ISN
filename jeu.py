@@ -40,6 +40,8 @@ class Jeu:
 
         self.listeFrame=[]
         self.vitesse = vitesse
+        self.moleculeJoueur.posX = constantes.largeur/2
+        self.moleculeJoueur.posY = constantes.hauteur-35
 
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
