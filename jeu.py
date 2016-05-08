@@ -9,6 +9,7 @@ from projectiles import *
 from pattern import *
 from constantes import *
 from replay import *
+from niveau import *
 pygame.mixer.init(frequency=22050, size=-16, channels=25, buffer=4096)
 explosion1 = pygame.mixer.Sound("resources/explosion1.wav")
 explosion2 = pygame.mixer.Sound("resources/explosion2.wav")
@@ -44,6 +45,9 @@ class Jeu:
 
     def play(self):
         pygame.time.Clock().tick(15)
+        self.continuer = True
+        self.clearProj()
+        self.tir = False
         while self.continuer:
             er = [] #rect ennemies
             epr = [] #rect des projectiles ennemis
@@ -113,7 +117,7 @@ class Jeu:
                 self.moleculeJoueur.hp -= 1
                 explosion1.play()
                 self.ennemyProjectiles[indexMechantProjectile].dead=True #On supprime le projectile, s'il a touché sa cible.
-                self.clearProj()
+                #self.clearProj()
 
             for proj in self.projectilesJoueur:
                 index = proj.rect.collidelist(er)
@@ -222,6 +226,7 @@ class Jeu:
             posX, posY = perso[punchline[1]][2]
             #print(punchline[1][0])
             #pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
+            self.fenetre.rafraichir()
             self.fenetre.fen.blit(sombre, (0,0))
             self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
             self.fenetre.dessinerCadre(0, self.fenetre.hauteur-100, 100, self.fenetre.largeur)
@@ -238,18 +243,20 @@ class Jeu:
     def progressInLevel(self):
         play = True
         while play:
+            #print("Et un tour de boucle dans la fonction progress InLevel !")
+            #print("Premier dialogue.")
+            self.fenetre.setFond(self.niveau.fond)
             self.dialoguer(self.niveau.firstDialog)
-
+            #print("On a fini de discuter, première phase de jeu.")
             pygame.mixer.music.load(self.niveau.pathMusicLevel)
             pygame.mixer.music.play(5)
             self.play()
-
+            #print("La première phase est finie, on discute un peu.")
             self.dialoguer(self.niveau.middleDialog)
-
+            #print("Fini de disctuer, place au boss !")
             pygame.mixer.music.load(self.niveau.pathMusicBoss)
             pygame.mixer.music.play(5)
             """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
-            self.continuer = True
             boss = self.niveau.boss
             boss.posX = (constantes.largeur-boss.rect.width)/2
             boss.posY = 10
@@ -258,16 +265,20 @@ class Jeu:
             self.ennemyList.append(boss)
             self.play()
             pygame.mixer.music.pause()
+            #print("On rediscute.")
             self.dialoguer(self.niveau.lastDialog)
 
             self.fenetre.selectNextLevel()
             event = pygame.event.wait()
-            while event.type != KEYUP and event.key != K_RETURN or event.key != K_ESCAPE:
+            while 1:
                 event = pygame.event.wait()
-            if event.key == K_RETURN:
-                self.changeNiveau()
-            else:
-                play = False
+                if event.type == KEYUP:
+                    if event.key == K_RETURN:
+                        self.changeNiveau()
+                        break
+                    elif event.key == K_ESCAPE:
+                        play = False
+                        break
 
 
     def stop(self):
@@ -277,6 +288,7 @@ class Jeu:
     def changeNiveau(self):
         """Cette fonction s'occupera de charger tout ce dont on a besoin d'un niveau :
             mobs, probas..."""
+        #print("Hop, on change de niveau :", str(self.niveau.numero+1))
         self.niveau = Niveau(self.niveau.numero+1)
 
     def pause(self):
@@ -293,9 +305,9 @@ class Jeu:
 
 
     def clearProj(self):
-        """for a in self.ennemyProjectiles :
+        for a in self.ennemyProjectiles :
             a.dead = True
-        for a in self.ennemyList :
+        """for a in self.ennemyList :
             a.dead = True"""
 
 

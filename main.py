@@ -29,9 +29,13 @@ while 1:
                 menu.draw(1)
             if event.key == K_RETURN:
                 if menu.get_position() == 0:
-                    fenetre.fond = pygame.image.load("resources/galaxie.jpg").convert_alpha()
                     jeu = Jeu(fenetre, Niveau(1), Molecule('hydrogene.png', Pattern(0,0)), 4.5)
                     jeu.progressInLevel()
+                    sombre = pygame.Surface((constantes.largeur, constantes.hauteur))
+                    sombre.set_alpha(255)
+                    sombre.fill((0, 0, 0))
+                    fenetre.fen.blit(sombre, (0,0))
+                    pygame.display.flip()
                     menu.draw()
                     pygame.display.update()
                 if menu.get_position() == 4:
