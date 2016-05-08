@@ -226,6 +226,7 @@ class Jeu:
             posX, posY = perso[punchline[1]][2]
             #print(punchline[1][0])
             #pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
+            self.fenetre.rafraichir()
             self.fenetre.fen.blit(sombre, (0,0))
             self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
             self.fenetre.dessinerCadre(0, self.fenetre.hauteur-100, 100, self.fenetre.largeur)
@@ -244,6 +245,7 @@ class Jeu:
         while play:
             #print("Et un tour de boucle dans la fonction progress InLevel !")
             #print("Premier dialogue.")
+            self.fenetre.setFond(self.niveau.fond)
             self.dialoguer(self.niveau.firstDialog)
             #print("On a fini de discuter, première phase de jeu.")
             pygame.mixer.music.load(self.niveau.pathMusicLevel)
