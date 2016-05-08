@@ -236,7 +236,7 @@ class Jeu:
             event = pygame.event.wait()
             #audio = pygame.mixer.Sound("resources/temporaire/"+str(dialog.counter)+".wav")
             #audioDialogue(audio)
-            while event.type != KEYUP:
+            while event.type != KEYDOWN:
                 event = pygame.event.wait()
                 pass
 
