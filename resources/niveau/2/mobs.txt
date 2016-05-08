@@ -1,7 +1,7 @@
 cortizone.png
 Oxygene.png 25
-Carbone.png 60
-Azote.png 80
+Carbone.png 50
+Azote.png 75
 Hydrogene.png 99
-8
+5
 30
