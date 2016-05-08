@@ -15,7 +15,7 @@ class Fenetre:
         self.font = pygame.font.Font(None, 30)
         #self.imgList = []
         self.entites = [] #une liste qui contient des listes comme ça : [image, tuple_de_position]
-        #self.fond = fond
+        self.fond = None
         pygame.display.set_caption(titre)
         self.explosions = [] #La liste des explosions: [ [ImageExplosion, ListeDeTuplesDePositions] ]
         #self.imgList.append(image.load("hakase_nyan.png").convert_alpha())
@@ -100,6 +100,12 @@ class Fenetre:
             self.fen.blit(image, (0,0))
             pygame.display.flip()
             time.sleep(1/60)
+
+    def setFond(self, imgPath):
+        self.fond = pygame.image.load(imgPath).convert()
+        self.fen.blit(self.fond, (0,0))
+        pygame.display.flip()
+
 
 """if __name__ == "__main__":
     f = Fenetre("test", 768, 600)
