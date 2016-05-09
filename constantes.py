@@ -23,4 +23,6 @@ largeur,hauteur= 768, 600
 #largeur,hauteur=1280,720
 
 recordOn=True
+niveauActuel=1
+niveauMaxAtteint=1
 
