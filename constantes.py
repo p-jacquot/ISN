@@ -23,6 +23,7 @@ largeur,hauteur= 768, 600
 #pas lycee
 #largeur,hauteur=1280,720
 
+
 recordOn=True
 niveauActuel=1
 niveauMaxAtteint=1
@@ -33,5 +34,6 @@ def sauvegarder() :
             niveauMaxAtteint = niveauMaxFait
         with open("options.pickle", 'wb') as file:
             pickle.dump([niveauActuel,niveauMaxAtteint,hauteur,largeur],file)
+
 
 

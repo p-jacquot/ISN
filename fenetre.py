@@ -64,30 +64,32 @@ class Fenetre:
         pygame.quit()
 
     def afficherPause(self):
-        sombre = pygame.Surface((self.largeur, self.hauteur))
+        """sombre = pygame.Surface((self.largeur, self.hauteur))
         sombre.set_alpha(128)
-        sombre.fill((0, 0, 0))
+        sombre.fill((0, 0, 0))"""
         font = pygame.font.Font(None, 40)
         font2 = pygame.font.Font(None, 20)
         font2.set_italic(True)
         surface = font.render("Pause", 0, pygame.Color(255, 255, 255, 0))
         surface2 = font2.render("Appuyez sur ECHAP pour continuer.", 0, pygame.Color(255, 255, 255, 0))
         surface3 = font2.render("Appuyez sur R pour enregistrer les 15 dernières secondes", 0, pygame.Color(255, 255, 255, 0))
-        self.fen.blit(sombre, (0,0))
+        #self.fen.blit(sombre, (0,0))
+        self.assombrir()
         self.fen.blit(surface, ((self.largeur/2)-60, (self.hauteur/2)-40))
         self.fen.blit(surface2, (0, 20))
         self.fen.blit(surface3, (0, 50))
         pygame.display.flip()
 
     def selectNextLevel(self):
-        sombre = pygame.Surface((self.largeur, self.hauteur))
+        """sombre = pygame.Surface((self.largeur, self.hauteur))
         sombre.set_alpha(128)
-        sombre.fill((0, 0, 0))
+        sombre.fill((0, 0, 0))"""
         font = pygame.font.Font(None, 40)
         font2 = pygame.font.Font(None, 20)
         bravo = font.render("Bravo !", 0, pygame.Color(255, 255, 255, 0))
         choix = font2.render("Appuyez sur ECHAP pour revenir au menu, ENTREE pour continuer.", 0, pygame.Color(255, 255, 255, 0))
-        self.fen.blit(sombre, (0,0))
+        #self.fen.blit(sombre, (0,0))
+        self.assombrir()
         self.fen.blit(bravo, ((self.largeur/2)-40, (self.hauteur/2)-50))
         self.fen.blit(choix, ((self.largeur/2) - 200, (self.hauteur/2) + 50))
         pygame.display.flip()
@@ -105,6 +107,12 @@ class Fenetre:
         self.fond = pygame.image.load(imgPath).convert()
         self.fen.blit(self.fond, (0,0))
         pygame.display.flip()
+
+    def assombrir(self):
+        sombre = pygame.Surface((self.largeur, self.hauteur))
+        sombre.set_alpha(128)
+        sombre.fill((0, 0, 0))
+        self.fen.blit(sombre, (0,0))
 
 
 """if __name__ == "__main__":

@@ -23,7 +23,7 @@ class Jeu:
     def __init__(self, fenetre, niveau, moleculeJoueur, vitesse): #on lui donnera le niveau qu'on veut jouer (un int, et on ira chercher dans des dossiers).
         self.fenetre = fenetre
         self.niveau = niveau
-
+        self.fenetre.setFond(self.niveau.fond)
         self.ennemyList = [] #les molécules méchantes
         self.ennemyProjectiles = [] #les projectiles des molécules méchantes
         self.projectilesJoueur = [] #les projectiles de la molécule gentille.
@@ -179,11 +179,11 @@ class Jeu:
 
             self.delayTirJoueur-=1
             if self.tir == True and self.delayTirJoueur <=0 :
-                for a in self.projAAjouter :
-                    proj = Projectile(a[0]+self.moleculeJoueur.posX,a[1]+self.moleculeJoueur.posY,a[2],a[3])
-                    proj.img = constantes.projectilesList[0].convert_alpha()
-                    self.projectilesJoueur.append(proj)
-                self.delayTirJoueur=2
+
+
+
+                self.shootJoueur()
+
 
             if self.moleculeJoueur.dead or self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
                 self.continuer = False
@@ -212,9 +212,9 @@ class Jeu:
         self.fenetre.rafraichir()
 
     def dialoguer(self, dialog):
-        sombre = pygame.Surface((self.fenetre.largeur, self.fenetre.hauteur))
+        """sombre = pygame.Surface((self.fenetre.largeur, self.fenetre.hauteur))
         sombre.set_alpha(128)
-        sombre.fill((0, 0, 0))
+        sombre.fill((0, 0, 0))"""
         perso = []
         for liste in dialog.characters:
             img = pygame.image.load(liste[1]).convert_alpha()
@@ -231,7 +231,8 @@ class Jeu:
             #print(punchline[1][0])
             #pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
             self.fenetre.rafraichir()
-            self.fenetre.fen.blit(sombre, (0,0))
+            #self.fenetre.fen.blit(sombre, (0,0))
+            self.fenetre.assombrir()
             self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
             self.fenetre.dessinerCadre(0, self.fenetre.hauteur-100, 100, self.fenetre.largeur)
             self.fenetre.dessinerCadre(posX+50, posY-25, 30, 100)
@@ -240,9 +241,13 @@ class Jeu:
             event = pygame.event.wait()
             #audio = pygame.mixer.Sound("resources/temporaire/"+str(dialog.counter)+".wav")
             #audioDialogue(audio)
-            while event.type != KEYDOWN:
+            reading = True
+            while reading:
                 event = pygame.event.wait()
-                pass
+                if event.type == KEYDOWN:
+                    if event.key == K_z:
+                        reading = False
+
 
     def progressInLevel(self):
         play = True
@@ -250,6 +255,7 @@ class Jeu:
             #print("Et un tour de boucle dans la fonction progress InLevel !")
             #print("Premier dialogue.")
             self.fenetre.setFond(self.niveau.fond)
+            self.introLevel()
             self.dialoguer(self.niveau.firstDialog)
             #print("On a fini de discuter, première phase de jeu.")
             pygame.mixer.music.load(self.niveau.pathMusicLevel)
@@ -260,7 +266,7 @@ class Jeu:
             #print("Fini de disctuer, place au boss !")
             pygame.mixer.music.load(self.niveau.pathMusicBoss)
             pygame.mixer.music.play(5)
-            """ici, ajouter la molécule boss dans la liste des molécules ennemies"""
+            #ici, ajouter la molécule boss dans la liste des molécules ennemies
             boss = self.niveau.boss
             boss.posX = (constantes.largeur-boss.rect.width)/2
             boss.posY = 10
@@ -271,6 +277,7 @@ class Jeu:
             pygame.mixer.music.pause()
             #print("On rediscute.")
             self.dialoguer(self.niveau.lastDialog)
+            self.outroLevel()
 
             constantes.niveauActuel = self.niveau.numero+1
             if constantes.niveauActuel>constantes.niveauMaxAtteint :
@@ -288,6 +295,7 @@ class Jeu:
                     elif event.key == K_ESCAPE:
                         play = False
                         break
+            pygame.mixer.music.pause()
 
 
     def stop(self):
@@ -305,19 +313,60 @@ class Jeu:
         self.fenetre.afficherPause()
         while pause:
             event = pygame.event.wait()
-            if event.type == KEYUP and event.key == K_ESCAPE:
-                pause = False
-            if event.key == K_r and event.type == KEYUP:
-                replay = Replay((constantes.largeur,constantes.hauteur),self.listeFrame)
-                nom = replay.nom
-                replay.saveReplay()
+            if event.type == KEYUP:
+                if event.key == K_ESCAPE:
+                    pause = False
+                if event.key == K_r:
+                    replay = Replay((constantes.largeur,constantes.hauteur),self.listeFrame)
+                    nom = replay.nom
+                    replay.saveReplay()
 
 
     def clearProj(self):
         for a in self.ennemyProjectiles :
             a.dead = True
+        for proj in self.projectilesJoueur:
+            proj.dead = True
         """for a in self.ennemyList :
             a.dead = True"""
+
+    def shootJoueur(self):
+        for a in projAAjouter :
+                proj = Projectile(a[0]+self.moleculeJoueur.posX,a[1]+self.moleculeJoueur.posY,a[2],a[3])
+                proj.img = constantes.projectilesList[0].convert_alpha()
+                self.projectilesJoueur.append(proj)
+        self.delayTirJoueur=2
+
+    def introLevel(self):
+        self.moleculeJoueur.posX = constantes.largeur/2
+        self.moleculeJoueur.posY = constantes.hauteur + 10
+        x = 0
+        for x in range(100):
+            self.moleculeJoueur.posY -= 1
+            self.actualiser()
+            #time.sleep(0.001)
+        self.shootJoueur()
+        while len(self.projectilesJoueur) > 0:
+            for proj in self.projectilesJoueur:
+                proj.move()
+                if proj.dead:
+                    self.projectilesJoueur.remove(proj)
+            self.actualiser()
+
+    def outroLevel(self):
+        pygame.mixer.music.load('resources/fanfare.wav')
+        pygame.mixer.music.play(1)
+        self.clearProj()
+        self.play()
+        self.moleculeJoueur.pattern.mv_y = -5
+        self.moleculeJoueur.pattern.mv_x = 0
+        while self.moleculeJoueur.dead == False:
+            self.moleculeJoueur.move()
+            self.actualiser()
+        self.moleculeJoueur.dead = False
+        self.moleculeJoueur.pattern.mv_y = 0
+            #time.sleep(0.001)
+
 
 
 
