@@ -30,8 +30,8 @@ niveauMaxAtteint=1
 niveauMaxFait = 3
 
 def sauvegarder() :
-        if niveauMaxAtteint > niveauMaxFait :
-            niveauMaxAtteint = niveauMaxFait
+        """if niveauMaxAtteint > niveauMaxFait :
+            niveauMaxAtteint = niveauMaxFait"""
         with open("options.pickle", 'wb') as file:
             pickle.dump([niveauActuel,niveauMaxAtteint,hauteur,largeur],file)
 

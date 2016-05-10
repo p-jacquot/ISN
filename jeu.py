@@ -307,6 +307,10 @@ class Jeu:
             mobs, probas..."""
         #print("Hop, on change de niveau :", str(self.niveau.numero+1))
         self.niveau = Niveau(self.niveau.numero+1)
+        if self.niveau.numero < len(self.typeProjJoueur) :
+            self.projAAjouter = self.typeProjJoueur[self.niveau.numero-1]
+        else :
+            self.projAAjouter = self.typeProjJoueur[-1]
 
     def pause(self):
         pause = True
@@ -331,7 +335,7 @@ class Jeu:
             a.dead = True"""
 
     def shootJoueur(self):
-        for a in projAAjouter :
+        for a in self.projAAjouter :
                 proj = Projectile(a[0]+self.moleculeJoueur.posX,a[1]+self.moleculeJoueur.posY,a[2],a[3])
                 proj.img = constantes.projectilesList[0].convert_alpha()
                 self.projectilesJoueur.append(proj)
@@ -345,6 +349,7 @@ class Jeu:
             self.moleculeJoueur.posY -= 1
             self.actualiser()
             #time.sleep(0.001)
+
         self.shootJoueur()
         while len(self.projectilesJoueur) > 0:
             for proj in self.projectilesJoueur:
