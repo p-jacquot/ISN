@@ -322,6 +322,7 @@ class Jeu:
         self.delayTirJoueur=2
 
     def introLevel(self):
+        self.moleculeJoueur.posX = constantes.largeur/2
         self.moleculeJoueur.posY = constantes.hauteur + 10
         x = 0
         for x in range(100):
@@ -340,6 +341,7 @@ class Jeu:
         self.clearProj()
         self.play()
         self.moleculeJoueur.pattern.mv_y = -5
+        self.moleculeJoueur.pattern.mv_x = 0
         while self.moleculeJoueur.dead == False:
             self.moleculeJoueur.move()
             self.actualiser()
