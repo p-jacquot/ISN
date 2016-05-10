@@ -234,9 +234,13 @@ class Jeu:
             event = pygame.event.wait()
             #audio = pygame.mixer.Sound("resources/temporaire/"+str(dialog.counter)+".wav")
             #audioDialogue(audio)
-            while event.type != KEYDOWN:
+            reading = True
+            while reading:
                 event = pygame.event.wait()
-                pass
+                if event.type == KEYDOWN:
+                    if event.key == K_z:
+                        reading = False
+
 
     def progressInLevel(self):
         play = True
@@ -279,6 +283,7 @@ class Jeu:
                     elif event.key == K_ESCAPE:
                         play = False
                         break
+            pygame.mixer.music.pause()
 
 
     def stop(self):
@@ -338,6 +343,8 @@ class Jeu:
             self.actualiser()
 
     def outroLevel(self):
+        pygame.mixer.music.load('resources/fanfare.wav')
+        pygame.mixer.music.play(1)
         self.clearProj()
         self.play()
         self.moleculeJoueur.pattern.mv_y = -5
