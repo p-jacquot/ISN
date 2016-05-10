@@ -1,6 +1,7 @@
 ﻿# Créé par Pierre, le 17/03/2016 en Python 3.2
 import pygame
 pygame.init()
+import pickle
 """Constantes projectiles"""
 projectilesList = [ pygame.image.load("resources/photos/photon_bleu_clair_pour_le_joueur2.png"),
                     pygame.image.load("resources/photos/photon_bleu.png"),
@@ -25,4 +26,12 @@ largeur,hauteur= 768, 600
 recordOn=True
 niveauActuel=1
 niveauMaxAtteint=1
+niveauMaxFait = 3
+
+def sauvegarder() :
+        if niveauMaxAtteint > niveauMaxFait :
+            niveauMaxAtteint = niveauMaxFait
+        with open("options.pickle", 'wb') as file:
+            pickle.dump([niveauActuel,niveauMaxAtteint,hauteur,largeur],file)
+
 

@@ -42,7 +42,10 @@ class Jeu:
         self.vitesse = vitesse
         self.moleculeJoueur.posX = constantes.largeur/2
         self.moleculeJoueur.posY = constantes.hauteur-35
-
+        if self.niveau.numero < len(self.typeProjJoueur) :
+            self.projAAjouter = self.typeProjJoueur[self.niveau.numero-1]
+        else :
+            self.projAAjouter = self.typeProjJoueur[-1]
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
 
     def play(self):
@@ -176,8 +179,7 @@ class Jeu:
 
             self.delayTirJoueur-=1
             if self.tir == True and self.delayTirJoueur <=0 :
-                projAAjouter = self.typeProjJoueur[self.niveau.numero-1]
-                for a in projAAjouter :
+                for a in self.projAAjouter :
                     proj = Projectile(a[0]+self.moleculeJoueur.posX,a[1]+self.moleculeJoueur.posY,a[2],a[3])
                     proj.img = constantes.projectilesList[0].convert_alpha()
                     self.projectilesJoueur.append(proj)
@@ -269,6 +271,11 @@ class Jeu:
             pygame.mixer.music.pause()
             #print("On rediscute.")
             self.dialoguer(self.niveau.lastDialog)
+
+            constantes.niveauActuel = self.niveau.numero+1
+            if constantes.niveauActuel>constantes.niveauMaxAtteint :
+                constantes.niveauMaxAtteint = constantes.niveauActuel
+            constantes.sauvegarder()
 
             self.fenetre.selectNextLevel()
             event = pygame.event.wait()
