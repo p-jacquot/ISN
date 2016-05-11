@@ -1,0 +1,17 @@
+cortizone.png
+ammoniaque.png 01
+azote.png 08
+carbone.png 12
+chlore.png 15
+chloroforme.png 18
+CO2.png 25
+Eau.png 31
+ethane.png 35
+Ethanol.png 40
+hydrogene.png 60
+methane.png 75
+methanol.png 78
+oxygene.png 85
+O2.png 99
+8
+30

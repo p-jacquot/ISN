@@ -43,6 +43,7 @@ class Molecule:
             a.rect.x=a.posX
             a.rect.y=a.posY
             self.rectAtome.append(a.rect)
+
         self.rect = self.rectAtome[0].unionall(self.rectAtome[1:])
         self.rect.x+=self.posX
         self.rect.y+=self.posY
@@ -129,7 +130,7 @@ def listerAtomes( nomMol,hauteur,largeur):
 
                 pixel = img.getpixel((x,y))
 
-                if pixel==(0,1,0,255) :
+                if pixel == (0,1,0,255):
                     listeAtomes.append(Carbone(x,y))
                 elif pixel == (0,0,1,255):
                     listeAtomes.append(Hydrogene(x,y))
@@ -137,6 +138,9 @@ def listerAtomes( nomMol,hauteur,largeur):
                     listeAtomes.append(Oxygene(x,y))
                 elif pixel == (0,1,1,255):
                     listeAtomes.append(Azote(x,y))
+                elif pixel == (1,0,1,255):
+                    listeAtomes.append(Chlore(x,y))
+
         return listeAtomes
     #pour tester pour l'instant vous pouvez faire la commande CH4=Molecule('CH4.png')puis print(CH4.atomeList) dans la console
 
