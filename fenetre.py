@@ -114,6 +114,9 @@ class Fenetre:
         sombre.fill((0, 0, 0))
         self.fen.blit(sombre, (0,0))
 
+    def generiqueFin(self):
+        self.setFond("resources/logo.png")
+
 
 """if __name__ == "__main__":
     f = Fenetre("test", 768, 600)

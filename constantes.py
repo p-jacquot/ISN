@@ -27,7 +27,7 @@ largeur,hauteur= 768, 600
 recordOn=True
 niveauActuel=1
 niveauMaxAtteint=1
-niveauMaxFait = 3
+niveauMaxFait = 4
 
 def sauvegarder() :
         """if niveauMaxAtteint > niveauMaxFait :

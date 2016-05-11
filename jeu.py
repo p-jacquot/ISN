@@ -115,7 +115,7 @@ class Jeu:
                 self.moleculeJoueur.hp -= 1
                 explosion1.play()
                 self.ennemyList[indexMechant].hit()
-                self.clearProj()
+                #self.clearProj()
 
             indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
             if indexMechantProjectile != -1:
@@ -280,6 +280,11 @@ class Jeu:
             self.outroLevel()
 
             constantes.niveauActuel = self.niveau.numero+1
+            if constantes.niveauMaxFait < constantes.niveauActuel :
+                constantes.niveauActuel = 1
+                constantes.sauvegarder()
+                self.niveau.numero = 0
+                self.fenetre.generiqueFin()
             if constantes.niveauActuel>constantes.niveauMaxAtteint :
                 constantes.niveauMaxAtteint = constantes.niveauActuel
             constantes.sauvegarder()
