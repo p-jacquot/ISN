@@ -354,11 +354,14 @@ class Jeu:
     def introLevel(self):
         self.moleculeJoueur.posX = constantes.largeur/2
         self.moleculeJoueur.posY = constantes.hauteur + 10
+        self.moleculeJoueur.pattern.mv_x = 0
+        self.moleculeJoueur.pattern.mv_y = -1
         x = 0
         for x in range(100):
-            self.moleculeJoueur.posY -= 1
+            self.moleculeJoueur.move()
             self.actualiser()
             #time.sleep(0.001)
+        self.moleculeJoueur.pattern.mv_y = 0
 
         self.shootJoueur()
         while len(self.projectilesJoueur) > 0:
