@@ -1,5 +1,5 @@
 ﻿# Créé par Pierre, le 07/05/2016 en Python 3.2
-
+import time
 import pygame
 import sys
 import constantes
@@ -22,7 +22,8 @@ constantes.largeur=donnees[3]
 
 
 fenetre = Fenetre("Hydrogène II : Le retour", constantes.largeur, constantes.hauteur)
-
+fenetre.setFond("resources/logo.png")
+time.sleep(1)
 menu = Menu()
 menu.init(['Nouvelle Partie', 'Continuer', 'Choix du Niveau', 'Replay', 'Options', 'Quitter'], fenetre.fen)
 menu.draw()
