@@ -5,8 +5,10 @@ niveau = int(input("dialogue pour quel niveau ?"))
 place = int(input("quelle est la place de ce dialogue ? 0 pour le début, 1 pour avant le boss et 2 pour apres le boss"))
 
 personnageGauche = str(input("Nom du personnage à gauche"))
+imagePersonnageGauche = str(input("quelle est l'image du personnage de gauche ? sans l'extension s'il vous plait"))
 personnageDroite = str(input("Nom du personnage à droite"))
-dialogue = Dialog("resources/temporaire/{}.png".format(personnageGauche),personnageGauche,(10,210),"resources/temporaire/{}.png".format(personnageDroite),personnageDroite,(500,200))
+imagePersonnageDroite = str(input("quelle est l'image du personnage de droite ? sans l'extension s'il vous plait"))
+dialogue = Dialog("resources/personnages/{}.png".format(imagePersonnageGauche),personnageGauche,(10,210),"resources/personnages/{}.png".format(imagePersonnageDroite),personnageDroite,(500,200))
 
 nombrePunchline = int(input("quel est le nombre de punchline au total ?"))
 for a in range(nombrePunchline):

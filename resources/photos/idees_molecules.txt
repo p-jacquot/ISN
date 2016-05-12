@@ -10,4 +10,5 @@ hydrogene : 0.0.1    h:22  l:22
 carbone : 0.1.0	 h:42  l:42
 azote : 0.1.1    h:35  l:35
 oxygene : 1.0.0  h:30 l:30
+chlore : 1,0,1
  

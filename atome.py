@@ -111,3 +111,28 @@ class Azote(Atome):
         return[Projectile(self.posX,self.posY, 0,1),Projectile(self.posX,self.posY,0.5,1),Projectile(self.posX,self.posY,-0.5,1)]
 
 
+class Chlore(Atome):
+
+    def __init__(self , posX, posY):
+        Atome.__init__(self,  posX, posY)
+        self.hp=30
+        self.delayTirMax=1000
+        self.delayTir=randint(0,self.delayTirMax)
+        img = pygame.image.load('resources/photos/chlore.png').convert_alpha()
+        self.rect = img.get_rect()
+        self.compteur = 0
+
+
+    def tir(self):
+        #distanceCible = int(sqrt(pow(xCible-self.x,2)+pow(yCible-self.y,2)))
+        #print(distanceCible)
+        if self.compteur == 30 :
+            self.delayTir=self.delayTirMax
+            self.compteur = 0
+
+        else :
+            self.cible = randint ( -3,3)
+            self.compteur += 1
+            self.delayTir = 1
+            return [Projectile(self.posX,self.posY ,self.cible/100, 0.15 )]
+        return []

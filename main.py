@@ -75,7 +75,7 @@ while 1:
                 if menu.get_position() == 0:
                     jeu = Jeu(fenetre, Niveau(1), Molecule('hydrogene.png', Pattern(0,0)), 4.5)
                     constantes.niveauActuel = 1
-
+                    constantes.sauvegarder()
                     jeu.progressInLevel()
                     sombre = pygame.Surface((constantes.largeur, constantes.hauteur))
                     sombre.set_alpha(255)

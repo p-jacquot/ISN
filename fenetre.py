@@ -134,8 +134,6 @@ class Fenetre:
         self.fen.blit(continuer, ((self.largeur/2) - 150, (self.hauteur/2) + 50))
         pygame.display.flip()
 
-
-
 """if __name__ == "__main__":
     f = Fenetre("test", 768, 600)
     f.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
