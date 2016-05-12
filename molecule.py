@@ -96,8 +96,8 @@ class Molecule:
 
         return projectiles
 
-    def hit(self):
-        self.hp -= 3
+    def hit(self, damage):
+        self.hp -= damage
         if self.hp <= 0:
             #print("Boooom !")
             self.dying = True
@@ -116,6 +116,12 @@ class Molecule:
                 tupleList.append((x,y))
             self.explodeCoords[1] = tupleList
             self.explode += 1
+
+    def reset(self):
+        self.dead = False
+        self.dying = False
+        self.dying = 0
+        self.hp = self.hpMax
 
 
 def listerAtomes( nomMol,hauteur,largeur):
