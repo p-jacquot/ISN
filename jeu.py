@@ -192,6 +192,8 @@ class Jeu:
                 self.continuer = False
 
             self.moleculeJoueur.move()
+            if self.moleculeJoueur.dying:
+                self.fenetre.explosions.append(self.moleculeJoueur.explodeCoords)
             if self.moleculeJoueur.posX<10:
                 self.moleculeJoueur.posX=10
             elif self.moleculeJoueur.posX>constantes.largeur-40:  #changer encore ici
