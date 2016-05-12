@@ -30,6 +30,8 @@ class Jeu:
 
         self.continuer = True
         self.moleculeJoueur = moleculeJoueur
+        self.moleculeJoueur.hpMax = 20
+        self.moleculeJoueur.hp = 20
         self.delayTirJoueur = 0
         self.tir = False
         self.delayMouvement = 0
@@ -187,7 +189,7 @@ class Jeu:
 
             if self.moleculeJoueur.dead or self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
                 self.continuer = False
-                print("lel on quitte !")
+                #print("lel on quitte !")
             self.moleculeJoueur.move()
             if self.moleculeJoueur.posX<10:
                 self.moleculeJoueur.posX=10
@@ -209,7 +211,7 @@ class Jeu:
         self.fenetre.entites.extend(self.ennemyProjectiles)
         self.fenetre.entites.extend(self.projectilesJoueur)
         self.fenetre.entites.append(self.moleculeJoueur)
-        self.fenetre.rafraichir()
+        self.fenetre.rafraichir(self.moleculeJoueur.hp)
 
     def dialoguer(self, dialog):
         """sombre = pygame.Surface((self.fenetre.largeur, self.fenetre.hauteur))
@@ -230,7 +232,7 @@ class Jeu:
             posX, posY = perso[punchline[1]][2]
             #print(punchline[1][0])
             #pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
-            self.fenetre.rafraichir()
+            self.fenetre.rafraichir(self.moleculeJoueur.hp)
             #self.fenetre.fen.blit(sombre, (0,0))
             self.fenetre.assombrir()
             self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
