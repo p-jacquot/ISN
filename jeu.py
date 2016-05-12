@@ -49,6 +49,7 @@ class Jeu:
         else :
             self.projAAjouter = self.typeProjJoueur[-1]
         #self.moleculeJoueur = Atome()  #bon ok, c'est un atome...
+        self.framesInvincibilite = 0
 
     def play(self):
         pygame.time.Clock().tick(15)
@@ -121,11 +122,15 @@ class Jeu:
                 #self.clearProj()
 
             indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
-            if indexMechantProjectile != -1:
+            if self.framesInvincibilite > 0 :
+                self.framesInvincibilite-= 1
+
+            if indexMechantProjectile != -1 and self.framesInvincibilite == 0:
                 self.moleculeJoueur.hit(1)
                 print(self.moleculeJoueur.dead)
                 explosion1.play()
                 self.ennemyProjectiles[indexMechantProjectile].dead=True #On supprime le projectile, s'il a touché sa cible.
+                self.framesInvincibilite = 50
                 #self.clearProj()
 
             for proj in self.projectilesJoueur:
@@ -190,6 +195,8 @@ class Jeu:
                 self.continuer = False
             elif self.moleculeJoueur.dead:
                 self.continuer = False
+                self.niveau.totalMobsLeft = 0
+                self.ennemyList = []
 
             self.moleculeJoueur.move()
             if self.moleculeJoueur.dying:
@@ -213,7 +220,8 @@ class Jeu:
         self.fenetre.entites.extend(self.ennemyList)
         self.fenetre.entites.extend(self.ennemyProjectiles)
         self.fenetre.entites.extend(self.projectilesJoueur)
-        self.fenetre.entites.append(self.moleculeJoueur)
+        if self.framesInvincibilite/2 == int(self.framesInvincibilite/2) :
+            self.fenetre.entites.append(self.moleculeJoueur)
         self.fenetre.rafraichir(self.moleculeJoueur.hp)
 
     def dialoguer(self, dialog):
@@ -365,6 +373,7 @@ class Jeu:
         self.delayTirJoueur=2
 
     def introLevel(self):
+        self.framesInvincibilite = 0
         self.moleculeJoueur.posX = constantes.largeur/2
         self.moleculeJoueur.posY = constantes.hauteur + 10
         self.moleculeJoueur.pattern.mv_x = 0
