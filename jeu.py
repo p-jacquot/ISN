@@ -275,6 +275,7 @@ class Jeu:
                 self.ennemyList.append(boss)
                 self.play()
                 pygame.mixer.music.pause()
+            if self.moleculeJoueur.dead == False:
                 self.dialoguer(self.niveau.lastDialog)
                 self.outroLevel()
 
@@ -293,13 +294,19 @@ class Jeu:
                     break
                 pygame.mixer.music.pause()
             else:
+                pygame.mixer.music.load("resources/game_over.wav")
+                pygame.mixer.music.play(1)
                 self.fenetre.selecContinuer()
                 key = self.waitForSelection()
                 if key == K_ESCAPE:
                     play = False
                 elif key == K_RETURN:
                     self.moleculeJoueur.reset()
+                    self.clearProj()
+                    self.ennemyList = []
+                    self.play()
                     self.changeNiveau(0) #Et 0 quand on recharge le niveau.
+                    pygame.mixer.music.pause()
 
     def waitForSelection(self):
         while 1:
