@@ -117,13 +117,8 @@ class Jeu:
                 self.moleculeJoueur.hit(1)
                 print(self.moleculeJoueur.dead)
                 explosion1.play()
-<<<<<<< HEAD
                 self.ennemyList[indexMechant].hit(3)
-                self.clearProj()
-=======
-                self.ennemyList[indexMechant].hit()
                 #self.clearProj()
->>>>>>> cd0ca63a6524d5f3245b4385bb3b94234e35f1dd
 
             indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
             if indexMechantProjectile != -1:
@@ -268,7 +263,7 @@ class Jeu:
             pygame.mixer.music.load(self.niveau.pathMusicLevel)
             pygame.mixer.music.play(5)
             self.play()
-<<<<<<< HEAD
+
             if self.moleculeJoueur.dead == False:
                 self.dialoguer(self.niveau.middleDialog)
                 pygame.mixer.music.load(self.niveau.pathMusicBoss)
@@ -286,6 +281,11 @@ class Jeu:
                 self.outroLevel()
 
                 constantes.niveauActuel = self.niveau.numero+1
+                if constantes.niveauMaxFait < constantes.niveauActuel :
+                    constantes.niveauActuel = 1
+                    constantes.sauvegarder()
+                    self.niveau.numero = 0
+                    self.fenetre.generiqueFin()
                 if constantes.niveauActuel>constantes.niveauMaxAtteint :
                     constantes.niveauMaxAtteint = constantes.niveauActuel
                 constantes.sauvegarder()
@@ -316,37 +316,6 @@ class Jeu:
 
     def waitForSelection(self):
         while 1:
-=======
-            #print("La première phase est finie, on discute un peu.")
-            self.dialoguer(self.niveau.middleDialog)
-            #print("Fini de disctuer, place au boss !")
-            pygame.mixer.music.load(self.niveau.pathMusicBoss)
-            pygame.mixer.music.play(5)
-            #ici, ajouter la molécule boss dans la liste des molécules ennemies
-            boss = self.niveau.boss
-            boss.posX = (constantes.largeur-boss.rect.width)/2
-            boss.posY = 10
-            boss.rect.x = boss.posX
-            boss.rect.y = boss.posY
-            self.ennemyList.append(boss)
-            self.play()
-            pygame.mixer.music.pause()
-            #print("On rediscute.")
-            self.dialoguer(self.niveau.lastDialog)
-            self.outroLevel()
-
-            constantes.niveauActuel = self.niveau.numero+1
-            if constantes.niveauMaxFait < constantes.niveauActuel :
-                constantes.niveauActuel = 1
-                constantes.sauvegarder()
-                self.niveau.numero = 0
-                self.fenetre.generiqueFin()
-            if constantes.niveauActuel>constantes.niveauMaxAtteint :
-                constantes.niveauMaxAtteint = constantes.niveauActuel
-            constantes.sauvegarder()
-
-            self.fenetre.selectNextLevel()
->>>>>>> cd0ca63a6524d5f3245b4385bb3b94234e35f1dd
             event = pygame.event.wait()
             if event.type == KEYUP:
                 if event.key == K_RETURN or event.key == K_ESCAPE:
