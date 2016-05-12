@@ -32,7 +32,7 @@ class Fenetre:
         self.imgList.append(lis)"""
 
 
-    def rafraichir(self):
+    def rafraichir(self, pv):
         #print(self.imgList)
         """for lis in self.imgList:
             self.fen.blit(lis[0], lis[1])"""
@@ -46,7 +46,8 @@ class Fenetre:
                 self.fen.blit(exp[0], pos)
                 #print("Il y a une explosion à :", pos)
         self.clock.tick(60)
-        self.fen.blit(self.font.render(str(self.clock.get_fps()), 1, (180, 180, 255)), (0, 0))
+        #self.fen.blit(self.font.render(str(self.clock.get_fps()), 1, (180, 180, 255)), (0, 0))
+        self.blitLifeBar(pv)
         pygame.display.flip()
         self.entites = []
         self.explosions = []
@@ -114,9 +115,24 @@ class Fenetre:
         sombre.fill((0, 0, 0))
         self.fen.blit(sombre, (0,0))
 
+    def blitLifeBar(self, pv):
+        pygame.draw.rect(self.fen, pygame.Color(97, 28, 28, 0), pygame.Rect(10, 10, 100, 20))
+        if pv > 0:
+            pygame.draw.rect(self.fen, pygame.Color(0, 255, 30, 0), pygame.Rect(10, 10, (pv*100)/20, 20))
+
+
     def generiqueFin(self):
         self.setFond("resources/logo.png")
 
+    def selecContinuer(self):
+        font = pygame.font.Font(None, 40)
+        font2 = pygame.font.Font(None, 20)
+        gameOver = font.render("Vous vous êtes fait photopolymériser...", 0, pygame.Color(190, 28, 48, 0))
+        continuer = font2.render("Appuyez sur Echap pour quitter, entrée pour réessayer.", 0, pygame.Color(255, 255, 255, 0))
+        self.assombrir()
+        self.fen.blit(gameOver, ((self.largeur/2)-250, (self.hauteur/2)-50))
+        self.fen.blit(continuer, ((self.largeur/2) - 150, (self.hauteur/2) + 50))
+        pygame.display.flip()
 
 """if __name__ == "__main__":
     f = Fenetre("test", 768, 600)

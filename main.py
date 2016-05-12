@@ -99,7 +99,7 @@ while 1:
                     #choixNiveau()
                     pass
                 if menu.get_position() == len(menu.liste)-1:
-                    pygame.display.quit()
+                    pygame.quit()
                     sys.exit()
             if event.key == K_ESCAPE:
                 pygame.quit()

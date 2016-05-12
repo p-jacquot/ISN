@@ -30,6 +30,8 @@ class Jeu:
 
         self.continuer = True
         self.moleculeJoueur = moleculeJoueur
+        self.moleculeJoueur.hpMax = 20
+        self.moleculeJoueur.hp = 20
         self.delayTirJoueur = 0
         self.tir = False
         self.delayMouvement = 0
@@ -112,14 +114,16 @@ class Jeu:
             """Calcul des collisions."""
             indexMechant = self.moleculeJoueur.rect.collidelist(er)
             if indexMechant != -1:
-                self.moleculeJoueur.hp -= 1
+                self.moleculeJoueur.hit(1)
+                print(self.moleculeJoueur.dead)
                 explosion1.play()
-                self.ennemyList[indexMechant].hit()
+                self.ennemyList[indexMechant].hit(3)
                 #self.clearProj()
 
             indexMechantProjectile = self.moleculeJoueur.rect.collidelist(epr)
             if indexMechantProjectile != -1:
-                self.moleculeJoueur.hp -= 1
+                self.moleculeJoueur.hit(1)
+                print(self.moleculeJoueur.dead)
                 explosion1.play()
                 self.ennemyProjectiles[indexMechantProjectile].dead=True #On supprime le projectile, s'il a touché sa cible.
                 #self.clearProj()
@@ -127,7 +131,7 @@ class Jeu:
             for proj in self.projectilesJoueur:
                 index = proj.rect.collidelist(er)
                 if index != -1:
-                    self.ennemyList[index].hit()
+                    self.ennemyList[index].hit(3)
                     proj.dead=True
 
             """Events incoming !"""
@@ -177,18 +181,19 @@ class Jeu:
                 self.fenetre.fermer()
                 self.continuer = False
 
-            self.delayTirJoueur-=1
+            self.delayTirJoueur -= 1
             if self.tir == True and self.delayTirJoueur <=0 :
-
-
-
                 self.shootJoueur()
 
 
-            if self.moleculeJoueur.dead or self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
+            if self.niveau.totalMobsLeft <= 0 and len(self.ennemyList) <= 0:
                 self.continuer = False
-                print("lel on quitte !")
+            elif self.moleculeJoueur.dead:
+                self.continuer = False
+
             self.moleculeJoueur.move()
+            if self.moleculeJoueur.dying:
+                self.fenetre.explosions.append(self.moleculeJoueur.explodeCoords)
             if self.moleculeJoueur.posX<10:
                 self.moleculeJoueur.posX=10
             elif self.moleculeJoueur.posX>constantes.largeur-40:  #changer encore ici
@@ -209,7 +214,7 @@ class Jeu:
         self.fenetre.entites.extend(self.ennemyProjectiles)
         self.fenetre.entites.extend(self.projectilesJoueur)
         self.fenetre.entites.append(self.moleculeJoueur)
-        self.fenetre.rafraichir()
+        self.fenetre.rafraichir(self.moleculeJoueur.hp)
 
     def dialoguer(self, dialog):
         """sombre = pygame.Surface((self.fenetre.largeur, self.fenetre.hauteur))
@@ -230,7 +235,7 @@ class Jeu:
             posX, posY = perso[punchline[1]][2]
             #print(punchline[1][0])
             #pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
-            self.fenetre.rafraichir()
+            self.fenetre.rafraichir(self.moleculeJoueur.hp)
             #self.fenetre.fen.blit(sombre, (0,0))
             self.fenetre.assombrir()
             self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
@@ -252,66 +257,79 @@ class Jeu:
     def progressInLevel(self):
         play = True
         while play:
-            #print("Et un tour de boucle dans la fonction progress InLevel !")
-            #print("Premier dialogue.")
             self.fenetre.setFond(self.niveau.fond)
             self.introLevel()
             self.dialoguer(self.niveau.firstDialog)
-            #print("On a fini de discuter, première phase de jeu.")
             pygame.mixer.music.load(self.niveau.pathMusicLevel)
             pygame.mixer.music.play(5)
             self.play()
-            #print("La première phase est finie, on discute un peu.")
-            self.dialoguer(self.niveau.middleDialog)
-            #print("Fini de disctuer, place au boss !")
-            pygame.mixer.music.load(self.niveau.pathMusicBoss)
-            pygame.mixer.music.play(5)
-            #ici, ajouter la molécule boss dans la liste des molécules ennemies
-            boss = self.niveau.boss
-            boss.posX = (constantes.largeur-boss.rect.width)/2
-            boss.posY = 10
-            boss.rect.x = boss.posX
-            boss.rect.y = boss.posY
-            self.ennemyList.append(boss)
-            self.play()
-            pygame.mixer.music.pause()
-            #print("On rediscute.")
-            self.dialoguer(self.niveau.lastDialog)
-            self.outroLevel()
 
-            constantes.niveauActuel = self.niveau.numero+1
-            if constantes.niveauMaxFait < constantes.niveauActuel :
-                constantes.niveauActuel = 1
+            if self.moleculeJoueur.dead == False:
+                self.dialoguer(self.niveau.middleDialog)
+                pygame.mixer.music.load(self.niveau.pathMusicBoss)
+                pygame.mixer.music.play(5)
+                boss = self.niveau.boss
+                boss.posX = (constantes.largeur-boss.rect.width)/2
+                boss.posY = 10
+                boss.rect.x = boss.posX
+                boss.rect.y = boss.posY
+                self.ennemyList.append(boss)
+                self.play()
+                pygame.mixer.music.pause()
+            if self.moleculeJoueur.dead == False:
+                self.dialoguer(self.niveau.lastDialog)
+                self.outroLevel()
+
+                constantes.niveauActuel = self.niveau.numero+1
+                if constantes.niveauMaxFait < constantes.niveauActuel :
+                    constantes.niveauActuel = 1
+                    constantes.sauvegarder()
+                    self.niveau.numero = 0
+                    self.fenetre.generiqueFin()
+                if constantes.niveauActuel>constantes.niveauMaxAtteint :
+                    constantes.niveauMaxAtteint = constantes.niveauActuel
                 constantes.sauvegarder()
-                self.niveau.numero = 0
-                self.fenetre.generiqueFin()
-            if constantes.niveauActuel>constantes.niveauMaxAtteint :
-                constantes.niveauMaxAtteint = constantes.niveauActuel
-            constantes.sauvegarder()
 
-            self.fenetre.selectNextLevel()
+                self.fenetre.selectNextLevel()
+                key = self.waitForSelection()
+                if key == K_RETURN:
+                    self.changeNiveau(1) #on lui donne 1 quand on veut le niveau suivant.
+                    break
+                elif key == K_ESCAPE:
+                    play = False
+                    break
+                pygame.mixer.music.pause()
+            else:
+                pygame.mixer.music.load("resources/game_over.wav")
+                pygame.mixer.music.play(1)
+                self.fenetre.selecContinuer()
+                key = self.waitForSelection()
+                if key == K_ESCAPE:
+                    play = False
+                elif key == K_RETURN:
+                    self.moleculeJoueur.reset()
+                    self.clearProj()
+                    self.ennemyList = []
+                    self.play()
+                    self.changeNiveau(0) #Et 0 quand on recharge le niveau.
+                    pygame.mixer.music.pause()
+
+    def waitForSelection(self):
+        while 1:
             event = pygame.event.wait()
-            while 1:
-                event = pygame.event.wait()
-                if event.type == KEYUP:
-                    if event.key == K_RETURN:
-                        self.changeNiveau()
-                        break
-                    elif event.key == K_ESCAPE:
-                        play = False
-                        break
-            pygame.mixer.music.pause()
-
+            if event.type == KEYUP:
+                if event.key == K_RETURN or event.key == K_ESCAPE:
+                    return event.key
 
     def stop(self):
         #si on veut faire des choses particulières une fois qu'on arrête le jeu.
         self.continuer = false
 
-    def changeNiveau(self):
+    def changeNiveau(self, plus):
         """Cette fonction s'occupera de charger tout ce dont on a besoin d'un niveau :
             mobs, probas..."""
         #print("Hop, on change de niveau :", str(self.niveau.numero+1))
-        self.niveau = Niveau(self.niveau.numero+1)
+        self.niveau = Niveau(self.niveau.numero + plus)
         if self.niveau.numero < len(self.typeProjJoueur) :
             self.projAAjouter = self.typeProjJoueur[self.niveau.numero-1]
         else :
@@ -349,11 +367,14 @@ class Jeu:
     def introLevel(self):
         self.moleculeJoueur.posX = constantes.largeur/2
         self.moleculeJoueur.posY = constantes.hauteur + 10
+        self.moleculeJoueur.pattern.mv_x = 0
+        self.moleculeJoueur.pattern.mv_y = -1
         x = 0
         for x in range(100):
-            self.moleculeJoueur.posY -= 1
+            self.moleculeJoueur.move()
             self.actualiser()
             #time.sleep(0.001)
+        self.moleculeJoueur.pattern.mv_y = 0
 
         self.shootJoueur()
         while len(self.projectilesJoueur) > 0:
