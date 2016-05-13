@@ -24,18 +24,19 @@ constantes.largeur=donnees[3]
 fenetre = Fenetre("Hydrogène II : Le retour", constantes.largeur, constantes.hauteur)
 fenetre.setFond("resources/logo.png")
 time.sleep(1)
-menu = Menu()
-menu.init(['Nouvelle Partie', 'Continuer', 'Choix du Niveau', 'Replay', 'Options', 'Quitter'], fenetre.fen)
+menu = Menu(['Nouvelle Partie', 'Continuer', 'Choix du Niveau', 'Replay', 'Options', 'Quitter'], fenetre.fen)
+#menu.init(['Nouvelle Partie', 'Continuer', 'Choix du Niveau', 'Replay', 'Options', 'Quitter'], fenetre.fen)
 menu.draw()
 pygame.key.set_repeat(199,69)
 pygame.display.update()
 """def choixNiveau() :
 
-        choix = Menu()
+
         listeNiveaux = []
         for a in range(constantes.niveauMaxAtteint):
             listeNiveaux.append(str(a+1))
-        choix.init(listeNiveaux, fenetre.fen)
+        choix = Menu(listeNiveaux,fenetre.fen)
+        #choix.init(listeNiveaux, fenetre.fen)
         choix.draw()
         pygame.key.set_repeat(199,69)
         pygame.display.update()
@@ -47,8 +48,8 @@ pygame.display.update()
                     if event.key == K_DOWN:
                         menu.draw(1)
                     if event.key == K_RETURN:
-                        jeu = Jeu(fenetre, Niveau(menu.get_position()+1), Molecule('hydrogene.png', Pattern(0,0)), 4.5)
-                        constantes.niveauActuel = menu.get_position()+1
+                        jeu = Jeu(fenetre, Niveau(choix.get_position()+1), Molecule('hydrogene.png', Pattern(0,0)), 4.5)
+                        constantes.niveauActuel = choix.get_position()+1
                         jeu.progressInLevel()
                         sombre = pygame.Surface((constantes.largeur, constantes.hauteur))
                         sombre.set_alpha(255)
@@ -96,7 +97,12 @@ while 1:
                     menu.draw()
                     pygame.display.update()
                 if menu.get_position() == 2 :
-                    #choixNiveau()
+                    """listeNiveaux = []
+                    for a in range(constantes.niveauMaxAtteint):
+                        listeNiveaux.append(str(a+1))
+                    listeNiveaux.append("Retour")
+                    choix = SousMenu(listeNiveaux,fenetre.fen)
+                    choix.choisir()"""
                     pass
                 if menu.get_position() == len(menu.liste)-1:
                     pygame.quit()

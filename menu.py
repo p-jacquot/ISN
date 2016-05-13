@@ -10,20 +10,25 @@ if not pygame.font.get_init():
 
 
 class Menu:
-    liste = []
-    pola = []
-    taille_ecriture = 40
-    police_ecriture = 'resources/polices/zawijasy.otf'   #Il faut en trouver une jolie :3 et qui a appelle le dossier ressources avec un s --'
-    font = pygame.font.Font
-    dest_surface = pygame.Surface
-    nombre_d_options = 0
-    image_fond = pygame.image.load("resources/hakase_nyan.png")
-    couleur_texte =  (255, 255, 100)
-    couleur_selection = (200,0,100)
-    position = 0
-    position_affichage = (0,0)
-    largeur = 0
-    hauteur = 0
+    def __init__(self,liste,fenetre):
+        self.liste = liste
+        self.pola = []
+        self.taille_ecriture = 40
+        self.police_ecriture = 'resources/polices/zawijasy.otf'   #Il faut en trouver une jolie :3 et qui a appelle le dossier ressources avec un s --'
+        self.font = pygame.font.Font
+        self.dest_surface = pygame.Surface
+        self.nombre_d_options = 0
+        self.image_fond = pygame.image.load("resources/hakase_nyan.png")
+        self.couleur_texte =  (255, 255, 100)
+        self.couleur_selection = (200,0,100)
+        self.position = 0
+        self.position_affichage = (0,0)
+        self.largeur = 0
+        self.hauteur = 0
+
+        self.dest_surface = fenetre
+        self.nombre_d_options = len(self.liste)
+        self.structure()
 
     class Zone_menu:
         texte = ''
@@ -46,7 +51,7 @@ class Menu:
         self.police_ecriture = path
 
     def get_position(self):
-        return self.position
+        return self.position               #
 
     def init(self, liste, dest_surface):
         self.liste = liste
