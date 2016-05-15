@@ -56,3 +56,40 @@ class Projectile:
             self.dead=True
 
 
+class Laser:                                                            #Ne fait pas encore de rotation a l'image du laser, du coup c'est moche
+
+    def __init__(self, posX, posY, mv_x, mv_y,rtImg,rebond):
+        self.posX = posX
+        self.posY = posY
+        self.mv_x = mv_x*6
+        self.mv_y = mv_y*6
+        self.rtImg = rtImg
+        self.rebond = rebond
+        self.dead=False
+        self.img= constantes.laser.convert_alpha()
+        self.imgrt= pygame.transform.rotate(self.img,self.rtImg)
+        self.rect = self.img.get_rect()
+        self.rect.x = self.posX
+        self.rect.y = self.posY
+
+    def __del__(self):
+        del self
+
+    def move(self):
+        self.posX += self.mv_x
+        self.posY += self.mv_y
+        self.rect.x = self.posX
+        self.rect.y = self.posY
+        if self.posX<=0 or self.posX>=constantes.largeur and self.rebond<5:
+            self.rebond += 1
+            self.mv_x = -self.mv_x
+            self.mv_y = self.mv_y
+            self.rtImg =acos(self.mv_y/(sqrt(pow(self.mv_x,2)+pow(self.mv_y,2))))
+
+        if self.posY<=0 or self.posY>=constantes.hauteur and self.rebond<5:
+            self.rebond = self.rebond+1
+            self.mv_x=self.mv_x
+            self.mv_y=-self.mv_y
+            self.rtImg = acos(self.mv_x/(sqrt(pow(self.mv_x,2)+pow(self.mv_y,2))))
+        if self.posY<-20 or self.posY>constantes.hauteur+20 or self.posX<-20 or self.posX>constantes.largeur+20:
+                self.dead=True
