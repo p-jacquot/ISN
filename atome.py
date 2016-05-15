@@ -2,7 +2,7 @@
 import pygame
 pygame.init()
 from math import *
-from projectiles import Projectile
+from projectiles import *
 from random import *
 
 class Atome:
