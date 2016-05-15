@@ -251,7 +251,9 @@ class Jeu:
             self.fenetre.assombrir()
             self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
             self.fenetre.dessinerCadre(0, self.fenetre.hauteur-100, 100, self.fenetre.largeur)
-            self.fenetre.dessinerCadre(posX+50, posY-25, 30, 100)
+            self.font = self.fenetre.font
+            surface = self.font.render(perso[punchline[1]][0], 0, pygame.Color(255, 0, 0, 0))
+            self.fenetre.dessinerCadre(posX+50, posY-25, 30, surface.get_rect().width+10)
             self.fenetre.ecrireTexte(perso[punchline[1]][0], posX + 55, posY - 20)
             self.fenetre.ecrireTexte(punchline[0], 25, self.fenetre.hauteur-80)
             event = pygame.event.wait()
