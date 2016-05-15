@@ -146,6 +146,10 @@ def listerAtomes( nomMol,hauteur,largeur):
                     listeAtomes.append(Azote(x,y))
                 elif pixel == (1,0,1,255):
                     listeAtomes.append(Chlore(x,y))
+                elif pixel == (1,1,2,255):
+                    listeAtomes.append(Soufre(x,y))
+                elif pixel == (1,1,0,255):
+                    listeAtomes.append(Boson(x,y))
 
         return listeAtomes
     #pour tester pour l'instant vous pouvez faire la commande CH4=Molecule('CH4.png')puis print(CH4.atomeList) dans la console
