@@ -2,6 +2,7 @@
 from math import *
 import constantes
 from random import *
+import pygame
 
 
 class Projectile:
