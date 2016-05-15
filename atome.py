@@ -136,3 +136,71 @@ class Chlore(Atome):
             self.delayTir = 1
             return [Projectile(self.posX,self.posY ,self.cible/100, 0.15 )]
         return []
+        
+class Soufre(Atome):
+
+    def __init__(self,posX,posY):
+        Atome.__init__(self,posX,posY)
+        self.hp=50
+        self.delayTirMax=1000
+        self.delayTir=randint(500,self.delayTirMax)
+        img = pygame.image.load('resources/photos/soufre.png').convert_alpha()
+        self.rect = img.get_rect()
+
+    def tir(self):
+        self.delayTir=self.delayTirMax
+        return [Laser(self.posX,self.posY, 0,1,0,0),Laser(self.posX,self.posY,0.5,0.5,45,0),Laser(self.posX,self.posY,-0.5,0.5,45,0)]
+
+
+class Boson(Atome):
+
+    def __init__(self,posX,posY):
+        Atome.__init__(self,posX,posY)
+        self.hp=5000
+        self.delayTirMax=100
+        self.delayTir=1
+        img = pygame.image.load('resources/photos/boson.png').convert_alpha()
+        self.rect = img.get_rect()
+        self.attaque = 0
+        self.tirprojectiles= 0
+        self.tirlasers= 0
+        self.tirbashp= 0
+
+    def tir(self):
+        self.attaque = randint(1,5)
+        if self.attaque == 1 and self.tirprojectiles==0 and self.tirlasers==0 and self.tirbashp==0:
+            self.delayTir = self.delayTirMax
+            return [Laser(self.posX,self.posY, 0,1,0,2),Laser(self.posX,self.posY,0.5,0.5,45,2),Laser(self.posX,self.posY,-0.5,0.5,45,2),Laser(self.posX,self.posY, -0.5,-0.5,0,2),Laser(self.posX,self.posY,0.5,-0.5,45,2),Laser(self.posX,self.posY,0,-1,45,2),Laser(self.posX,self.posY, 1,0,0,2),Laser(self.posX,self.posY,-1,0,45,2)]
+        elif (self.attaque == 2 or self.tirprojectiles>0) and self.tirlasers==0 and self.tirbashp==0:
+            if self.tirprojectiles<50:
+                directiontir = randint(-100,100)
+                self.tirprojectiles += 1
+                self.delayTir = 1
+                return [Projectile(self.posX,self.posY,directiontir/100,1)]
+            elif self.tirprojectiles>=50:
+                self.delayTir = 200
+                self.tirprojectiles = 0
+            return []
+        elif (self.attaque == 3 or self.tirlasers>0) and self.tirprojectiles==0 and self.tirbashp==0:
+            if self.tirlasers<10:
+                directiontir = randint(-100,100)
+                self.tirlasers += 1
+                self.delayTir = 1
+                return [Laser(self.posX,self.posY,directiontir/100,1,45,2)]
+            elif self.tirlasers>=10:
+                self.delayTir = 1000
+                self.tirlasers = 0
+            return []
+        elif self.attaque == 4 and self.tirprojectiles==0 and self.tirlasers==0 and self.tirbashp==0:
+            self.delayTir= 500
+            return []
+        elif (self.attaque == 5 or self.tirbashp>0) and self.tirprojectiles==0 and self.tirlasers==0:
+            if self.tirbashp<500:
+                directiontir = randint(-20,20)
+                self.tirbashp += 1
+                self.delayTir = 1
+                return [Projectile(self.posX,self.posY,directiontir/100,0.1)]
+            elif self.tirbashp>=500:
+                self.delayTir= self.delayTirMax
+                self.tirbashp=0
+            return []
