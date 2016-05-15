@@ -238,9 +238,12 @@ class Jeu:
             rect = p[1].get_rect()
             rect.x, rect.y = p[2]
             p[2] = (rect.x, self.fenetre.hauteur - 100 - rect.height)
+            if p[2][0] == 500 :
+                p[2]= (constantes.largeur-rect.width,self.fenetre.hauteur-100-rect.height)
         while dialog.notFinished:
             punchline = dialog.getPunchline()
             posX, posY = perso[punchline[1]][2]
+
             #print(punchline[1][0])
             #pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
             self.fenetre.rafraichir(self.moleculeJoueur.hp)
