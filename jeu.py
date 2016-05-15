@@ -394,6 +394,7 @@ class Jeu:
             self.actualiser()
 
     def outroLevel(self):
+        self.framesInvincibilite = 0
         pygame.mixer.music.load('resources/fanfare.wav')
         pygame.mixer.music.play(1)
         self.clearProj()
