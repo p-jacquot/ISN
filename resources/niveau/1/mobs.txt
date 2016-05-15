@@ -1,4 +1,4 @@
-methamphetamine.png
+aminophenol.png
 Oxygene.png 25
 Carbone.png 50
 Azote.png 75
