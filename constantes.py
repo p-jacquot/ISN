@@ -11,6 +11,7 @@ projectilesList = [ pygame.image.load("resources/photos/photon_bleu_clair_pour_l
                     pygame.image.load("resources/photos/photon_vert.png"),
                     pygame.image.load("resources/photos/photon_violet.png")]
 
+laser = pygame.image.load("resources/photos/laserjaune.png")
 
 """Les sprites des explosions"""
 explodeList = [pygame.image.load("resources/photos/explosion_v1.1.bmp"),
