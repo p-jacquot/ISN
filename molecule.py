@@ -28,7 +28,11 @@ class Molecule:
         self.hauteur = self.rect.height
         self.largeur = self.rect.width
         self.atomeList = listerAtomes(nomMol, self.hauteur, self.largeur) #La liste qui contient tous les atomes.
-        self.hpMax = vieMol(self.atomeList) #La vie maximale de la molécule, somme de ceux des atomes.
+        self.hpMax = vieMol(self.atomeList)#La vie maximale de la molécule, somme de ceux des atomes.
+        if nomMol == "yperite.png":
+            self.hpMax += 1000
+        if nomMol == "paracetamol.png":
+            self.hpMax +=1500
         self.hp = self.hpMax #La vie de la molécule.
         self.posX = 0
         self.posY = 0
