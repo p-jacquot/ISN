@@ -116,3 +116,5 @@ while 1:
             sys.exit()
     pygame.time.wait(8)
 
+les lignes rouges sont celles supprimées
+
