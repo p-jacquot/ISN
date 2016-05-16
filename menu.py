@@ -22,7 +22,7 @@ class Menu:
         self.couleur_texte =  (255, 255, 100)
         self.couleur_selection = (200,0,100)
         self.position = 0
-        self.position_affichage = (0,0)
+        self.position_affichage = (0,50)
         self.largeur = 0
         self.hauteur = 0
 
@@ -66,6 +66,7 @@ class Menu:
                 self.position = self.nombre_d_options - 1                                               #pour se retrouver en bas si tout en haut
             self.position %= self.nombre_d_options
         menu = pygame.Surface((self.largeur, self.hauteur))
+        menu = pygame.image.load( "resources/photos/fond transparent.png" ).convert()
         selection_rect = self.pola[self.position].selection_rect
         pygame.draw.rect(menu,self.couleur_selection,selection_rect)
 
