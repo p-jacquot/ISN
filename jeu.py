@@ -265,6 +265,11 @@ class Jeu:
                 if event.type == KEYDOWN:
                     if event.key == K_z:
                         reading = False
+                    if event.key == K_LEFT:
+                        reading = False
+                        dialog.counter-=2
+                        if dialog.counter<0:
+                            dialog.counter = 0
 
 
     def progressInLevel(self):
