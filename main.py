@@ -116,5 +116,5 @@ while 1:
             sys.exit()
     pygame.time.wait(8)
 
-les lignes vertes sont celles ajoutées
+
 
