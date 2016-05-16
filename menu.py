@@ -22,7 +22,7 @@ class Menu:
         self.couleur_texte =  (255, 255, 100)
         self.couleur_selection = (200,0,100)
         self.position = 0
-        self.position_affichage = (0,0)
+        self.position_affichage = (0,50)
         self.largeur = 0
         self.hauteur = 0
 
