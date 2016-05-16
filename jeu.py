@@ -240,13 +240,13 @@ class Jeu:
             p[2] = (rect.x, self.fenetre.hauteur - 100 - rect.height)
             if p[2][0] == 500 :
                 p[2]= (constantes.largeur-rect.width,self.fenetre.hauteur-100-rect.height)
+            self.fenetre.rafraichir(self.moleculeJoueur.hp)
         while dialog.notFinished:
             punchline = dialog.getPunchline()
             posX, posY = perso[punchline[1]][2]
 
             #print(punchline[1][0])
             #pygame.draw.rect(self.fenetre.fen, pygame.Color(0, 0, 0, 0), pygame.Rect(0, 0, self.fenetre.largeur, self.fenetre.hauteur))
-            self.fenetre.rafraichir(self.moleculeJoueur.hp)
             #self.fenetre.fen.blit(sombre, (0,0))
             self.fenetre.assombrir()
             self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
@@ -265,6 +265,8 @@ class Jeu:
                 if event.type == KEYDOWN:
                     if event.key == K_z:
                         reading = False
+            self.fenetre.rafraichir(self.moleculeJoueur.hp)
+            self.fenetre.fen.blit(perso[punchline[1]][1], (posX, posY))
 
 
     def progressInLevel(self):
