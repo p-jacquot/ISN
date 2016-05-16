@@ -22,7 +22,7 @@ constantes.largeur=donnees[3]
 
 
 fenetre = Fenetre("Hydrogène II : Le retour", constantes.largeur, constantes.hauteur)
-fenetre.setFond("resources/logo.png")
+fenetre.setFond("resources/photos/hyd'roger.png")
 time.sleep(1)
 menu = Menu(['Nouvelle Partie', 'Continuer', 'Choix du Niveau', 'Replay', 'Options', 'Quitter'], fenetre.fen)
 #menu.init(['Nouvelle Partie', 'Continuer', 'Choix du Niveau', 'Replay', 'Options', 'Quitter'], fenetre.fen)
