@@ -1,8 +1,7 @@
 # ISN
-Projet d'ISN : Un shooter avec des molécules.
+Projet d'ISN : Un shooter avec des molécules codé en python.
 Développé par :
-	Fougère Sebastian
-	Jacquot Pierre
-	Noblet Baptiste le BG
+	Fougère Sebastian (Sebouche)
+	Jacquot Pierre	(Popiette)
+	Noblet Baptiste	(DantCold)
 
-En python. (bawi, ISN hein.)
