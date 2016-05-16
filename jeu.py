@@ -116,7 +116,7 @@ class Jeu:
             indexMechant = self.moleculeJoueur.rect.collidelist(er)
             if indexMechant != -1:
                 self.moleculeJoueur.hit(1)
-                print(self.moleculeJoueur.dead)
+                #print(self.moleculeJoueur.dead)
                 explosion1.play()
                 self.ennemyList[indexMechant].hit(3)
                 #self.clearProj()
@@ -127,7 +127,7 @@ class Jeu:
 
             if indexMechantProjectile != -1 and self.framesInvincibilite == 0:
                 self.moleculeJoueur.hit(1)
-                print(self.moleculeJoueur.dead)
+                #print(self.moleculeJoueur.dead)
                 explosion1.play()
                 self.ennemyProjectiles[indexMechantProjectile].dead=True #On supprime le projectile, s'il a touché sa cible.
                 self.framesInvincibilite = 50
@@ -315,11 +315,11 @@ class Jeu:
                 self.fenetre.selectNextLevel()
                 key = self.waitForSelection()
                 if key == K_RETURN:
+                    print("On a appuyé sur entrée !")
                     self.changeNiveau(1) #on lui donne 1 quand on veut le niveau suivant.
-                    break
                 elif key == K_ESCAPE:
+                    print("On a appuyé sur Echap !")
                     play = False
-                    break
                 pygame.mixer.music.pause()
             else:
                 pygame.mixer.music.load("resources/game_over.wav")
@@ -418,7 +418,7 @@ class Jeu:
         while self.moleculeJoueur.dead == False:
             self.moleculeJoueur.move()
             self.actualiser()
-        self.moleculeJoueur.dead = False
+        self.moleculeJoueur.reset()
         self.moleculeJoueur.pattern.mv_y = 0
             #time.sleep(0.001)
 
