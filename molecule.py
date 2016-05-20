@@ -91,14 +91,13 @@ class Molecule:
         for atome in self.atomeList:
             if atome.delayTir<0:
                 projectiles+=(atome.tir())
-                for a in projectiles:
-                    a.posX+=self.posX
-                    a.posY+=self.posY
-                    a.rect.x=a.posX
-                    a.rect.y=a.posY
             else:
                 atome.delayTir-=10
-
+        for a in projectiles:
+            a.posX+=self.posX
+            a.posY+=self.posY
+            a.rect.x=a.posX
+            a.rect.y=a.posY
         return projectiles
 
     def hit(self, damage):

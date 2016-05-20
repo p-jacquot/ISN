@@ -55,6 +55,7 @@ class Jeu:
         pygame.time.Clock().tick(15)
         self.continuer = True
         self.clearProj()
+        self.clearEnnemis
         self.tir = False
         while self.continuer:
             er = [] #rect ennemies
@@ -73,6 +74,7 @@ class Jeu:
             self.delayMouvement -= 1"""
             newList=[]
             #print(len(self.ennemyList))
+            #self.fenetre.ecrireTexte(str(len(self.ennemyList)),50,50)
             for ennemy in self.ennemyList:
                 if ennemy.dead==False:
                     if self.delayMouvement == 0 :
@@ -290,12 +292,11 @@ class Jeu:
                 self.dialoguer(self.niveau.middleDialog)
                 pygame.mixer.music.load(self.niveau.pathMusicBoss)
                 pygame.mixer.music.play(5)
-                boss = self.niveau.boss
-                boss.posX = (constantes.largeur-boss.rect.width)/2
-                boss.posY = 10
-                boss.rect.x = boss.posX
-                boss.rect.y = boss.posY
-                self.ennemyList.append(boss)
+                self.niveau.boss.posX = (constantes.largeur-self.niveau.boss.rect.width)/2
+                self.niveau.boss.posY = 10
+                self.niveau.boss.rect.x = self.niveau.boss.posX
+                self.niveau.boss.rect.y = self.niveau.boss.posY
+                self.ennemyList = [self.niveau.boss]
                 self.play()
                 pygame.mixer.music.pause()
             if self.moleculeJoueur.dead == False:
@@ -376,8 +377,9 @@ class Jeu:
             a.dead = True
         for proj in self.projectilesJoueur:
             proj.dead = True
-        """for a in self.ennemyList :
-            a.dead = True"""
+    def clearEnnemis(self):
+        for a in self.ennemyList :
+            a.dead = True
 
     def shootJoueur(self):
         for a in self.projAAjouter :

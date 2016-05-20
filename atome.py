@@ -136,7 +136,7 @@ class Chlore(Atome):
             self.delayTir = 1
             return [Projectile(self.posX,self.posY ,self.cible/100, 0.15 )]
         return []
-        
+
 class Soufre(Atome):
 
     def __init__(self,posX,posY):

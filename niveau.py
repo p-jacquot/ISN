@@ -44,7 +44,6 @@ class Niveau:
 
         self.fond = ("resources/niveau/" + str(numero) + "/fond.jpg")
 
-
     def genererMob(self):
         rand =  randint(0, 99)
         #print(rand)
