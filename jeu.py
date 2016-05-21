@@ -370,6 +370,7 @@ class Jeu:
                     replay = Replay((constantes.largeur,constantes.hauteur),self.listeFrame)
                     nom = replay.nom
                     replay.saveReplay()
+                    self.fenetre.ecrireTexte("Replay Sauvegardé !",10,100)
 
 
     def clearProj(self):

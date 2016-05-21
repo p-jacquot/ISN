@@ -4,7 +4,9 @@ import pygame
 import time
 import jeu as Jeu
 from replay import ReplayLoaded
-
+from pygame.event import *
+from pygame.locals import * #Pour les events.
+pygame.init()
 class Fenetre:
     """Classe Fenêtre, s'occupant de l'affichage."""
 
@@ -98,11 +100,53 @@ class Fenetre:
 
     def playReplay(self,nom):
         replay = ReplayLoaded(nom)
-        for a in replay.listeFrames:
-            image = pygame.image.frombuffer(a,replay.taille,"RGB")
+        retourArriere = False
+        pause = False
+        avancer = True
+        vitesse = 0
+        a=0
+        while a<len(replay.listeFrames)-1:
+
+
+            event = pygame.event.poll()
+            if event.type == KEYDOWN :
+                if event.key == K_UP:
+                    pause = True
+                    retourArriere = False
+                if event.key == K_LEFT :
+                    retourArriere =True
+                    pause = False
+                if event.key == K_RIGHT :
+                    avancer = True
+                    retourArriere = False
+                    pause =False
+                if event.key == K_ESCAPE :
+                    break
+                if event.key == K_r :
+                    vitesse = -1
+                if event.key == K_q :
+                    vitesse = 1
+            if event.type == KEYUP :
+                if event.key == K_r or event.key == K_q:
+                    vitesse = 0
+            #print("-----")
+            #print(a)
+            if retourArriere :
+                a-=1
+            elif pause :
+                pass
+            elif avancer :
+                a +=1
+            if a < 0:
+                a = 0
+            #print(a)
+            image = pygame.image.frombuffer(replay.listeFrames[a],replay.taille,"RGB")
             self.fen.blit(image, (0,0))
+            self.ecrireTexte(str(int(a/len(replay.listeFrames)*100))+'%',50,50)
             pygame.display.flip()
-            time.sleep(1/60)
+            self.clock.tick(60+vitesse*30)
+            if event.type == QUIT:
+                self.fermer()
 
     def setFond(self, imgPath):
         self.fond = pygame.image.load(imgPath).convert()

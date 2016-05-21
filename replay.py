@@ -9,7 +9,7 @@ class Replay:
         self.listeFrames = listeFrames
         t = _time.time()
         y, m, d, hh, mm, ss, weekday, jday, dst = _time.localtime(t)
-        self.nom = "resources/replay/{0}_{1}__{2}_{3}_{4}.pickle".format(m,d,hh,mm,ss)
+        self.nom = "resources/replay/{1} {0} at {2},{3},{4}.pickle".format(m,d,hh,mm,ss)
     def saveReplay(self) :
 
         #nom = "resources/replay/{0}_{1}__{2}_{3}_{4}_{5}.pickle".format(datetime.date.month,datetime.date.day,datetime.time.hour,datetime.time.minute,datetime.time.second,datetime.time.microsecond)

@@ -8,6 +8,10 @@ from menu import *
 from fenetre import *
 from jeu import *
 from niveau import *
+from os import listdir
+from os.path import isfile, join
+listeReplay = [f for f in listdir("resources/replay/") if isfile(join('resources/replay', f))]
+listeReplay = listeReplay[:-1]
 
 
 pygame.init()
@@ -104,6 +108,11 @@ while 1:
                     choix = SousMenu(listeNiveaux,fenetre.fen)
                     choix.choisir()"""
                     pass
+                if menu.get_position() == 3 :
+                    #fen = Fenetre("Replay",constantes.largeur,constantes.hauteur)
+                    #fenetre.playReplay("resources/replay/"+str(listeReplay[menu.get_position()]))
+                    for a in listeReplay:
+                        fenetre.playReplay("resources/replay/"+str(a))
                 if menu.get_position() == len(menu.liste)-1:
                     pygame.quit()
                     sys.exit()
