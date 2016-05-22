@@ -57,7 +57,7 @@ class Projectile:
             self.dead=True
 
 
-class Laser:                                                            #Ne fait pas encore de rotation a l'image du laser, du coup c'est moche
+class Laser:                                                            
 
     def __init__(self, posX, posY, mv_x, mv_y,rtImg,rebond):
         self.posX = posX
@@ -92,5 +92,43 @@ class Laser:                                                            #Ne fait
             self.mv_x=self.mv_x
             self.mv_y=-self.mv_y
             self.rtImg = acos(self.mv_x/(sqrt(pow(self.mv_x,2)+pow(self.mv_y,2))))
+        if self.posY<-20 or self.posY>constantes.hauteur+20 or self.posX<-20 or self.posX>constantes.largeur+20:
+                self.dead=True
+                
+class Laser2:                                                            
+
+    def __init__(self, posX, posY, mv_x, mv_y,rtImg,tp):
+        self.posX = posX
+        self.posY = posY
+        self.mv_x = mv_x*6
+        self.mv_y = mv_y*6
+        self.rtImg = rtImg
+        self.tp = tp
+        self.dead=False
+        self.imgrt= constantes.laser2.convert_alpha()
+        self.img= pygame.transform.rotate(self.imgrt,self.rtImg)
+        self.rect = self.img.get_rect()
+        self.rect.x = self.posX
+        self.rect.y = self.posY
+
+    def __del__(self):
+        del self
+
+    def move(self):
+        self.posX += self.mv_x
+        self.posY += self.mv_y
+        self.rect.x = self.posX
+        self.rect.y = self.posY
+        if self.posX<=0 or self.posX>=constantes.largeur and self.tp<5:
+            self.tp += 1
+            self.posX= constantes.largeur-self.posX
+            self.mv_x = self.mv_x*1.4
+            self.mv_y = self.mv_y*1.4
+            self.posX =self.posX
+        if self.posY<=0 or self.posY>=constantes.hauteur and self.tp<5:
+            self.tp += 1
+            self.posY=constantes.hauteur-self.posY
+            self.mv_x=self.mv_x*1.3
+            self.mv_y=self.mv_y*1.3
         if self.posY<-20 or self.posY>constantes.hauteur+20 or self.posX<-20 or self.posX>constantes.largeur+20:
                 self.dead=True
