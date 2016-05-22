@@ -151,6 +151,19 @@ class Soufre(Atome):
         self.delayTir=self.delayTirMax
         return [Laser(self.posX,self.posY, 0,1,0,0),Laser(self.posX,self.posY,0.5,0.5,45,0),Laser(self.posX,self.posY,-0.5,0.5,45,0)]
 
+class Fluor(Atome):
+
+    def __init__(self,posX,posY):
+        Atome.__init__(self,posX,posY)
+        self.hp=75
+        self.delayTirMax=1000
+        self.delayTir=randint(500,self.delayTirMax)
+        img = pygame.image.load('resources/photos/fluor.png').convert_alpha()
+        self.rect = img.get_rect()
+
+    def tir(self):
+        self.delayTir=self.delayTirMax
+        return [Laser2(self.posX,self.posY, 0,1,0,0),Laser2(self.posX,self.posY,0.5,0.5,45,0),Laser2(self.posX,self.posY,-0.5,0.5,-45,0)]
 
 class Boson(Atome):
 

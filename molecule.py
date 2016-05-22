@@ -151,6 +151,8 @@ def listerAtomes( nomMol,hauteur,largeur):
                     listeAtomes.append(Chlore(x,y))
                 elif pixel == (1,1,2,255):
                     listeAtomes.append(Soufre(x,y))
+                elif pixel == (2,1,2,255):
+                    listeAtomes.append(Fluor(x,y))
                 elif pixel == (1,1,0,255):
                     listeAtomes.append(Boson(x,y))
 
