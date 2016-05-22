@@ -37,4 +37,4 @@ def sauvegarder() :
             pickle.dump([niveauActuel,niveauMaxAtteint,hauteur,largeur],file)
 
 
-
+langue = 'FR'

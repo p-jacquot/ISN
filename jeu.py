@@ -250,7 +250,7 @@ class Jeu:
         while dialog.notFinished:
             punchline = dialog.getPunchline()
             if self.niveau.numero == 1 and placeDialog == 0 :   #virer cette ligne quand tous les dialogues auront été faits
-                audio = pygame.mixer.Sound("resources/niveau/{2}/{0},{1}.wav".format(placeDialog,dialog.counter,self.niveau.numero))
+                audio = pygame.mixer.Sound("resources/niveau/{2}/{3}/{0},{1}.wav".format(placeDialog,dialog.counter,self.niveau.numero,constantes.langue))
                 """volume = audioDialogue.get_volume()
                 multiplier = 1/volume
                 audioDialogue.set_volume(multiplier*(1-punchline[1])+0.4,multiplier*(punchline[1])+0.4)"""
