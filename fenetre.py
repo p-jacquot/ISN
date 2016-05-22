@@ -178,6 +178,15 @@ class Fenetre:
         self.fen.blit(continuer, ((self.largeur/2) - 150, (self.hauteur/2) + 50))
         pygame.display.flip()
 
+    def dessinerSelecteur(self, posX, posY, value):
+        if value < 0:
+            value = -value
+        if value > 100:
+            value = value % 100
+        pygame.draw.rect(self.fen, pygame.Color(215, 215, 215, 0), pygame.Rect(posX, posY, 100, 10))
+        pygame.draw.rect(self.fen, pygame.Color(117, 117, 117, 0), pygame.Rect(value+posX, posY-5, 10, 20))
+        pygame.display.flip()
+
 """if __name__ == "__main__":
     f = Fenetre("test", 768, 600)
     f.fond = pygame.image.load("resources/hakase_nyan.png").convert_alpha()
