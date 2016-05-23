@@ -43,7 +43,7 @@ class Niveau:
         self.lastDialog = lastDialog
 
         self.fond = ("resources/niveau/" + str(numero) + "/fond.jpg")
-
+        #self.totalMobsLeft = 0
     def genererMob(self):
         rand =  randint(0, 99)
         #print(rand)
