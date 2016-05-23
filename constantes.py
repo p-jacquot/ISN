@@ -12,11 +12,16 @@ projectilesList = [ pygame.image.load("resources/photos/photon_bleu_clair_pour_l
                     pygame.image.load("resources/photos/photon_violet.png")]
 
 laser = pygame.image.load("resources/photos/laserjaune.png")
+laser2 = pygame.image.load("resources/photos/laserjaune.png")
 
 """Les sprites des explosions"""
 explodeList = [pygame.image.load("resources/photos/explosion_v1.1.bmp"),
                pygame.image.load("resources/photos/explosion_v2.2.bmp"),
                pygame.image.load("resources/photos/explosion_v3.bmp")]
+
+
+
+touches = [122, 276, 275, 273, 274, 304]      #touches = [tir,gauche,droite,haut,bas,controle]
 #Quand vous voulez récupérer l'image d'un photon : projectilesList[index]
 
 #lycee
@@ -28,7 +33,7 @@ largeur,hauteur= 768, 600
 recordOn=True
 niveauActuel=1
 niveauMaxAtteint=1
-niveauMaxFait = 4
+niveauMaxFait = 5
 
 def sauvegarder() :
         """if niveauMaxAtteint > niveauMaxFait :
@@ -37,4 +42,6 @@ def sauvegarder() :
             pickle.dump([niveauActuel,niveauMaxAtteint,hauteur,largeur],file)
 
 
-langue = 'FR'
+indiceLangue = 1
+langueDispo = ['FR','JP','DE','PL']
+langue = langueDispo[indiceLangue]

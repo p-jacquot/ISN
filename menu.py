@@ -1,34 +1,21 @@
 ﻿import pygame
 from pygame.locals import *
 
-if not pygame.display.get_init():
-    pygame.display.init()
-
-if not pygame.font.get_init():
-    pygame.font.init()
 
 
-
-class Menu:
-    def __init__(self,liste,fenetre):
-        self.liste = liste
-        self.pola = []
-        self.taille_ecriture = 40
-        self.police_ecriture = 'resources/polices/zawijasy.otf'   #Il faut en trouver une jolie :3 et qui a appelle le dossier ressources avec un s --'
-        self.font = pygame.font.Font
-        self.dest_surface = pygame.Surface
-        self.nombre_d_options = 0
-        self.image_fond = pygame.image.load("resources/hakase_nyan.png")
-        self.couleur_texte =  (255, 255, 100)
-        self.couleur_selection = (200,0,100)
-        self.position = 0
-        self.position_affichage = (0,50)
-        self.largeur = 0
-        self.hauteur = 0
-
-        self.dest_surface = fenetre
-        self.nombre_d_options = len(self.liste)
-        self.structure()
+class Menu :
+    liste = []
+    pola = []
+    taille_ecriture = 40
+    police_ecriture = 'resources/polices/zawijasy.otf'   #Il faut en trouver une jolie :3 et qui a appelle le dossier ressources avec un s --'
+    font = pygame.font.Font
+    dest_surface = pygame.Surface
+    couleur_texte =  (255, 255, 100)
+    couleur_selection = (200,0,100)
+    position = 0
+    position_affichage = (10,50)
+    largeur = 0
+    hauteur = 0
 
     class Zone_menu:
         texte = ''
@@ -36,10 +23,28 @@ class Menu:
         zone_rect = pygame.Rect
         selection_rect = pygame.Rect
 
+    def init(self, liste, dest_surface):
+        self.liste = []
+        self.pola = []
+        self.taille_ecriture = 40
+        self.police_ecriture = 'resources/polices/zawijasy.otf'   #Il faut en trouver une jolie :3 et qui a appelle le dossier ressources avec un s --'
+        self.font = pygame.font.Font
+        self.dest_surface = pygame.Surface
+        self.couleur_texte =  (255, 255, 100)
+        self.couleur_selection = (200,0,100)
+        self.position = 0
+        self.position_affichage = (10,50)
+        self.largeur = 0
+        self.hauteur = 0
+        self.liste = liste
+        self.dest_surface = dest_surface
+        self.nombre_d_options = len(self.liste)
+        self.structure()
+
     def deplacement_menu(self, top, left):
         self.position_affichage = (top,left)
 
-    def set_colors(self, text, selection, background):
+    def set_colors(self, text, selection):
         self.image_fond = background
         self.couleur_texte =  text
         self.couleur_selection = selection
@@ -51,13 +56,7 @@ class Menu:
         self.police_ecriture = path
 
     def get_position(self):
-        return self.position               #
-
-    def init(self, liste, dest_surface):
-        self.liste = liste
-        self.dest_surface = dest_surface
-        self.nombre_d_options = len(self.liste)
-        self.structure()
+        return self.position
 
     def draw(self,deplacement=0):
         if deplacement:
@@ -68,8 +67,12 @@ class Menu:
         menu = pygame.Surface((self.largeur, self.hauteur))
         menu = pygame.image.load( "resources/photos/fond transparent.png" ).convert()
         selection_rect = self.pola[self.position].selection_rect
-        pygame.draw.rect(menu,self.couleur_selection,selection_rect)
-
+        for i in range(self.nombre_d_options):
+            self.pola[i].zone_menu= self.font.render(self.pola[i].texte,1,self.couleur_texte)
+        for i in range(self.position+1):
+            self.pola[self.position].zone_menu= self.font.render(self.pola[self.position].texte,1,self.couleur_selection)
+            if self.position==0:
+                self.pola[0].zone_menu= self.font.render(self.pola[0].texte,1,self.couleur_selection)
         for i in range(self.nombre_d_options):
             menu.blit(self.pola[i].zone_menu,self.pola[i].zone_rect)
         self.dest_surface.blit(menu,self.position_affichage)
@@ -105,33 +108,3 @@ class Menu:
         mx, my = self.position_affichage
         self.position_affichage = (x+mx, y+my)
 
-if __name__ == "__main__":
-    import sys
-
-    fenetre = pygame.display.set_mode((1000,880))
-    #fond = pygame.image.load("").convert()                                                  #image de fond que je doit faire
-    #fenetre.blit(fond, (0,0))
-    menu = Menu()
-    menu.init(['Nouveau','Continuer','Choix du niveau','Options','Quit'], fenetre)
-    menu.draw()
-    pygame.key.set_repeat(199,69)
-    pygame.display.update()
-    while 1:
-        for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                if event.key == K_UP:
-                    menu.draw(-1)
-                if event.key == K_DOWN:
-                    menu.draw(1)
-                if event.key == K_RETURN:
-                    if menu.get_position() == 4:
-                        pygame.display.quit()
-                        sys.exit()
-                if event.key == K_ESCAPE:
-                    pygame.display.quit()
-                    sys.exit()
-                pygame.display.update()
-            elif event.type == QUIT:
-                pygame.display.quit()
-                sys.exit()
-        pygame.time.wait(8)

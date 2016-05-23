@@ -16,6 +16,7 @@ explosion2 = pygame.mixer.Sound("resources/explosion2.wav")
 explosion1.set_volume(.5)
 explosion2.set_volume(.5)
 audioDialogue=pygame.mixer.Channel(0)
+audioDialogue.set_volume(5)
 musicDialogue = pygame.mixer.Channel(1)
 
 
@@ -233,8 +234,8 @@ class Jeu:
         sombre.set_alpha(128)
         sombre.fill((0, 0, 0))"""
         perso = []
-        if self.niveau.numero == 1 and placeDialog == 0 :   #virer cette ligne quand tous les dialogues auront été faits
-            musicDialogue.play(pygame.mixer.Sound("resources/niveau/{2}/{0}.wav".format(placeDialog,dialog.counter,self.niveau.numero)))
+        """if self.niveau.numero == 1 and placeDialog == 0 :   #virer cette ligne quand tous les dialogues auront été faits
+            musicDialogue.play(pygame.mixer.Sound("resources/niveau/{2}/{0}.wav".format(placeDialog,dialog.counter,self.niveau.numero)))"""
         for liste in dialog.characters:
             img = pygame.image.load(liste[1]).convert_alpha()
             perso.append([liste[0], img, liste[2]])
@@ -249,12 +250,14 @@ class Jeu:
             self.fenetre.rafraichir(self.moleculeJoueur.hp)
         while dialog.notFinished:
             punchline = dialog.getPunchline()
-            if self.niveau.numero == 1 and placeDialog == 0 :   #virer cette ligne quand tous les dialogues auront été faits
+            try :   #virer cette ligne quand tous les dialogues auront été faits
                 audio = pygame.mixer.Sound("resources/niveau/{2}/{3}/{0},{1}.wav".format(placeDialog,dialog.counter,self.niveau.numero,constantes.langue))
                 """volume = audioDialogue.get_volume()
                 multiplier = 1/volume
                 audioDialogue.set_volume(multiplier*(1-punchline[1])+0.4,multiplier*(punchline[1])+0.4)"""
                 audioDialogue.play(audio)
+            except:
+                pass
             posX, posY = perso[punchline[1]][2]
 
             #print(punchline[1][0])
@@ -298,7 +301,7 @@ class Jeu:
             pygame.mixer.music.load(self.niveau.pathMusicLevel)
             pygame.mixer.music.play(5)
             self.play()
-
+            pygame.mixer.music.pause()
             if self.moleculeJoueur.dead == False:
                 self.dialoguer(self.niveau.middleDialog,1)
                 pygame.mixer.music.load(self.niveau.pathMusicBoss)
