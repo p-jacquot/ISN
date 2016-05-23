@@ -33,6 +33,8 @@ class Molecule:
             self.hpMax += 1000
         if nomMol == "paracetamol.png":
             self.hpMax +=1500
+        if nomMol == 'acide triflique.png':
+            self.hpMax += 2500
         self.hp = self.hpMax #La vie de la molécule.
         self.posX = 0
         self.posY = 0
