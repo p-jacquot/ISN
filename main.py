@@ -23,6 +23,7 @@ constantes.niveauActuel = donnees[0]
 constantes.niveauMaxAtteint = donnees[1]
 constantes.hauteur=donnees[2]
 constantes.largeur=donnees[3]
+constantes.touches=donnees[4]
 
 
 fenetre = Fenetre("Hyd'Roger", constantes.largeur, constantes.hauteur)
