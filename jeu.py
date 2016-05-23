@@ -152,33 +152,33 @@ class Jeu:
             elif event.type == KEYDOWN:
                 #print("Touche appuyée.")
                 """Lorsqu'on appuie sur une touche. Ces valeurs ne sont là qu'a titre d'exemple, il faudra qu'on les modifies."""
-                if event.key == K_UP:
+                if event.key == constantes.touches[3]:
                     self.moleculeJoueur.pattern.mv_y = -1 * self.vitesse
-                elif event.key == K_DOWN:
+                elif event.key == constantes.touches[4]:
                     #print("C'est la touche bas.")
                     self.moleculeJoueur.pattern.mv_y = 1 * self.vitesse
-                elif event.key == K_LEFT:
+                elif event.key == constantes.touches[1]:
                     self.moleculeJoueur.pattern.mv_x = -1 * self.vitesse
-                elif event.key == K_RIGHT:
+                elif event.key == constantes.touches[2]:
                     self.moleculeJoueur.pattern.mv_x = 1 * self.vitesse
-                if event.key == K_z :
+                if event.key == constantes.touches[0] :
                     self.tir =True
-                if event.key == K_LSHIFT :
+                if event.key == constantes.touches[5] :
                     self.vitesse = 2
             elif event.type == KEYUP:
                 """Lorsqu'on relâche une touche."""
                 #print("Touche relachée !")
-                if event.key == K_UP and self.moleculeJoueur.pattern.mv_y<0:
+                if event.key == constantes.touches[3] and self.moleculeJoueur.pattern.mv_y<0:
                     self.moleculeJoueur.pattern.mv_y = 0
-                elif event.key == K_DOWN and self.moleculeJoueur.pattern.mv_y>0:
+                elif event.key == constantes.touches[4] and self.moleculeJoueur.pattern.mv_y>0:
                     self.moleculeJoueur.pattern.mv_y = 0
-                elif event.key == K_LEFT and self.moleculeJoueur.pattern.mv_x<0:
+                elif event.key == constantes.touches[1] and self.moleculeJoueur.pattern.mv_x<0:
                     self.moleculeJoueur.pattern.mv_x = 0
-                elif event.key == K_RIGHT and self.moleculeJoueur.pattern.mv_x>0:
+                elif event.key == constantes.touches[2] and self.moleculeJoueur.pattern.mv_x>0:
                     self.moleculeJoueur.pattern.mv_x = 0
-                if event.key == K_z:
+                if event.key == constantes.touches[0]:
                     self.tir = False
-                if event.key == K_LSHIFT :
+                if event.key == constantes.touches[5] :
                     self.vitesse = 4.5
                 if event.key == K_ESCAPE:
                     self.pause()
@@ -278,7 +278,7 @@ class Jeu:
             while reading:
                 event = pygame.event.wait()
                 if event.type == KEYDOWN:
-                    if event.key == K_z:
+                    if event.key == constantes.touches[0]:
                         reading = False
                     if event.key == K_LEFT:
                         reading = False
