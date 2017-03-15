@@ -1,3 +1,16 @@
 https://github.com/MichalDanielDobrzanski/DeepLearningPython35
 https://fr.scribd.com/doc/128866719/Algorithme-de-Jhon-Daugman-doc 
 page 17 on a un beau graph
+
+
+
+ne prendre que l'iris
+filtre de canny pour avoir uniquement les contours
+filtre de hough pour avoir les cercles
+transformer en tableau
+comparer avec la base de donnée
+
+
+
+https://github.com/python-prepa/python-prepa/blob/master/ens-python-prepa/source/ateliers/data_mining.rst
+https://github.com/python-prepa/python-prepa/blob/master/ens-python-prepa/source/ateliers/image_outils.rst
