@@ -298,21 +298,25 @@ class Jeu:
             self.fenetre.setFond(self.niveau.fond)
             self.introLevel()
             self.dialoguer(self.niveau.firstDialog,0)
-            pygame.mixer.music.load(self.niveau.pathMusicLevel)
-            pygame.mixer.music.play(5)
+            self.playMusic(self.niveau.pathMusicLevel, 5)
+            #pygame.mixer.music.load(self.niveau.pathMusicLevel)
+            #pygame.mixer.music.play(5)
             self.play()
-            pygame.mixer.music.pause()
+            self.pauseMusic()
+            #pygame.mixer.music.pause()
             if self.moleculeJoueur.dead == False:
                 self.dialoguer(self.niveau.middleDialog,1)
-                pygame.mixer.music.load(self.niveau.pathMusicBoss)
-                pygame.mixer.music.play(5)
+                self.playMusic(self.niveau.pathMusicBoss, 5)
+                #pygame.mixer.music.load(self.niveau.pathMusicBoss)
+                #pygame.mixer.music.play(5)
                 self.niveau.boss.posX = (constantes.largeur-self.niveau.boss.rect.width)/2
                 self.niveau.boss.posY = 10
                 self.niveau.boss.rect.x = self.niveau.boss.posX
                 self.niveau.boss.rect.y = self.niveau.boss.posY
                 self.ennemyList = [self.niveau.boss]
                 self.play()
-                pygame.mixer.music.pause()
+                self.pauseMusic()
+                #pygame.mixer.music.pause()
             if self.moleculeJoueur.dead == False:
                 self.dialoguer(self.niveau.lastDialog,2)
                 self.outroLevel()
@@ -335,10 +339,12 @@ class Jeu:
                 elif key == K_ESCAPE:
                     print("On a appuyé sur Echap !")
                     play = False
-                pygame.mixer.music.pause()
+                self.pauseMusic()
+                #pygame.mixer.music.pause()
             else:
-                pygame.mixer.music.load("resources/game_over.wav")
-                pygame.mixer.music.play(1)
+                self.playMusic("resources/game_over.wav", 1)
+                #pygame.mixer.music.load("resources/game_over.wav")
+                #pygame.mixer.music.play(1)
                 self.fenetre.selecContinuer()
                 key = self.waitForSelection()
                 if key == K_ESCAPE:
@@ -349,7 +355,8 @@ class Jeu:
                     self.ennemyList = []
                     self.play()
                     self.changeNiveau(0) #Et 0 quand on recharge le niveau.
-                    pygame.mixer.music.pause()
+                    self.pauseMusic()
+                    #pygame.mixer.music.pause()
 
     def waitForSelection(self):
         while 1:
@@ -426,8 +433,9 @@ class Jeu:
 
     def outroLevel(self):
         self.framesInvincibilite = 0
-        pygame.mixer.music.load('resources/fanfare.wav')
-        pygame.mixer.music.play(1)
+        self.playMusic('resources/fanfare.wav')
+        #pygame.mixer.music.load('resources/fanfare.wav')
+        #pygame.mixer.music.play(1)
         self.clearProj()
         self.play()
         self.moleculeJoueur.pattern.mv_y = -5
@@ -439,7 +447,15 @@ class Jeu:
         self.moleculeJoueur.pattern.mv_y = 0
             #time.sleep(0.001)
 
+    def playMusic(self, path, loop):
+        try:
+            pygame.mixer.music.load(path)
+            pygame.mixer.music.play(loop)
+        except:
+            pass
 
-
-
-
+    def pauseMusic(self):
+        try:
+            pygame.mixer.music.pause()
+        except:
+            pass
